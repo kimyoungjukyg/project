@@ -1,0 +1,210 @@
+package com.KL.member.controller;
+
+import java.awt.List;
+import java.io.IOException;
+import java.text.DateFormat;
+
+import java.util.Date;
+import java.util.Locale;
+
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.KL.member.service.MemberService;
+import com.KL.member.service.PtService;
+import com.KL.member.vo.MemberVO;
+import com.KL.member.vo.PtVO;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
+
+@Controller
+
+public class MemberController {
+
+	/*
+	 * @로시작하는건 어노테이션이라고함
+	 * 
+	 * 별도의 객체를 생성하지 않고도 자동으로 객체를 주입하여 사용할수 있도록 하는 이노테이션. 스프링의 특징중 하나인 의존성 주입
+	 * (Dependency Injection)을 구현하는 개념.
+	 * 
+	 * @Autowired를 붙이면 스프링 컨테이너가 자동으로 관리를 함.
+	 */
+	@Autowired
+	private MemberService ms;
+	private ModelAndView mav;
+	@Autowired
+	private PtService pt;
+	
+	@Autowired
+	private BCryptPasswordEncoder passEncoder;
+	@Autowired
+	private HttpSession session;
+
+	// 프로젝트시작시에 뜨는페이지 지정
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home() {
+		return "redirect:/textList";/*"redirect:/textList";*/
+	}
+	
+	
+	
+	
+	//pt트레이너 리스트 소환
+	@RequestMapping(value="/textList",method=RequestMethod.GET)
+	public ModelAndView textList() {
+		mav=new ModelAndView();
+		mav=ms.textList();
+		return mav;
+	}
+	
+	// 회원가입 페이지로 이동 요청 처리
+	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
+	public String joinForm() {
+		return "joinForm";
+	}
+
+	// 회원가입 처리
+	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	public ModelAndView memberJoin(@ModelAttribute MemberVO memberVO) {
+		mav = new ModelAndView();
+
+		String encPassword = passEncoder.encode(memberVO.getPassword());
+		memberVO.setPassword(encPassword);
+		System.out.println("암호화 비번 확인 : " + memberVO.getPassword());
+
+		mav = ms.memberJoin(memberVO);
+		return mav;
+	}
+
+	// 아이디 중복확인
+	@RequestMapping(value = "/idOverlap", method = RequestMethod.POST)
+	public void idOverlap(HttpServletResponse response, @RequestParam("id") String id) throws IOException {
+		ms.idOverlap(id, response);
+	}
+
+	// 로그인 처리
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ModelAndView memberLogin(@ModelAttribute MemberVO memberVO, HttpServletResponse response)
+			throws IOException {
+		mav = new ModelAndView();
+		mav = ms.memberLogin(memberVO, response);
+		return mav;
+	}
+
+	// 로그아웃 처리
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String memberLogout() {
+		session.invalidate();
+		return "redirect:/textList#login";
+	}
+
+	// 회원 목록
+	@RequestMapping(value = "/memberList", method = RequestMethod.GET)
+	public ModelAndView memberList(HttpSession session) {
+		mav = new ModelAndView();
+		String loginMember = (String) session.getAttribute("session_id");
+		if (loginMember == null || !loginMember.equals("admin")) {
+			mav.setViewName("loginForm");
+		} else {
+			mav = ms.memberList();
+		}
+		return mav;
+	}
+
+	// 회원 상세정보
+	@RequestMapping(value = "/memberView", method = RequestMethod.GET)
+	public ModelAndView memberView(@RequestParam("id") String id) {
+		mav = new ModelAndView();
+		mav = ms.memberView(id);
+		return mav;
+	}
+	
+	//회원 삭제 하기
+	@RequestMapping(value = "/memberDelete", method = RequestMethod.GET)
+	public String memberDelete(@RequestParam("id") String id) {
+		ms.memberDelete(id);
+		
+		return "redirect:/memberList";
+	}
+
+	//pt일정 /신청장소로넘어가기
+	
+	@RequestMapping(value="/ptView",method=RequestMethod.GET)
+	public ModelAndView ptView(@RequestParam("id") String id) {
+		pt.increasHit(id);
+	
+		
+		mav=new ModelAndView();
+		
+	mav=pt.ptView(id);
+	return mav;
+		
+	}
+	@RequestMapping(value = "/callender", method = RequestMethod.GET)
+	public ModelAndView callender(@RequestParam("id") String id) {
+	 mav=new ModelAndView();
+		mav=pt.callender(id);
+		return mav;
+	}
+	
+	@RequestMapping(value="/ptmake",method=RequestMethod.POST)
+	public ModelAndView ptmake(@ModelAttribute PtVO ptVo) throws IOException {
+	
+		
+	mav=new ModelAndView();
+		
+	mav=pt.ptmake(ptVo);
+	return mav;
+		
+	}
+	@RequestMapping(value="/ptr",method=RequestMethod.GET)
+	public ModelAndView ptr(@RequestParam("log") int log) {
+	/*pt.increasHit(id);*/
+	
+	
+	mav=new ModelAndView();
+		
+	mav=pt.ptr(log);
+	return mav;
+		
+	}
+	
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
