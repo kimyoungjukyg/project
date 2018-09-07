@@ -6,8 +6,10 @@ import java.text.DateFormat;
 
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.KL.member.service.MemberService;
@@ -56,8 +59,8 @@ public class MemberController {
 	// 프로젝트시작시에 뜨는페이지 지정
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
-		return "redirect:/textList";/*"redirect:/textList";*/
-	}
+		return "redirect:/textList";
+		}
 	
 	
 	
@@ -144,21 +147,17 @@ public class MemberController {
 	
 	@RequestMapping(value="/ptView",method=RequestMethod.GET)
 	public ModelAndView ptView(@RequestParam("id") String id) {
+		
 		pt.increasHit(id);
-	
 		
 		mav=new ModelAndView();
 		
 	mav=pt.ptView(id);
+	
 	return mav;
 		
 	}
-	@RequestMapping(value = "/callender", method = RequestMethod.GET)
-	public ModelAndView callender(@RequestParam("id") String id) {
-	 mav=new ModelAndView();
-		mav=pt.callender(id);
-		return mav;
-	}
+	
 	
 	@RequestMapping(value="/ptmake",method=RequestMethod.POST)
 	public ModelAndView ptmake(@ModelAttribute PtVO ptVo) throws IOException {
@@ -182,12 +181,18 @@ public class MemberController {
 		
 	}
 	
+	
+
+	@RequestMapping(value = "/callender", method = RequestMethod.GET)
+	public ModelAndView callender(@RequestParam("id") String id) {
+	 mav=new ModelAndView();
+		mav=pt.callender(id);
+		return mav;
+	}
+	
+	
+	
 }
-	
-	
-	
-	
-	
 	
 	
 	

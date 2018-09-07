@@ -55,9 +55,8 @@ mav.setViewName("ptView");
 	public ModelAndView ptmake(PtVO ptVo) throws IOException {
 response.setContentType("text/html;charset=utf-8");
 PrintWriter out=response.getWriter();
-		out.println("<script>");
-		out.println("<alert('강의 등록이 완료되었습니다.')>");
-		out.println("</script>");
+		
+		
 		mav=new ModelAndView();
 		
 		int result = ptDAO.ptmake(ptVo);
@@ -66,6 +65,7 @@ PrintWriter out=response.getWriter();
 			// 등록 실패하면 다시 joinForm으로 이동
 			mav.setViewName("ptView");
 		} else {
+			
 			// 등록 성공하면 loginForm으로 이동
 			mav.setViewName("redirect:/textList#PT");
 		}

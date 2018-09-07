@@ -32,9 +32,13 @@
   <body id="page-top">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">
-        <span class="d-block d-lg-none">K L 프로젝트</span>
-        
+      <a class="navbar-brand js-scroll-trigger" href="#page-top" >
+      
+        <span class="d-block d-lg-none" style="height: 80px" > 
+        <img  src="img/lo.png" alt="" style="height: 90px">
+        </span>                    
+         
+         
         <span class="d-none d-lg-block">
           <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/test.jpg" alt="" >
         </span>

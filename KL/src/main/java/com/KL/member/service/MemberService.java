@@ -2,7 +2,9 @@ package com.KL.member.service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,7 +42,7 @@ public class MemberService {
 			mav.setViewName("joinForm");
 		} else {
 			// 회원가입 성공하면 loginForm으로 이동
-			mav.setViewName("redirect:/textList#login");
+			mav.setViewName("redirect:/textList#mypage");
 		}
 
 		return mav;
@@ -117,5 +119,10 @@ mav.setViewName("text1");
 		
 		return mav;
 	}
+
+
+
+	
+	
 
 }
