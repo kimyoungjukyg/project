@@ -26,8 +26,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.KL.member.service.CardService;
 import com.KL.member.service.MemberService;
 import com.KL.member.service.PtService;
+import com.KL.member.vo.CardVO;
 import com.KL.member.vo.MemberVO;
 import com.KL.member.vo.PtVO;
 
@@ -50,6 +52,9 @@ public class MemberController {
 	private ModelAndView mav;
 	@Autowired
 	private PtService pt;
+	
+	@Autowired
+	private CardService ca;
 	
 	@Autowired
 	private BCryptPasswordEncoder passEncoder;
@@ -158,7 +163,7 @@ public class MemberController {
 		
 	}
 	
-	
+	//트레이너가 강의 설정
 	@RequestMapping(value="/ptmake",method=RequestMethod.POST)
 	public ModelAndView ptmake(@ModelAttribute PtVO ptVo) throws IOException {
 	
@@ -182,16 +187,27 @@ public class MemberController {
 	}
 	
 	
-
+//일반회원이 개설강의 리스트보기
 	@RequestMapping(value = "/callender", method = RequestMethod.GET)
 	public ModelAndView callender(@RequestParam("id") String id) {
 	 mav=new ModelAndView();
 		mav=pt.callender(id);
 		return mav;
 	}
-	
-	
-	
+	//카드등록
+	@RequestMapping(value="/cardlist",method=RequestMethod.POST)
+	public ModelAndView cardlist(@ModelAttribute CardVO cardVo) throws IOException {	
+	mav=new ModelAndView();
+		
+	mav=ca.cardlist(cardVo);
+	return mav;
+		
+	}
+	//카드등록페이지
+	@RequestMapping(value = "/cardwrite", method = RequestMethod.GET)
+	public String cardwrite() {
+		return "cardwrite";
+	}
 }
 	
 	

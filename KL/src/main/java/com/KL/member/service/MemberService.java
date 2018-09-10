@@ -76,7 +76,7 @@ public class MemberService {
 			session.setAttribute("session_id", memberVO.getId());
 			session.setAttribute("classify", loginMember.getClassify());
 			mav.addObject("loginMember", loginMember);
-			mav.setViewName("redirect:/textList#login");
+			mav.setViewName("redirect:/textList#mypage");
 		} else {
 			out.println("<script>");
 			out.println("alert('비밀번호가 틀립니다.');");

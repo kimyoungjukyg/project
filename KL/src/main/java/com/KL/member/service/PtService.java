@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.KL.member.dao.*;
+import com.KL.member.vo.CardVO;
 import com.KL.member.vo.MemberVO;
 import com.KL.member.vo.PtVO;
 
@@ -25,7 +26,7 @@ public class PtService {
 	@Autowired
 	private PtDAO ptDAO;
 	private PtVO ptVO;
-	
+	private CardVO cardVO;
 	
 	@Autowired
 	private HttpSession session;
@@ -90,6 +91,10 @@ PrintWriter out=response.getWriter();
 		return mav;
 	}
 
+
+
+
+	
 
 
 

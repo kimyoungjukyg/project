@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,6 +52,8 @@
         
 </head>
 <body>
+
+
 <div class="container">
     <div class='col-md-5'>
 
@@ -64,7 +67,7 @@
     강의 이름:
     <div class="form-group">
          
-<input type='text' class="form-control" name="title" />
+<input type='text' class="form-control" name="title" required/>
 
 </div>
 
@@ -74,7 +77,7 @@
    <div class='col-md-5'>
         시작일: <div class="form-group">
             <div class='input-group date' id='datetimepicker6'>
-                <input type='text' class="form-control" name="starttime" />
+                <input type='text' class="form-control" name="starttime" required/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -84,7 +87,7 @@
 <div class='col-md-5'>
           종료일:  <div class="form-group">
             <div class='input-group date' id='datetimepicker7'>
-                <input type='text' class="form-control" name="endtime"/>
+                <input type='text' class="form-control" name="endtime" required/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -95,41 +98,76 @@
     강의료:
     <div class="form-group">
          
-<input type='text' class="form-control" name="price"/>원
+<input type='text' class="form-control" name="price" id="price" required/>원
 
 </div>
 
 </div>
 <div class='col-md-5'>
- 표시 색: 
-  <select class="form-control" name="className" id="className">
-  <option value="" selected>--선택--</option>
-   <option value="chill" id="className">연보라</option>
-      <option value="info" id="className">하늘색</option>
-         <option value="important" id="className">분홍색</option>
-            <option value="success" id="className">연두색</option>
-  </select>
+
   
-  
+  <input type="hidden" name="className" value="chill">
 <input type="hidden" name="count" value=0>
 </div>
  
- 
+ <%int a=0;%>
   
 <input type='hidden' class="form-control" name="allDay" value="false" />
 <input type='hidden' class="form-control" name="log" value=0 />
  <div class='col-md-5'>
- <button type="submit" class="byn btn-secondary" >강의 등록</button>
+
+
+ <button type="submit" class="byn btn-secondary" onclick="formcheck()" >강의 등록</button>
 
 </div>
  </form>
+
+ 
 </div>
 
+
+
+<script type="text/javascript">
+function formcheck(){
+	
+	var title=document.forms[0].title.value;
+	var starttime=document.forms[0].starttime.value;
+	var endtime=document.forms[0].endtime.value;
+	var price=document.forms[0].price.value;
+	if(title==null||title==""){
+		alert('강의명을 입력하세요.');
+		document.forms[0].redate.focus();
+		return false;
+	}
+	if(starttime==null||starttime==""){
+		alert('시작 시간을 입력하세요.');
+		document.forms[0].redate.focus();
+		return false;
+	}
+	if(endtime==null||endtime==""){
+		alert('종료 시간을 입력하세요.');
+		document.forms[0].redate.focus();
+		return false;
+	}
+	if(price.match(/^\d\d\d\d+$/ig)==null){
+		alert('가격은 천원부터 입니다.');
+		document.forms[0].redate.focus();
+		return false;
+	}
+	
+		
+		
+	}
+
+	
+
+</script>
 <script type="text/javascript">
     $(function () {
         $('#datetimepicker6').datetimepicker();
         $('#datetimepicker7').datetimepicker({
             useCurrent: false
+       
         });
         $("#datetimepicker6").on("dp.change", function (e) {
             $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
@@ -139,5 +177,7 @@
         });
     });
 </script>
+
+
 </body>
 </html>
