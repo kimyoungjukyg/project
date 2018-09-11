@@ -1,6 +1,7 @@
 package com.KL.member.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -43,9 +44,19 @@ public class CardService {
 		} else {
 			
 			// 등록 성공하면 loginForm으로 이동
-			mav.setViewName("ptr");
+			mav.setViewName("redirect:ptr");
 		}
 
+		return mav;
+	}
+
+
+	public ModelAndView cardread() {
+mav=new ModelAndView();
+List<CardVO> cardread=cardDAO.cardread();
+mav.addObject("cardread",cardread);
+mav.setViewName("ptr");
+	
 		return mav;
 	}
 	

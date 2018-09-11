@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.*" %>
+       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +30,7 @@ function doShow() {
 
 신청자:<%=session.getAttribute("session_id") %><br>
 강의이름: ${ptr.title}<br>
+
 트레이너: ${ptr.id}<br>
 
 시작시간: ${ptr.starttime }<br>
@@ -47,11 +50,14 @@ function doShow() {
     <label for="paytype1">통장 송금</label>
     <div id="con" style="display:none">
     <h2>카드 결제</h2>
-    
+      
       <select name="cardlist">
       <option value="" selected>등록카드선택</option>
-       <option value="" ></option>
+       <c:forEach var="card" items="${cardread}">
+       <option value="${card.cardnum }" >${card.cardnum}</option>
+          </c:forEach>
       </select>
+       
       <input type="button" onclick="location.href='cardwrite?id=<%=session.getAttribute("session_id") %>'"value="카드등록">
       
     </div>
@@ -93,21 +99,6 @@ function div_OnOff2(v,con2){
 </script>
  
  
- <script type="text/javascript">
-function formcheck(){
-	
-	var title=document.forms[0].title.value;
-
-	if(title==null||title==""){
-		alert('강의명을 입력하세요.');
-		document.forms[0].redate.focus();
-		return false;
-	}
-
-	}
-
-	
-
-</script>  
+ 
 </body>
 </html>

@@ -208,6 +208,16 @@ public class MemberController {
 	public String cardwrite() {
 		return "cardwrite";
 	}
+	//카드등록후 리스트
+	@RequestMapping(value="/cardread",method=RequestMethod.GET)
+	public ModelAndView cardread(){	
+	mav=new ModelAndView();
+		
+	mav=ca.cardread();
+	return mav;
+		
+	}
+	
 }
 	
 	

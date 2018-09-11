@@ -85,9 +85,9 @@ PrintWriter out=response.getWriter();
 	public ModelAndView ptr(int log) {
 		mav=new ModelAndView();
 		PtVO ptr=ptDAO.ptr(log);
-		
+	
 		mav.addObject("ptr", ptr);
-		mav.setViewName("ptr");
+		mav.setViewName("redirect:cardread");
 		return mav;
 	}
 
