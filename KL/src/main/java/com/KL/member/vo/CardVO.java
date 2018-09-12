@@ -4,6 +4,14 @@ public class CardVO {
 private String id;
 private String cardnum;
 private String password;
+private int num;
+public int getNum() {
+	return num;
+}
+
+public void setNum(int num) {
+	this.num = num;
+}
 
 public CardVO() {
 	
@@ -27,4 +35,6 @@ public String getPassword() {
 public void setPassword(String password) {
 	this.password = password;
 }
+
+
 }

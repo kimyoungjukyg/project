@@ -27,6 +27,8 @@ public class PtService {
 	private PtDAO ptDAO;
 	private PtVO ptVO;
 	private CardVO cardVO;
+	@Autowired
+	private CardDAO cardDAO;
 	
 	@Autowired
 	private HttpSession session;
@@ -46,7 +48,6 @@ mav.setViewName("ptView");
 	public ModelAndView callender(String id) {
 		mav=new ModelAndView();
 		List<PtVO> callender=ptDAO.callender(id);
-		
 		mav.addObject("callender",callender);
 		mav.setViewName("ptgo");
 		return mav;
@@ -54,8 +55,8 @@ mav.setViewName("ptView");
 	
 	
 	public ModelAndView ptmake(PtVO ptVo) throws IOException {
-response.setContentType("text/html;charset=utf-8");
-PrintWriter out=response.getWriter();
+		response.setContentType("text/html;charset=utf-8");
+	PrintWriter out=response.getWriter();
 		
 		
 		mav=new ModelAndView();
@@ -80,14 +81,22 @@ PrintWriter out=response.getWriter();
 		ptDAO.increaseHit(id);		
 	}
 
-
+ 
 	
-	public ModelAndView ptr(int log) {
+	public ModelAndView ptr(PtVO ptVO,String id) {
 		mav=new ModelAndView();
-		PtVO ptr=ptDAO.ptr(log);
-	
+		PtVO ptr=ptDAO.ptr(ptVO);
+		session.setAttribute("log", ptr.getLog());
+		session.setAttribute("title", ptr.getTitle());
+		session.setAttribute("id", ptr.getId());
+		session.setAttribute("start", ptr.getStarttime());
+		session.setAttribute("end", ptr.getEndtime());
+		session.setAttribute("price", ptr.getPrice());
+		List<CardVO> cardread=cardDAO.cardread(id);
+		
+		mav.addObject("cardread",cardread);
 		mav.addObject("ptr", ptr);
-		mav.setViewName("redirect:cardread");
+		mav.setViewName("ptr");
 		return mav;
 	}
 

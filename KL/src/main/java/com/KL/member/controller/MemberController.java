@@ -175,17 +175,16 @@ public class MemberController {
 		
 	}
 	@RequestMapping(value="/ptr",method=RequestMethod.GET)
-	public ModelAndView ptr(@RequestParam("log") int log) {
+	public ModelAndView ptr(@ModelAttribute PtVO ptVO,@RequestParam("id") String id) {
 	/*pt.increasHit(id);*/
 	
 	
 	mav=new ModelAndView();
 		
-	mav=pt.ptr(log);
+	mav=pt.ptr(ptVO,id);
 	return mav;
 		
 	}
-	
 	
 //일반회원이 개설강의 리스트보기
 	@RequestMapping(value = "/callender", method = RequestMethod.GET)
@@ -196,28 +195,36 @@ public class MemberController {
 	}
 	//카드등록
 	@RequestMapping(value="/cardlist",method=RequestMethod.POST)
-	public ModelAndView cardlist(@ModelAttribute CardVO cardVo) throws IOException {	
-	mav=new ModelAndView();
-		
-	mav=ca.cardlist(cardVo);
+	public ModelAndView cardlist(@ModelAttribute CardVO cardVO) throws IOException {			
+		mav=new ModelAndView();
+	mav=ca.cardlist(cardVO);
 	return mav;
 		
 	}
+	
 	//카드등록페이지
 	@RequestMapping(value = "/cardwrite", method = RequestMethod.GET)
-	public String cardwrite() {
+	public String cardwrite(@RequestParam("id") String id) {
+		ca.increase(id);
 		return "cardwrite";
 	}
 	//카드등록후 리스트
 	@RequestMapping(value="/cardread",method=RequestMethod.GET)
 	public ModelAndView cardread(){	
+		String id=(String) session.getAttribute("session_id");
 	mav=new ModelAndView();
-		
-	mav=ca.cardread();
+
+	mav=ca.cardread(id);
 	return mav;
 		
 	}
-	
+	@RequestMapping(value = "/ptpay", method = RequestMethod.POST)
+	public ModelAndView ptpay(@ModelAttribute CardVO cardVO, HttpServletResponse response)
+			throws IOException {
+		mav = new ModelAndView();
+		mav = ca.ptpay(cardVO, response);
+		return mav;
+	}
 }
 	
 	

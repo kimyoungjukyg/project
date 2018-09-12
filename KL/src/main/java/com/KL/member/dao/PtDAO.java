@@ -33,9 +33,9 @@ public class PtDAO {
 		
 	}
 
-	public PtVO ptr(int log) {
+	public PtVO ptr(PtVO ptVO) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("Pt.ptr",log);
+		return sqlSession.selectOne("Pt.ptr",ptVO);
 	}
 
 	public PtVO ptup(PtVO ptVO) {

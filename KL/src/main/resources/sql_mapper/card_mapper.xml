@@ -2,9 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtdmybatis-3-mapper.dtd">
 <mapper namespace="Card">
-<insert parameterType="card" id="cardlist"> INSERT INTO cardlist VALUES(#{id},#{cardnum},#{password}) </insert>
+<insert parameterType="card" id="cardlist"> INSERT INTO cardlist VALUES(#{id},#{cardnum},#{password},#{num}) </insert>
 <select id="cardread" parameterType="card" resultType="card">
-SELECT * FROM cardlist 
+SELECT * FROM cardlist where id=#{id}
 </select>
-
+<update id="increase" parameterType="card">
+UPDATE cardlist SET num=num+1 where id=#{id}
+</update>
+<select parameterType="card" id="ptpay" resultType="card"> SELECT * FROM cardlist WHERE cardnum = #{cardnum} </select>
 </mapper>

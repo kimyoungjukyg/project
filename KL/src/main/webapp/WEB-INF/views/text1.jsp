@@ -243,7 +243,7 @@
           <%if("1".equals(session.getAttribute("classify"))){%>
             
      <%}else { %>
-      <button type="button" class="byn btn-secondary" onclick="location.href='callender?id=${member.id}'">강의 신청하기</button>
+      <button type="button" class="byn btn-secondary" onclick="location.href='callender?id=${member.id}&cost=<%=session.getAttribute("session_id")%>'">강의 신청하기</button>
       <%} %>
          
           <button type="button" class="byn btn-secondary" onclick="ptReview?id=${member.id}">리뷰 보기</button>
@@ -296,6 +296,8 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/resume.min.js"></script>
+    
+
 
   </body>
 

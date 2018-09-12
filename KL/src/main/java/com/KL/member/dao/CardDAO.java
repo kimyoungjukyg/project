@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.KL.member.vo.CardVO;
+import com.KL.member.vo.PtVO;
 
 @Repository
 public class CardDAO {
@@ -18,9 +19,39 @@ public class CardDAO {
 		return sqlSession.insert("Card.cardlist",cardVO);
 	}
 
-	public List<CardVO> cardread() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("Card.cardread");
+	
+	
+
+	public void increase(String id) {
+		sqlSession.update("Card.increase",id);
+		
 	}
+
+	public List<CardVO> cardread(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("Card.cardread",id);
+	}
+
+
+
+
+	public CardVO cardtest(CardVO cardVO) {
+	
+		return sqlSession.selectOne("Card.ptpay", cardVO);
+	}
+
+
+
+
+	
+
+
+
+
+	
+
+	
+
+	
 
 }

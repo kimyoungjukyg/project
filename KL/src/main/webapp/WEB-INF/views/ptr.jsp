@@ -29,18 +29,18 @@ function doShow() {
       <h2>결제확인</h2>
 
 신청자:<%=session.getAttribute("session_id") %><br>
-강의이름: ${ptr.title}<br>
+강의이름: <%=session.getAttribute("title") %><br>
 
-트레이너: ${ptr.id}<br>
+트레이너:<%=session.getAttribute("id") %><br>
 
-시작시간: ${ptr.starttime }<br>
+시작시간: <%=session.getAttribute("start") %><br>
 
-종료시간: ${ptr.endtime }<br>
-가격: ${ptr.price }<br>
-	
+종료시간: <%=session.getAttribute("end") %><br>
+가격: <%=session.getAttribute("price") %><br>
+<%=session.getAttribute("log") %>
 
 
-
+<form action="ptpay" method="post">
 <input type="button" value="결제하기" onclick="javascript:doShow()" id="button1">
     <div id="aa" style="display:none">
     결제방식: 
@@ -51,14 +51,23 @@ function doShow() {
     <div id="con" style="display:none">
     <h2>카드 결제</h2>
       
-      <select name="cardlist">
+      <select name="cardnum">
       <option value="" selected>등록카드선택</option>
-       <c:forEach var="card" items="${cardread}">
-       <option value="${card.cardnum }" >${card.cardnum}</option>
-          </c:forEach>
-      </select>
        
-      <input type="button" onclick="location.href='cardwrite?id=<%=session.getAttribute("session_id") %>'"value="카드등록">
+       <c:forEach var="card" items="${cardread}">
+
+       <option value="${card.cardnum }" >${card.cardnum}</option>
+       
+          </c:forEach>
+           </select> 
+      <input type="button" onclick="location.href='cardwrite?id=<%=session.getAttribute("session_id") %>'"value="카드등록">      
+    <br>비밀번호 : <input type="text" name="password" maxlength="4"><br>
+     <input type="submit" value="결제">
+   
+
+
+   
+    
       
     </div>
    <div id="con2" style="display:none">
@@ -70,6 +79,7 @@ function doShow() {
     
     
     </div>
+      </form>
 <script type="text/javascript">
 function div_OnOff(v,id){
 	if(v=="1"){

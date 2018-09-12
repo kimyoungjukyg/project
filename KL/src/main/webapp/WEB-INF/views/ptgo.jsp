@@ -16,7 +16,7 @@ ${pt.title},${pt.id},${pt.starttime },${pt.endtime },${pt.count} }
 <input type="hidden" name="id" value="${pt.id}">
 <input type="hidden" name="starttime" value="${pt.starttime}">
 <input type="hidden" name="endtime" value="${pt.endtime}">
- <button type="submit" class="byn btn-secondary" onclick="location.href='ptr?log=${pt.log}'" >신청</button><br>
+ <button type="submit" class="byn btn-secondary" onclick="location.href='ptr?log=${pt.log}&id=<%=session.getAttribute("session_id") %>'" >신청</button><br>
 
 </c:forEach>
 

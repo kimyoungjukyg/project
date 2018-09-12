@@ -12,7 +12,7 @@
 <input type="hidden" name="id" value="<%=session.getAttribute("session_id") %>">
 카드번호:<input type="text" name="cardnum" id="cardnum" placeholder="카드번호입력"  maxlength="19" required > <input type="button" onclick="card()" value="카드형식확인"><br>
 비밀번호:<input type="text" name="password"  placeholder="비밀번호입력" maxlength="4"><br>
-
+<input type="hidden" name="num" value=0>
 
 <input type="submit" value="등록" >
 
