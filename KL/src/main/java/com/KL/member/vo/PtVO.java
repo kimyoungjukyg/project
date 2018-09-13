@@ -1,14 +1,12 @@
 package com.KL.member.vo;
 
-import java.sql.Date;
-
 import oracle.sql.DATE;
 
 public class PtVO {
 private String id;
 private String title;
-private Date starttime;
-private Date endtime;
+private String starttime;
+private String endtime;
 private String allDay;
 private String className;
 private int price;
@@ -50,16 +48,17 @@ public void setTitle(String title) {
 	this.title = title;
 }
 
-public Date getStarttime() {
+
+public String getStarttime() {
 	return starttime;
 }
-public void setStarttime(Date starttime) {
+public void setStarttime(String starttime) {
 	this.starttime = starttime;
 }
-public Date getEndtime() {
+public String getEndtime() {
 	return endtime;
 }
-public void setEndtime(Date endtime) {
+public void setEndtime(String endtime) {
 	this.endtime = endtime;
 }
 public String getAllDay() {

@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.KL.member.dao.MemberDAO;
+import com.KL.member.dao.PtDAO;
 import com.KL.member.vo.MemberVO;
+import com.KL.member.vo.PtVO;
 
 @Service
 public class MemberService {
@@ -24,7 +26,9 @@ public class MemberService {
 	private MemberDAO memberDAO;
 	private ModelAndView mav;
 	private MemberVO memberVO;
-
+	@Autowired
+	private PtDAO ptDAO;
+	private PtVO ptvo;
 	@Autowired
 	private BCryptPasswordEncoder passEncoder;
 
@@ -114,6 +118,7 @@ public class MemberService {
 mav=new ModelAndView();
 List<MemberVO> textList =memberDAO.textList();
 mav.addObject("textList",textList);
+
 mav.setViewName("text1");
 		
 		

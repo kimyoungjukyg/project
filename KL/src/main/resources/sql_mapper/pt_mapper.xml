@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtdmybatis-3-mapper.dtd">
 <mapper namespace="Pt">
-<insert parameterType="pt" id="ptmake"> INSERT INTO FULLCALENDAR VALUES(#{id}, #{title}, #{starttime},#{endtime},#{allDay},#{className},#{price},#{count},#{log}) </insert>
+<insert parameterType="pt" id="ptmake"> 
+INSERT INTO FULLCALENDAR VALUES(#{id}, #{title}, #{starttime},#{endtime},#{allDay},#{className},#{price},#{count},#{log}) 
+</insert>
 <select id="callender" parameterType="pt" resultType="pt">
-SELECT * FROM FULLCALENDAR where Id=#{id}
+SELECT * FROM FULLCALENDAR where id=#{id}
 </select>
 
 <update id="increaseHit" parameterType="pt">

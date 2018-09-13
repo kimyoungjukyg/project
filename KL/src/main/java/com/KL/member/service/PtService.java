@@ -49,20 +49,16 @@ mav.setViewName("ptView");
 		mav=new ModelAndView();
 		List<PtVO> callender=ptDAO.callender(id);
 		mav.addObject("callender",callender);
-		mav.setViewName("ptgo");
+		mav.setViewName("ptgo"+"#PT");
 		return mav;
 	}
 	
 	
 	public ModelAndView ptmake(PtVO ptVo) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
-	PrintWriter out=response.getWriter();
-		
-		
 		mav=new ModelAndView();
-		
 		int result = ptDAO.ptmake(ptVo);
-
+session.setAttribute("ptid", ptVo);
 		if (result == 0) {
 			// 등록 실패하면 다시 joinForm으로 이동
 			mav.setViewName("ptView");

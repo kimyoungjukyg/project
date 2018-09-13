@@ -1,14 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.*" %>
-       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.*" %>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ 
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-latest.js"></script> 
-<script> 
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ex</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="css/resume.min.css" rel="stylesheet">
+  <script> 
 function doShow() { 
     if ($('#aa').is(":visible")) { 
         $('#aa').hide(); // id값을 받아서 숨기기 
@@ -21,35 +39,117 @@ function doShow() {
     } 
 } 
 </script> 
+  </head>
 
+  <body id="page-top">
 
-</head>
-<body>
-  
-      <h2>결제확인</h2>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+      <a class="navbar-brand js-scroll-trigger" href="textList" >
+      
+        <span class="d-block d-lg-none" style="height: 80px" > 
+        <img  src="img/lo.png" alt="" style="height: 90px">
+        </span>                    
+         
+         
+        <span class="d-none d-lg-block">
+          <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/test.jpg" alt="" >
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+       
+          <li class="nav-item">
+      
+           <a class="nav-link js-scroll-trigger" href="textList#mypage">마이페이지</a>
+      
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="textList#motion">운동 영상</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="textList#exercise">운동법 공유</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#PT">PT 신청</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="textList#food">음식 레시피</a>
+          </li>
+         <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="textList#awards">여유공간</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+ <hr class="m-0">
 
-신청자:<%=session.getAttribute("session_id") %><br>
-강의이름: <%=session.getAttribute("title") %><br>
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="PT">
+     
+        <div class="my-auto">
+       <h2 class="mb-5">PT 결제</h2>
+<div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-auto">
+              <h3 class="mb-0">신청자:</h3>
+            </div>
+<div class="resume-date text-md-right">
+              <span class="text-primary"><%=session.getAttribute("session_id") %></span>
+            </div>
+            </div>
+            <div class="resume-item d-flex flex-column flex-md-row mb-5">
+             <div class="resume-content mr-auto">
+              <h3 class="mb-0">강의이름:</h3>
+            </div>
+<div class="resume-date text-md-right">
+              <span class="text-primary"><%=session.getAttribute("title") %></span>
+            </div>
+             </div>
+            <div class="resume-item d-flex flex-column flex-md-row mb-5">
+             <div class="resume-content mr-auto">
+              <h3 class="mb-0">트레이너:</h3>
+            </div>
+<div class="resume-date text-md-right">
+              <span class="text-primary"><%=session.getAttribute("id") %></span>
+            </div>
+             </div>
+            <div class="resume-item d-flex flex-column flex-md-row mb-5">
+             <div class="resume-content mr-auto">
+              <h3 class="mb-0">시작시간:</h3>
+            </div>
+<div class="resume-date text-md-right">
+              <span class="text-primary"><%=session.getAttribute("start") %></span>
+            </div> </div>
+            <div class="resume-item d-flex flex-column flex-md-row mb-5">
+             <div class="resume-content mr-auto">
+              <h3 class="mb-0">종료시간:</h3>
+            </div>
+<div class="resume-date text-md-right">
+              <span class="text-primary"><%=session.getAttribute("end") %></span>
+            </div> </div> 
+            <div class="resume-item d-flex flex-column flex-md-row mb-5">
+             <div class="resume-content mr-auto">
+              <h3 class="mb-0">가격:</h3>
+            </div>
+<div class="resume-date text-md-right">
+              <span class="text-primary"><%=session.getAttribute("price")+"원" %></span>
+            </div>
+             </div>
+              <form action="ptpay" method="post">
+            <div class="resume-item d-flex flex-column flex-md-row mb-5">
 
-트레이너:<%=session.getAttribute("id") %><br>
-
-시작시간: <%=session.getAttribute("start") %><br>
-
-종료시간: <%=session.getAttribute("end") %><br>
-가격: <%=session.getAttribute("price") %><br>
-<%=session.getAttribute("log") %>
-
-
-<form action="ptpay" method="post">
-<input type="button" value="결제하기" onclick="javascript:doShow()" id="button1">
-    <div id="aa" style="display:none">
+<input type="button" value="결제하기" onclick="javascript:doShow()" id="button1" class="byn btn-secondary">
+</div>           
+     <div id="aa" style="display:none">
     결제방식: 
-    <input type="radio" name="paytype" id="paytype1" value="1" onclick="div_OnOff(this.value,'con');">
+    <input type="radio" name="paytype" id="paytype1" value="1" onclick="div_OnOff(this.value,'con');" class="byn btn-secondary">
     <label for="paytype1">카드</label>
-     <input type="radio" name="paytype" id="paytype2" value="2" onclick="div_OnOff(this.value,'con');">
+     <input type="radio" name="paytype" id="paytype2" value="2" onclick="div_OnOff(this.value,'con');" class="byn btn-secondary">
     <label for="paytype1">통장 송금</label>
     <div id="con" style="display:none">
-    <h2>카드 결제</h2>
+    <h3>카드 결제</h3>
       
       <select name="cardnum">
       <option value="" selected>등록카드선택</option>
@@ -60,14 +160,9 @@ function doShow() {
        
           </c:forEach>
            </select> 
-      <input type="button" onclick="location.href='cardwrite?id=<%=session.getAttribute("session_id") %>'"value="카드등록">      
-    <br>비밀번호 : <input type="text" name="password" maxlength="4"><br>
-     <input type="submit" value="결제">
-   
-
-
-   
-    
+      <input type="button" class="byn btn-secondary" onclick="location.href='cardwrite?id=<%=session.getAttribute("session_id") %>'"value="카드등록">      
+    <br>비밀번호 : <input type="text" name="password" maxlength="4"  class="form-control"><br>
+     <input type="submit" value="결제" class="byn btn-secondary">
       
     </div>
    <div id="con2" style="display:none">
@@ -79,7 +174,34 @@ function doShow() {
     
     
     </div>
-      </form>
+      </form>    
+          </div>
+      
+            </div> 
+           
+          
+      </section>
+   
+
+
+
+
+
+
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/resume.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script> 
+
+    <!--chatting  -->
 <script type="text/javascript">
 function div_OnOff(v,id){
 	if(v=="1"){
@@ -107,8 +229,6 @@ function div_OnOff2(v,con2){
 }
 
 </script>
- 
- 
- 
-</body>
+  </body>
+
 </html>

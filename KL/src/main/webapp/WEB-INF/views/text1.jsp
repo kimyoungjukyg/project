@@ -215,8 +215,9 @@
 
 
         <div class="resume-item d-flex flex-column flex-md-row mb-5">
+           <div id="aa" style="display:">
            <h3 class="mb-4">PT신청  &amp; 리뷰</h3>
-          
+        
            <div class="resume-date text-md-right">
              <%if("1".equals(session.getAttribute("classify"))){%>
                <button type="button" class="byn btn-secondary" onclick="location.href='ptView?id=<%=session.getAttribute("session_id")%>'">자기 강의 만들기</button>     
@@ -224,15 +225,17 @@
           
           <%} %>
            </div>
-</div> 
+
     <div class="resume-date text-md-right">
             <%if(null==session.getAttribute("session_id")){ %>
                
      <button type="button" class="byn btn-secondary" onclick="location.href='#login'">로그인이 필요합니다</button>
             <%}else{ %>
+           
    <c:forEach var="member" items="${textList}">
+   
           <div class="resume-item d-flex flex-column flex-md-row mb-5">
-         
+         <input type="hidden" name="id"value="${member.id}">
             <div class="resume-content mr-auto">
            
               <div class="subheading mb-3">${member.id}</div>
@@ -243,21 +246,28 @@
           <%if("1".equals(session.getAttribute("classify"))){%>
             
      <%}else { %>
-      <button type="button" class="byn btn-secondary" onclick="location.href='callender?id=${member.id}&cost=<%=session.getAttribute("session_id")%>'">강의 신청하기</button>
+    
+    
+     <input type="button" class="byn btn-secondary" onclick="location.href='callender?id=${member.id}'" value="강의 신청하기">
       <%} %>
-         
-          <button type="button" class="byn btn-secondary" onclick="ptReview?id=${member.id}">리뷰 보기</button>
-            
+     
+       
+        <button type="button" class="byn btn-secondary" onclick="ptReview?id=${member.id}">리뷰 보기</button>      
             </div>
           
-          
-        
-            </c:forEach> 
+           
+            </c:forEach>
+           
             </div>
             <%} %>
-          
-           </div>
+          </div> 
+                   </div>
+      
+         
            
+            </div> 
+           
+          
       </section>
 
       <hr class="m-0">
@@ -296,8 +306,43 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/resume.min.js"></script>
-    
-
+    <script src="http://code.jquery.com/jquery-latest.js"></script> 
+<script> 
+function doShow2(){
+	 if ($('#cc').is(":visible")) { 
+    	 $('#cc').show();
+    }else{
+    	$('#cc').show();
+    }
+}
+function doShow() { 
+    if ($('#aa').is(":visible")) { 
+        $('#aa').show();
+        $('#bb').hide();
+        $('#cc').hide();
+        // 클래스값을 받아서 숨기기 
+      
+    } else { 
+        $('#aa').hide();
+        $('#cc').show();// id값을 받아서 보이기 
+         // 클래스값을 받아서 보이기 
+        
+    } 
+    if ($('#bb').is(":visible")) { 
+        $('#aa').show(); // id값을 받아서 숨기기 
+        $('#bb').hide(); // 클래스값을 받아서 숨기기 
+      
+    } else { 
+        $('#aa').hide(); // id값을 받아서 보이기 
+        $('#bb').show(); // 클래스값을 받아서 보이기 
+        
+    } 
+    if ($('#cc').is(":visible")) { 
+    	 $('#cc').hide();
+    }
+} 
+</script> 
+    <!--chatting  -->
 
   </body>
 

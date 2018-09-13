@@ -167,7 +167,6 @@ public class MemberController {
 	@RequestMapping(value="/ptmake",method=RequestMethod.POST)
 	public ModelAndView ptmake(@ModelAttribute PtVO ptVo) throws IOException {
 	
-		
 	mav=new ModelAndView();
 		
 	mav=pt.ptmake(ptVo);
@@ -190,6 +189,7 @@ public class MemberController {
 	@RequestMapping(value = "/callender", method = RequestMethod.GET)
 	public ModelAndView callender(@RequestParam("id") String id) {
 	 mav=new ModelAndView();
+
 		mav=pt.callender(id);
 		return mav;
 	}
