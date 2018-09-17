@@ -64,7 +64,7 @@
             <a class="nav-link js-scroll-trigger" href="#exercise">운동법 공유</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#PT">PT 신청</a>
+            <a class="nav-link js-scroll-trigger" href="${pageContext.servletContext.contextPath }/calendar">PT 신청</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#food">음식 레시피</a>

@@ -1,0 +1,72 @@
+/회원정보
+CREATE TABLE MEMBER(
+    ID NVARCHAR2(50) PRIMARY KEY,
+    PASSWORD NVARCHAR2(100),
+    NAME NVARCHAR2(50),
+    GENDER NVARCHAR2(10),
+    ADDRESS NVARCHAR2(100),
+    PHONE_NUMBER NVARCHAR2(50),
+    EMAIL NVARCHAR2(50),
+    CLASSIFY NUMBER,
+    PROFILE_IMG NVARCHAR2(50),
+    EMAIL_CONFIRM NVARCHAR2(50),
+    TRAINER_CONFIRM NVARCHAR2(50));
+    
+    select * from member;
+    drop table member;
+    
+ //회원의 카드리스트
+ create table cardlist(
+ id NVARCHAR2(50) not null,
+ cardnum NVARCHAR2(50) primary key,
+ password NVARCHAR2(50) not null,
+ num number,
+foreign key(id) references member(id)
+on delete cascade
+on update casecade
+
+);
+  
+  
+  select * from cardlist;
+  drop table cardlist;
+  
+    
+CREATE TABLE PT(
+ID NVARCHAR2(50) NOT NULL, 
+tranl_ID NVARCHAR2(50) NOT NULL,  
+title  VARCHAR2(50)  primary key, 
+starttime VARCHAR2(50) NOT NULL,
+endtime VARCHAR2(50) NOT NULL,  
+PRICE NUMBER NOT NULL,
+foreign key(id) references member(id)
+on delete cascade
+);
+
+DROP TABLE PT;
+
+//강사가 생성하는 강의테이블
+drop table FULLCALENDAR;
+select * from FULLCALENDAR;
+
+create table FULLCALENDAR(
+id NVARCHAR2(50) not null,
+title  VARCHAR2(50) PRIMARY KEY,
+starttime varchar2(50)  not null,
+endtime varchar2(50)  not null,
+allDay VARCHAR2(50),
+clssName varchar2(50),
+price number  not null,
+count number,
+log number,
+foreign key(id) references member(id)
+on delete cascade
+);
+drop table schedule;
+select * from SCHEDULE;
+create table SCHEDULE(
+employeeNo NVARCHAR2(50),
+starttime NVARCHAR2(50),
+endtime NVARCHAR2(50),
+scheduleContent NVARCHAR2(50))
+

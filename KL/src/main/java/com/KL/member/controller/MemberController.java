@@ -1,42 +1,31 @@
 package com.KL.member.controller;
 
-import java.awt.List;
+
 import java.io.IOException;
-import java.text.DateFormat;
 
-import java.util.Date;
-import java.util.Locale;
-import java.util.Map;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.KL.member.service.CardService;
-import com.KL.member.service.MemberService;
-import com.KL.member.service.PtService;
-import com.KL.member.vo.CardVO;
-import com.KL.member.vo.MemberVO;
-import com.KL.member.vo.PtVO;
+import com.KL.member.service.*;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
+
+import com.KL.member.vo.*;
+
+
+
 
 @Controller
-
 public class MemberController {
 
 	/*
@@ -52,6 +41,7 @@ public class MemberController {
 	private ModelAndView mav;
 	@Autowired
 	private PtService pt;
+	
 	
 	@Autowired
 	private CardService ca;
@@ -225,6 +215,8 @@ public class MemberController {
 		mav = ca.ptpay(cardVO, response);
 		return mav;
 	}
+	
+
 }
 	
 	
