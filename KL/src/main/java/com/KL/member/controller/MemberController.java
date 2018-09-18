@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.KL.member.service.*;
 
@@ -54,7 +55,7 @@ public class MemberController {
 	// 프로젝트시작시에 뜨는페이지 지정
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
-		return "redirect:/textList";
+		return "joinForm";
 		}
 	
 	
@@ -76,22 +77,20 @@ public class MemberController {
 
 	// 회원가입 처리
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public ModelAndView memberJoin(@ModelAttribute MemberVO memberVO) {
-		mav = new ModelAndView();
-
+	public String memberJoin(@ModelAttribute MemberVO memberVO,RedirectAttributes rttr, HttpServletResponse response) throws Exception {
 		String encPassword = passEncoder.encode(memberVO.getPassword());
 		memberVO.setPassword(encPassword);
-		System.out.println("암호화 비번 확인 : " + memberVO.getPassword());
+		rttr.addFlashAttribute("result", ms.memberJoin(memberVO, response));
 
-		mav = ms.memberJoin(memberVO);
-		return mav;
+		
+		return "redirect:/joinForm";
 	}
-
-	// 아이디 중복확인
-	@RequestMapping(value = "/idOverlap", method = RequestMethod.POST)
-	public void idOverlap(HttpServletResponse response, @RequestParam("id") String id) throws IOException {
-		ms.idOverlap(id, response);
-	}
+	// 회원 인증
+		@RequestMapping(value = "/approval_member.do", method = RequestMethod.POST)
+		public void approval_member(@ModelAttribute MemberVO memberVO, HttpServletResponse response) throws Exception{
+			ms.approval_member(memberVO, response);
+		}
+	
 
 	// 로그인 처리
 	@RequestMapping(value = "/login", method = RequestMethod.POST)

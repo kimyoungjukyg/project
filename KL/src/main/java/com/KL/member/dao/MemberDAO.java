@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.KL.member.vo.MemberVO;
 
@@ -18,10 +19,13 @@ public class MemberDAO {
 		return sqlSession.insert("Member.memberJoin", memberVO);
 	}
 
-	public MemberVO idOverlap(String id) {
-		return sqlSession.selectOne("Member.idOverlap", id);
-	}
-
+//이메일인증
+		@Transactional
+		public int approval_member(MemberVO memberVO){
+			return sqlSession.update("Member.approval_member", memberVO);
+		}
+	
+	
 	public MemberVO memberLogin(MemberVO memberVO) {
 		return sqlSession.selectOne("Member.login", memberVO);
 	}

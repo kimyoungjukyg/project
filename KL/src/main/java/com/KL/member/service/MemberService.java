@@ -5,10 +5,13 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,38 +34,101 @@ public class MemberService {
 	private PtVO ptvo;
 	@Autowired
 	private BCryptPasswordEncoder passEncoder;
+	
 
 	@Autowired
 	private HttpSession session;
 
 	// 회원가입 메소드
-	public ModelAndView memberJoin(MemberVO memberVO) {
-		mav = new ModelAndView();
+	
+	public int memberJoin(MemberVO memberVO,HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
 
-		int result = memberDAO.memberJoin(memberVO);
-
-		if (result == 0) {
-			// 회원가입 실패하면 다시 joinForm으로 이동
-			mav.setViewName("joinForm");
-		} else {
-			// 회원가입 성공하면 loginForm으로 이동
-			mav.setViewName("redirect:/textList#mypage");
-		}
-
-		return mav;
+	
+			memberVO.setApproval_key(create_key());
+			memberDAO.memberJoin(memberVO);
+			send_mail(memberVO);
+			return 1;
+		
 	}
+	//인증키
 
-	// 아이디 중복확인 메소드
-	public void idOverlap(String id, HttpServletResponse response) throws IOException {
-		memberVO = new MemberVO();
-		memberVO = memberDAO.idOverlap(id);
-		if (memberVO == null) {
-			response.getWriter().print("1");
-		} else {
-			response.getWriter().print("0");
+	public String create_key() throws Exception {
+		String key = "";
+		Random rd = new Random();
+
+		for (int i = 0; i < 8; i++) {
+			key += rd.nextInt(10);
+		}
+		return key;
+	}
+//이메일전송
+	public void send_mail(MemberVO memberVO) throws Exception {
+		// Mail Server 설정
+		String charSet = "utf-8";
+		String hostSMTP = "smtp.naver.com";
+		String hostSMTPid = "kyg7414@gmail.com";
+		String hostSMTPpwd = "ksym0522";
+
+		// 보내는 사람 EMail, 제목, 내용
+		String fromEmail = "kyg7414@gmail.com";
+		String fromName = "Spring Homepage";
+		String subject = "";
+		String msg = "";
+
+		// 회원가입 메일 내용
+		subject = "Spring Homepage 회원가입 인증 메일입니다.";
+		msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+		msg += "<h3 style='color: blue;'>";
+		msg += memberVO.getId() + "님 회원가입을 환영합니다.</h3>";
+		msg += "<div style='font-size: 130%'>";
+		msg += "하단의 인증 버튼 클릭 시 정상적으로 회원가입이 완료됩니다.</div><br/>";
+		msg += "<form method='post' action='http://localhost:8090/member/approval_member.do'>";
+		msg += "<input type='hidden' name='email' value='" + memberVO.getEmail() + "'>";
+		msg += "<input type='hidden' name='approval_key' value='" + memberVO.getApproval_key() + "'>";
+		msg += "<input type='submit' value='인증'></form><br/></div>";
+
+		// 받는 사람 E-Mail 주소
+		String mail = memberVO.getEmail();
+		try {
+			HtmlEmail email = new HtmlEmail();
+			email.setDebug(true);
+			email.setCharset(charSet);
+			email.setSSL(true);
+			email.setHostName(hostSMTP);
+			email.setSmtpPort(587);
+
+			email.setAuthentication(hostSMTPid, hostSMTPpwd);
+			email.setTLS(true);
+			email.addTo(mail, charSet);
+			email.setFrom(fromEmail, fromName, charSet);
+			email.setSubject(subject);
+			email.setHtmlMsg(msg);
+			email.send();
+		} catch (Exception e) {
+			System.out.println("메일발송 실패 : " + e);
 		}
 	}
-
+	//회원인증
+	
+	public void approval_member(MemberVO memberVO, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (memberDAO.approval_member(memberVO) == 0) { // 이메일 인증에 실패하였을 경우
+			out.println("<script>");
+			out.println("alert('잘못된 접근입니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+		} else { // 이메일 인증을 성공하였을 경우
+			out.println("<script>");
+			out.println("alert('인증이 완료되었습니다. 로그인 후 이용하세요.');");
+			out.println("location.href='../index.jsp';");
+			out.println("</script>");
+			out.close();
+		}
+	}
 	// 로그인 메소드
 	public ModelAndView memberLogin(MemberVO memberVO, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=UTF-8");
@@ -78,7 +144,7 @@ public class MemberService {
 		// memberVO.getPassword() 사용자가 입력한 패스워드, loginMember.getPassword() DB 패스워드
 		if (passEncoder.matches(memberVO.getPassword(), loginMember.getPassword())) {
 			session.setAttribute("session_id", memberVO.getId());
-			session.setAttribute("classify", loginMember.getClassify());
+			
 			mav.addObject("loginMember", loginMember);
 			mav.setViewName("redirect:/textList#mypage");
 		} else {
@@ -92,7 +158,29 @@ public class MemberService {
 		return mav;
 
 	}
+/*//아이디중복검사
+	
+	public void check_id(String id, HttpServletResponse response) throws Exception {
+		
+		memberDAO.check_id(id);
+		
+	}
+//이메일중복검사
+	
+	public void check_email(String email, HttpServletResponse response) throws Exception {
+		
+		memberDAO.check_email(email);
+		
+	}*/
 
+	
+
+
+	
+	
+	
+	
+	
 	public ModelAndView memberList() {
 		mav = new ModelAndView();
 		List<MemberVO> memberList = memberDAO.memberList();

@@ -15,32 +15,64 @@
 <script>
 	//JSON : JavaScript Object Notation
 
-	//아이디 중복확인
-	function idOverlap() {
-		$.ajax({
-			type : "post",
-			url : "idOverlap",
-			//join >> form태그의 id
-			data : {
-				"id" : frm.id.value
-			},
-			//return type
-			dataType : "text",
-			success : function(data) {
-				if (data == "1") {
-					alert("이 아이디는 사용 가능합니다.");
-				} else {
-					alert("이 아이디는 사용할 수 없습니다.");
-				}
-			},
-			error : function(request, status, error) {
-				alert("code : " + request.status + "\n" + "message : "
-						+ request.responseText + "\n" + "error : " + error);
+	$(function(){
+		$("#joinForm").submit(function(){
+			if($("#password").val() !== $("#password2").val()){
+				alert("비밀번호가 다릅니다.");
+				$("#password").val("").focus();
+				$("#password2").val("");
+				return false;
+			}else if ($("#password").val().length < 8) {
+				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
+				$("#password").val("").focus();
+				return false;
+			}else if($.trim($("#password").val()) !== $("#password").val() || $.trim($("#email").val()) !== $("#email").val() || $.trim($("#id").val()) !== $("#id").val()){
+				alert("공백은 입력이 불가능합니다.");
+				return false;
 			}
 		});
-	}
+	/* 	
+		$("#id").keyup(function() {
+			$.ajax({
+				url : "./check_id.do",
+				type : "POST",
+				data : {
+					id : $("#id").val()
+				},
+				success : function(result) {
+					if (result == 1) {
+						$("#id_check").html("중복된 아이디가 있습니다.");
+						$("#joinBtn").attr("disabled", "disabled");
+					} else {
+						$("#id_check").html("");
+						$("#joinBtn").removeAttr("disabled");
+					}
+				},
+			})
+		});
+		
+		$("#email").keyup(function(){
+			$.ajax({
+				url : "./check_email.do",
+				type : "POST",
+				data : {
+					email : $("#email").val()
+				},
+				success : function(result) {
+					if (result == 1) {
+						$("#email_check").html("중복된 이메일이 있습니다.");
+					} else {
+						$("#email_check").html("");
+					}
+				},
+			})
+		}); */
+	})
 
-	//전화번호 유효성 검사
+
+	
+
+	/* //전화번호 유효성 검사
 	$(function(){
 
 	    $(".phone-number-check").on('keydown', function(e){
@@ -145,16 +177,18 @@ function sample6_execDaumPostcode() {
         }
     }).open();
 }
+ */
 
 </script>
 </head>
 
 <body>
-	<form action="join" method="post" name="frm" id="frm">
+	<!-- <form action="join" method="post" name="frm" id="joinForm">
 		<table border="1">
 			<tr>
-				<td>아이디 : <input type="text" name="id"> <input
-					type="button" onclick="idOverlap()" value=중복확인></td>
+				<td>아이디 : <input type="text" name="id"id="id">
+				<span id="id_check" class="w3-text-red"></span>
+				</td>
 			</tr>
 			<tr>
 				<td>비밀번호 : <input type="password" name="password" id="pass1"
@@ -194,7 +228,11 @@ function sample6_execDaumPostcode() {
 
 			</tr>
 			<tr>
-				<td>이메일 : <input type="email" name="email"></td>
+				<td>이메일 : <input type="email" name="email" id="email">
+				
+				<span id="email_check" class="w3-text-red"></span>
+
+				</td>
 			</tr>
 			<tr>
 				<td>회원 분류 : <select name="classify" id="classify">
@@ -203,7 +241,42 @@ function sample6_execDaumPostcode() {
 				</select></td>
 			</tr>
 		</table>
-		<button type="submit" value="가입">가입</button>
-	</form>
+		<button type="submit" value="가입 " id="joinBtn">가입</button>
+	</form> -->
+	<div class="w3-content w3-container w3-margin-top">
+		<div class="w3-container w3-card-4">
+			<div class="w3-center w3-large w3-margin-top">
+				<h3>Member Join Form</h3>
+			</div>
+			<div>
+				<form id="joinForm" action="./join" method="post">
+					<p>
+						<label>ID</label> 
+						<input class="w3-input" type="text" id="id" name="id" required> 
+						<span id="id_check" class="w3-text-red"></span>
+					</p>
+					<p>
+						<label>Password</label> 
+						<input class="w3-input" id="password" name="password" type="password" required>
+					</p>
+					<p>
+						<label>Confirm</label> 
+						<input class="w3-input" id="password2" type="password" required>
+					</p>
+					<p>
+						<label>Email</label>
+						<input type="text" id="email" name="email" class="w3-input" required placeholder="이메일 인증 후 로그인이 가능합니다.">
+						<span id="email_check" class="w3-text-red"></span>
+					</p>
+					<p class="w3-center">
+						<button type="submit" id="joinBtn" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">Join</button>
+						<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>
+					</p>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	
 </body>
 </html>
