@@ -1,10 +1,8 @@
 package com.KL.member.controller;
 
 
-import java.io.File;
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -57,7 +54,7 @@ public class MemberController {
 	// 프로젝트시작시에 뜨는페이지 지정
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
-		return "redirect:textList";
+		return "redirect:/textList";
 		}
 	
 	
@@ -79,12 +76,10 @@ public class MemberController {
 
 	// 회원가입 처리
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String memberJoin(@ModelAttribute MemberVO memberVO,RedirectAttributes rttr, HttpServletResponse response,@RequestParam("uploadFile") MultipartFile file) throws Exception {
+	public String memberJoin(@ModelAttribute MemberVO memberVO,RedirectAttributes rttr, HttpServletResponse response) throws Exception {
 		String encPassword = passEncoder.encode(memberVO.getPassword());
 		memberVO.setPassword(encPassword);
-		 File f = new File("C:\\Users\\user\\git\\project\\KL\\src\\main\\webapp\\resources\\test\\img\\"+file.getOriginalFilename());
-	     file.transferTo(f);
-	     memberVO.setProfile_IMG(file.getName());
+		
 		rttr.addFlashAttribute("result", ms.memberJoin(memberVO, response));
 
 		
@@ -95,7 +90,15 @@ public class MemberController {
 		public void approval_member(@ModelAttribute MemberVO memberVO, HttpServletResponse response) throws Exception{
 			ms.approval_member(memberVO, response);
 		}
-	
+		// 아이디 중복 검사(AJAX)
+		@RequestMapping(value = "/check_id.do", method = RequestMethod.POST)
+		public void check_id(@RequestParam("id") String id, HttpServletResponse response) throws Exception{
+			ms.check_id(id, response);
+		}
+		
+
+		
+		
 
 	// 로그인 처리
 	@RequestMapping(value = "/login", method = RequestMethod.POST)

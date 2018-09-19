@@ -44,12 +44,19 @@ public class MemberService {
 	public int memberJoin(MemberVO memberVO,HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
+		if (memberDAO.check_id(memberVO.getId()) == 1) {
+			out.println("<script>");
+			out.println("alert('동일한 아이디가 있습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return 0;
+		}  else {
 
-	
 			memberVO.setApproval_key(create_key());
 			memberDAO.memberJoin(memberVO);
 			send_mail(memberVO);
-			return 1;
+			return 1;}
 		
 	}
 	//인증키
@@ -124,7 +131,7 @@ public class MemberService {
 		} else { // 이메일 인증을 성공하였을 경우
 			out.println("<script>");
 			out.println("alert('인증이 완료되었습니다. 로그인 후 이용하세요.');");
-			/*out.println("location.href='../index.jsp';");*/
+			out.println("location.href='./member/textlist';");
 			out.println("</script>");
 			out.close();
 		}
@@ -139,7 +146,14 @@ public class MemberService {
 
 		System.out.println("사용자 입력 비번 : " + memberVO.getPassword());
 		System.out.println("DB의 암호화된 비번 : " + loginMember.getPassword());
-
+	if(!loginMember.getApproval_status().equals("true")){
+			out.println("<script>");
+			out.println("alert('이메일 인증 후 로그인 하세요.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			
+		}else {
 		// spring-security를 활용한 비밀번호 확인
 		// memberVO.getPassword() 사용자가 입력한 패스워드, loginMember.getPassword() DB 패스워드
 		if (passEncoder.matches(memberVO.getPassword(), loginMember.getPassword())) {
@@ -147,31 +161,26 @@ public class MemberService {
 			
 			mav.addObject("loginMember", loginMember);
 			mav.setViewName("redirect:/textList#mypage");
-		} else {
+		} 
+		else{
 			out.println("<script>");
 			out.println("alert('비밀번호가 틀립니다.');");
 			out.println("history.go(-1)");// 이전 페이지로 이동!
 			out.println("</script>");
 			out.close();
 		}
-
+		}
 		return mav;
 
 	}
-/*//아이디중복검사
+//아이디중복검사
 	
 	public void check_id(String id, HttpServletResponse response) throws Exception {
-		
-		memberDAO.check_id(id);
-		
+		PrintWriter out = response.getWriter();
+		out.println(memberDAO.check_id(id));
+		out.close();
 	}
-//이메일중복검사
-	
-	public void check_email(String email, HttpServletResponse response) throws Exception {
-		
-		memberDAO.check_email(email);
-		
-	}*/
+
 
 	
 

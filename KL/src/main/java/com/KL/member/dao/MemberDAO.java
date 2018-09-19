@@ -17,15 +17,20 @@ public class MemberDAO {
 
 	public int memberJoin(MemberVO memberVO) {
 		return sqlSession.insert("Member.memberJoin", memberVO);
-	}
-
+	}   
 //이메일인증
 		@Transactional
 		public int approval_member(MemberVO memberVO){
 			return sqlSession.update("Member.approval_member", memberVO);
 		}
-	
+// 아이디 중복 검사
+		public int check_id(String id){
+			return sqlSession.selectOne("Member.check_id", id);
+		}
 		
+
+
+
 	
 	public MemberVO memberLogin(MemberVO memberVO) {
 		return sqlSession.selectOne("Member.login", memberVO);

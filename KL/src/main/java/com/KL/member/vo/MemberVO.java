@@ -17,7 +17,6 @@ public class MemberVO {
 private String classify;	//회원 구분
 	private String profile_IMG;	//프로필 이미지
 	
-	private int trainer_Confirm;	//트레이너 승인여부
 
 	
 	public MemberVO() {
@@ -85,15 +84,7 @@ private String classify;	//회원 구분
 	}
 
 
-	public int getTrainer_Confirm() {
-		return trainer_Confirm;
-	}
-
-
-	public void setTrainer_Confirm(int trainer_Confirm) {
-		this.trainer_Confirm = trainer_Confirm;
-	}
-
+	
 
 	public String getId() {
 		return id;

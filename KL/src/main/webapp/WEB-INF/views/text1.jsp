@@ -146,6 +146,7 @@
           </div>
           <p class="lead mb-5">마이페이지가 될공간</p>
           <div class="social-icons">
+         <button type="button" class="byn btn-secondary" onclick="location.href='email'">메일보네기 </button>  
  <button type="button" class="byn btn-secondary" onclick="location.href='logout'">로그아웃 </button>
        
           </div>

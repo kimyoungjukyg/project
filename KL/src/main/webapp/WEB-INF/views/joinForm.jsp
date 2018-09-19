@@ -26,9 +26,9 @@
 				return false;
 			}
 		});
-		/* $("#id").keyup(function() {
+		 $("#id").keyup(function() {
 			$.ajax({
-				url : "./check_id.do",
+				url : "member/check_id.do",
 				type : "POST",
 				data : {
 					id : $("#id").val()
@@ -45,22 +45,7 @@
 			})
 		});
 		
-		$("#email").keyup(function(){
-			$.ajax({
-				url : "./check_email.do",
-				type : "POST",
-				data : {
-					email : $("#email").val()
-				},
-				success : function(result) {
-					if (result == 1) {
-						$("#email_check").html("중복된 이메일이 있습니다.");
-					} else {
-						$("#email_check").html("");
-					}
-				},
-			})
-		});  */
+		
 	})
 
 
@@ -178,78 +163,85 @@ function sample6_execDaumPostcode() {
 </head>
 
 <body>
- <form action="join" method="post" name="frm" id="joinForm" enctype="multipart/form-data">
+<div class="w3-content w3-container w3-margin-top">
+		<div class="w3-container w3-card-4">
+			<div class="w3-center w3-large w3-margin-top">
+				<h3>Member Join Form</h3>
+			</div>
+			<div>
+
+ <form action="join" method="post" name="frm" id="joinForm" >
  
-		<table border="1">
-		 <tr>
-            <th>이미지 </th>
-             <td>
-                <input type="file" name="uploadFile" id="uploadFile" />
-                <input type="hidden" name="profile_img" value="">
-            </td>
-        </tr>
-
-
-			<tr>
-				<td>아이디 : <input class="w3-input" type="text" id="id" name="id" required> 
+		<p>
+				<label>아이디 </label>
+				 <input class="w3-input" type="text" id="id" name="id" required> 
 						<span id="id_check" class="w3-text-red"></span>
-				</td>
-			</tr>
-			<tr>
-				<td>비밀번호 : <input type="password" name="password" id="pass1"
-					onkeyup="passCheck()" placeholder="비밀번호를 입력해 주세요."></td>
-			</tr>
-			<tr>
-				<td>비밀번호 재확인 : <input type="password" id="pass2"
+			
+			</p>	
+			
+				<p>
+				<label>비밀번호 </label>
+				<input class="w3-input" type="password" name="password" id="pass1"
+					onkeyup="passCheck()" placeholder="비밀번호를 입력해 주세요.">
+			</p>
+		
+			<p>
+				<label>비밀번호 재확인 </label>
+				 <input class="w3-input" type="password" id="pass2"
 					onkeyup="passCheck()" placeholder="한번 더  입력해 주세요." />
-				<td>
-			</tr>
-			<tr>
-				<td>
+				
+			</p>
+				
 					<p style="color: red;" id="passCheckMessage"></p>
-				</td>
-			</tr>
-			<tr>
-				<td>이름 : <input type="text" name="name"></td>
-			</tr>
-			<tr>
-				<td>성별 : <select name="gender">
+				
+			
+				<p>
+			<label>	이름</label> <input class="w3-input" type="text" name="name">
+			</p>
+				<p>
+				<label>성별</label>
+				 <select name="gender">
 						<option value="남자" selected="selected">남자</option>
 						<option value="여자">여자</option>
 						<option value="중성">중성</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>전화번호 : <input type="text" class="phone-number-check" name = "phone_number"></td>
-			</tr>
-			<tr>
-				<td><input type="text" id="sample6_postcode" placeholder="우편번호">
-					<input type="button" onclick="sample6_execDaumPostcode()"
-					value="우편번호 찾기"></td>
-			</tr>
-			<tr>
-				<td><input type="text" id="sample6_address" name="address" placeholder="주소"><input
-					type="text" id="sample6_address2" placeholder="상세주소"></td>
+				</select>
+			</p>
+				<p>
+				<label>전화번호</label>
+				<input type="text" class="w3-input" class="phone-number-check" name = "phone_number">
+			
+			</p>
+			<p>
+				<input type="text" class="w3-input" id="sample6_postcode" placeholder="우편번호">
+					<input type="button" onclick="sample6_execDaumPostcode()"class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round"
+					value="우편번호 찾기">
+			
+			
+				<input type="text" class="w3-input" id="sample6_address" name="address" placeholder="주소"><input
+					type="text" class="w3-input" id="sample6_address2" placeholder="상세주소">
 
-			</tr>
-			<tr>
-				<td>이메일 : 	<input type="text" id="email" name="email" class="w3-input" required placeholder="이메일 인증 후 로그인이 가능합니다.">
-						<span id="email_check" class="w3-text-red"></span>
+				</p>
+				<p>
+				<label>이메일 </label>	<input class="w3-input" type="text" id="email" name="email" class="w3-input" required placeholder="이메일 인증 후 로그인이 가능합니다.">
+					
 				
 				<span id="email_check" class="w3-text-red"></span>
 
-				</td>
-			</tr>
-			<tr>
-				<td>회원 분류 : <select name="classify" id="classify">
+				</p>
+			
+				<p>
+				<label>회원 분류 </label>
+				 <select name="classify" id="classify">
 						<option value="0" selected="selected" id="classify">일반 회원</option>
 						<option value="1" id="classify">트레이너</option>
-				</select></td>
-			</tr>
-		</table>
-		<button type="submit" value="가입 " id="joinBtn">가입</button>
+				</select>
+			</p>
+		
+		<button type="submit"class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" value="가입 " id="joinBtn">가입</button>
 	</form> 
-	
+	</div>
+	</div>
+	</div>
 </body>
 </html>	
 			

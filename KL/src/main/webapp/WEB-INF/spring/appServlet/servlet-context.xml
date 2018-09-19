@@ -13,9 +13,6 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 		<annotation-driven />
-	<beans:bean id="multipartResolver"
-    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-</beans:bean>
 
 
 
