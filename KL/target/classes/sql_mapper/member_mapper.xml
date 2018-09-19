@@ -3,7 +3,7 @@
 "http://mybatis.org/dtdmybatis-3-mapper.dtd">
 <mapper namespace="Member">
 
-<insert parameterType="member" id="memberJoin"> INSERT INTO MEMBER VALUES(#{id}, #{password}, #{email},'false',#{approval_key}) </insert>
+<insert parameterType="member" id="memberJoin"> INSERT INTO MEMBER VALUES(#{id}, #{password},#{name},#{gender},#{address},#{phone_number}, #{email},#{classify},#{profile_img},'false',#{approval_key},'false') </insert>
 
 
 <!-- 이메일 인증 -->

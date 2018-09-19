@@ -17,22 +17,16 @@
 
 	$(function(){
 		$("#joinForm").submit(function(){
-			if($("#password").val() !== $("#password2").val()){
-				alert("비밀번호가 다릅니다.");
-				$("#password").val("").focus();
-				$("#password2").val("");
+			 if ($("#pass1").val().length < 5) {
+				alert("비밀번호는 5자 이상으로 설정해야 합니다.");
+				$("#pass1").val("").focus();
 				return false;
-			}else if ($("#password").val().length < 8) {
-				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
-				$("#password").val("").focus();
-				return false;
-			}else if($.trim($("#password").val()) !== $("#password").val() || $.trim($("#email").val()) !== $("#email").val() || $.trim($("#id").val()) !== $("#id").val()){
+			}else if($.trim($("#pass1").val()) !== $("#pass1").val() || $.trim($("#email").val()) !== $("#email").val() || $.trim($("#id").val()) !== $("#id").val()){
 				alert("공백은 입력이 불가능합니다.");
 				return false;
 			}
 		});
-	/* 	
-		$("#id").keyup(function() {
+		/* $("#id").keyup(function() {
 			$.ajax({
 				url : "./check_id.do",
 				type : "POST",
@@ -66,13 +60,13 @@
 					}
 				},
 			})
-		}); */
+		});  */
 	})
 
 
 	
 
-	/* //전화번호 유효성 검사
+	 //전화번호 유효성 검사
 	$(function(){
 
 	    $(".phone-number-check").on('keydown', function(e){
@@ -120,7 +114,7 @@
 	      }
 	  });  
 	});
-
+	
 	// 비밀번호 체크
 function passCheck() {
 		var pass1 = $("#pass1").val();
@@ -134,6 +128,7 @@ function passCheck() {
 			$("#pass1").removeClass("warn");
 			$("#pass2").removeClass("warn");
 		}
+		
 	}
 	
 function sample6_execDaumPostcode() {
@@ -177,17 +172,27 @@ function sample6_execDaumPostcode() {
         }
     }).open();
 }
- */
+
 
 </script>
 </head>
 
 <body>
-	<!-- <form action="join" method="post" name="frm" id="joinForm">
+ <form action="join" method="post" name="frm" id="joinForm" enctype="multipart/form-data">
+ 
 		<table border="1">
+		 <tr>
+            <th>이미지 </th>
+             <td>
+                <input type="file" name="uploadFile" id="uploadFile" />
+                <input type="hidden" name="profile_img" value="">
+            </td>
+        </tr>
+
+
 			<tr>
-				<td>아이디 : <input type="text" name="id"id="id">
-				<span id="id_check" class="w3-text-red"></span>
+				<td>아이디 : <input class="w3-input" type="text" id="id" name="id" required> 
+						<span id="id_check" class="w3-text-red"></span>
 				</td>
 			</tr>
 			<tr>
@@ -215,7 +220,7 @@ function sample6_execDaumPostcode() {
 				</select></td>
 			</tr>
 			<tr>
-				<td>전화번호 : <input type="text" class="phone-number-check" name = "phone_Number"></td>
+				<td>전화번호 : <input type="text" class="phone-number-check" name = "phone_number"></td>
 			</tr>
 			<tr>
 				<td><input type="text" id="sample6_postcode" placeholder="우편번호">
@@ -228,7 +233,8 @@ function sample6_execDaumPostcode() {
 
 			</tr>
 			<tr>
-				<td>이메일 : <input type="email" name="email" id="email">
+				<td>이메일 : 	<input type="text" id="email" name="email" class="w3-input" required placeholder="이메일 인증 후 로그인이 가능합니다.">
+						<span id="email_check" class="w3-text-red"></span>
 				
 				<span id="email_check" class="w3-text-red"></span>
 
@@ -242,41 +248,8 @@ function sample6_execDaumPostcode() {
 			</tr>
 		</table>
 		<button type="submit" value="가입 " id="joinBtn">가입</button>
-	</form> -->
-	<div class="w3-content w3-container w3-margin-top">
-		<div class="w3-container w3-card-4">
-			<div class="w3-center w3-large w3-margin-top">
-				<h3>Member Join Form</h3>
-			</div>
-			<div>
-				<form id="joinForm" action="./join" method="post">
-					<p>
-						<label>ID</label> 
-						<input class="w3-input" type="text" id="id" name="id" required> 
-						<span id="id_check" class="w3-text-red"></span>
-					</p>
-					<p>
-						<label>Password</label> 
-						<input class="w3-input" id="password" name="password" type="password" required>
-					</p>
-					<p>
-						<label>Confirm</label> 
-						<input class="w3-input" id="password2" type="password" required>
-					</p>
-					<p>
-						<label>Email</label>
-						<input type="text" id="email" name="email" class="w3-input" required placeholder="이메일 인증 후 로그인이 가능합니다.">
-						<span id="email_check" class="w3-text-red"></span>
-					</p>
-					<p class="w3-center">
-						<button type="submit" id="joinBtn" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">Join</button>
-						<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>
-					</p>
-				</form>
-			</div>
-		</div>
-	</div>
-
+	</form> 
 	
 </body>
-</html>
+</html>	
+			

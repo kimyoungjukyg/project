@@ -68,17 +68,17 @@ public class MemberService {
 		// Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com";
-		String hostSMTPid = "kyg7414@gmail.com";
-		String hostSMTPpwd = "ksym0522";
+		String hostSMTPid = "kyg7414@naver.com";
+		String hostSMTPpwd = "ksym052207@";
 
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "kyg7414@gmail.com";
+		String fromEmail = "kyg7414@naver.com";
 		String fromName = "Spring Homepage";
 		String subject = "";
 		String msg = "";
 
 		// 회원가입 메일 내용
-		subject = "Spring Homepage 회원가입 인증 메일입니다.";
+		subject = "KL 회원가입 인증 메일입니다.";
 		msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
 		msg += "<h3 style='color: blue;'>";
 		msg += memberVO.getId() + "님 회원가입을 환영합니다.</h3>";
@@ -97,7 +97,7 @@ public class MemberService {
 			email.setCharset(charSet);
 			email.setSSL(true);
 			email.setHostName(hostSMTP);
-			email.setSmtpPort(587);
+			email.setSmtpPort(465);
 
 			email.setAuthentication(hostSMTPid, hostSMTPpwd);
 			email.setTLS(true);
@@ -124,7 +124,7 @@ public class MemberService {
 		} else { // 이메일 인증을 성공하였을 경우
 			out.println("<script>");
 			out.println("alert('인증이 완료되었습니다. 로그인 후 이용하세요.');");
-			out.println("location.href='../index.jsp';");
+			/*out.println("location.href='../index.jsp';");*/
 			out.println("</script>");
 			out.close();
 		}

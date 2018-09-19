@@ -25,6 +25,7 @@ public class MemberDAO {
 			return sqlSession.update("Member.approval_member", memberVO);
 		}
 	
+		
 	
 	public MemberVO memberLogin(MemberVO memberVO) {
 		return sqlSession.selectOne("Member.login", memberVO);

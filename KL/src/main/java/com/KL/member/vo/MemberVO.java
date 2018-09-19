@@ -5,20 +5,93 @@ import java.util.Date;
 public class MemberVO {
 	private String id;
 	private String password;
+	private String name;
 	private String email;
-	
+	private String gender;
+	private String address;
+	private String phone_number;
 	private String approval_status;
 	private String approval_key;
 
 
-/*	private String classify;	//회원 구분
+private String classify;	//회원 구분
 	private String profile_IMG;	//프로필 이미지
-	private int email_Confirm;	//이메일 인증여부
+	
 	private int trainer_Confirm;	//트레이너 승인여부
-*/
+
 	
 	public MemberVO() {
 
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public String getGender() {
+		return gender;
+	}
+
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+	public String getPhone_number() {
+		return phone_number;
+	}
+
+
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
+	}
+
+
+	public String getClassify() {
+		return classify;
+	}
+
+
+	public void setClassify(String classify) {
+		this.classify = classify;
+	}
+
+
+	public String getProfile_IMG() {
+		return profile_IMG;
+	}
+
+
+	public void setProfile_IMG(String profile_IMG) {
+		this.profile_IMG = profile_IMG;
+	}
+
+
+	public int getTrainer_Confirm() {
+		return trainer_Confirm;
+	}
+
+
+	public void setTrainer_Confirm(int trainer_Confirm) {
+		this.trainer_Confirm = trainer_Confirm;
 	}
 
 
