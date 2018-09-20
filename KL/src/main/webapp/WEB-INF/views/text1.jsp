@@ -52,6 +52,9 @@
           <li class="nav-item">
           <%if(session.getAttribute("session_id")==null){%>
             <a class="nav-link js-scroll-trigger" href="#login">로그인/회원가입</a>
+          <%}else if(session.getAttribute("session_id").equals("admin")){ %>
+           <a class="nav-link js-scroll-trigger" href="#admin">관리자</a>
+          
           <%}else{ %>
            <a class="nav-link js-scroll-trigger" href="#mypage">마이페이지</a>
            <%} %>
@@ -64,10 +67,10 @@
             <a class="nav-link js-scroll-trigger" href="#exercise">운동법 공유</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="${pageContext.servletContext.contextPath }/calendar">PT 신청</a>
+            <a class="nav-link js-scroll-trigger" href="#PT">PT 신청</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#food">음식 레시피</a>
+            <a class="nav-link js-scroll-trigger" href="#board">음식 레시피</a>
           </li>
          <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#awards">여유공간</a>
@@ -83,6 +86,7 @@
           <h1 class="mb-0">KL
             <span class="text-primary">프로젝트</span>
           </h1>
+          <%=session.getAttribute("session_id") %>
           <div class="subheading mb-5">2018-09-03 시작
             <a href="mailto:kyg7414@gmail.com">KL@email.com</a>
           </div>
@@ -135,6 +139,28 @@
         </div>
       </section>
       <hr class="m-0">
+      <%}else if(session.getAttribute("session_id").equals("admin")){ %>
+      <section class="resume-section p-3 p-lg-5 d-flex d-column" id="admin">
+        <div class="my-auto">
+          <h1 class="mb-0">admin
+            <span class="text-primary">page</span>
+          </h1>
+          <div class="subheading mb-5">2018-09-20 제작
+           
+          </div>
+          <p class="lead mb-5">관리자페이지가 될공간</p>
+          <div class="social-icons">
+         <button type="button" class="byn btn-secondary" onclick="location.href='email'">회원들에게 메일보네기 </button>
+             <button type="button" class="byn btn-secondary" onclick="location.href='memberList'">회원목록보기</button> 
+ <button type="button" class="byn btn-secondary" onclick="location.href='logout'">로그아웃 </button>
+       
+          </div>
+        </div>
+      </section>
+      <hr class="m-0">
+      
+      
+      
       <%}else{ %>
  <section class="resume-section p-3 p-lg-5 d-flex d-column" id="mypage">
         <div class="my-auto">
@@ -146,7 +172,7 @@
           </div>
           <p class="lead mb-5">마이페이지가 될공간</p>
           <div class="social-icons">
-         <button type="button" class="byn btn-secondary" onclick="location.href='email'">메일보네기 </button>  
+         
  <button type="button" class="byn btn-secondary" onclick="location.href='logout'">로그아웃 </button>
        
           </div>
@@ -273,12 +299,8 @@
 
       <hr class="m-0">
 
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="food">
-        <div class="my-auto">
-          <h2 class="mb-5">Food Recipe</h2>
-          <p>Apart from being a web developer, I enjoy most of my time being outdoors. In the winter, I am an avid skier and novice ice climber. During the warmer months here in Colorado, I enjoy mountain biking, free climbing, and kayaking.</p>
-          <p class="mb-0">When forced indoors, I follow a number of sci-fi and fantasy genre movies and television shows, I am an aspiring chef, and I spend a large amount of my free time exploring the latest technology advancements in the front-end web development world.</p>
-        </div>
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="board">
+  
       </section>
 
       <hr class="m-0">

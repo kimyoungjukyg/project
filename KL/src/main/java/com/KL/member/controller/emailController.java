@@ -13,16 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/email")
 public class emailController {
-	
 	@Autowired
-	 private JavaMailSender mailSender;
-		
+	private JavaMailSender mailSender;
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String home() {
+	public String email() {
 		return "mail";
 	}
-	
-	
 	  // mailSending 코드
 	  @RequestMapping(value = "/mailSending")
 	  public String mailSending(HttpServletRequest request) {
@@ -47,6 +43,6 @@ public class emailController {
 	      System.out.println(e);
 	    }
 	   
-	    return "redirect:/textList";
+	    return "redirect:textList";
 	  }
 }

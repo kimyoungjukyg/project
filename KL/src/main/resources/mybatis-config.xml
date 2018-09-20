@@ -8,5 +8,6 @@
 <typeAlias alias="pt" type="com.KL.member.vo.PtVO"/>
 <typeAlias alias="card" type="com.KL.member.vo.CardVO"/>
 <typeAlias alias="calendar" type="com.KL.member.vo.CalendarVO"/>
+
 </typeAliases>
 </configuration>

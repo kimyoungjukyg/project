@@ -2,9 +2,7 @@ package com.KL.member.service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -28,13 +26,12 @@ public class MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 	private ModelAndView mav;
-	private MemberVO memberVO;
 	@Autowired
 	private PtDAO ptDAO;
-	private PtVO ptvo;
 	@Autowired
 	private BCryptPasswordEncoder passEncoder;
-	
+
+
 
 	@Autowired
 	private HttpSession session;
@@ -131,7 +128,7 @@ public class MemberService {
 		} else { // 이메일 인증을 성공하였을 경우
 			out.println("<script>");
 			out.println("alert('인증이 완료되었습니다. 로그인 후 이용하세요.');");
-			out.println("location.href='./member/textlist';");
+			out.println("history.go(-1);");
 			out.println("</script>");
 			out.close();
 		}
@@ -159,8 +156,13 @@ public class MemberService {
 		if (passEncoder.matches(memberVO.getPassword(), loginMember.getPassword())) {
 			session.setAttribute("session_id", memberVO.getId());
 			
+			
 			mav.addObject("loginMember", loginMember);
-			mav.setViewName("redirect:/textList#mypage");
+			if(memberVO.getId().equals("admin")) {
+				mav.setViewName("redirect:/textList#admin");
+			}else {
+			
+			mav.setViewName("redirect:/textList#mypage");}
 		} 
 		else{
 			out.println("<script>");
@@ -182,13 +184,6 @@ public class MemberService {
 	}
 
 
-	
-
-
-	
-	
-	
-	
 	
 	public ModelAndView memberList() {
 		mav = new ModelAndView();

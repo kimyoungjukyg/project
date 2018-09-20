@@ -1,8 +1,10 @@
 package com.KL.member.controller;
 
 
+import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -14,13 +16,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.KL.member.service.*;
+import com.KL.member.vo.CardVO;
+import com.KL.member.vo.MemberVO;
+import com.KL.member.vo.PtVO;
 
 
-import com.KL.member.vo.*;
+
 
 
 
@@ -38,9 +44,11 @@ public class MemberController {
 	 */
 	@Autowired
 	private MemberService ms;
+	
 	private ModelAndView mav;
 	@Autowired
 	private PtService pt;
+
 	
 	
 	@Autowired
@@ -51,6 +59,11 @@ public class MemberController {
 	@Autowired
 	private HttpSession session;
 
+	
+	
+	
+	
+	
 	// 프로젝트시작시에 뜨는페이지 지정
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
@@ -222,8 +235,8 @@ public class MemberController {
 		mav = ca.ptpay(cardVO, response);
 		return mav;
 	}
-	
 
+	
 }
 	
 	
