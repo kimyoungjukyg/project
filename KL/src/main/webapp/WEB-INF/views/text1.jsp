@@ -300,6 +300,47 @@
       <hr class="m-0">
 
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="board">
+       <div class="my-auto">
+       <h2 class="mb-5">Food Recipe</h2>
+
+
+        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+         
+        
+          
+
+    <div class="resume-date text-md-right">
+           <table class="table">
+           <thead>
+           <tr><th>글번호</th>
+           <th>작성자</th>
+           <th>글제목</th>
+           <th>작성일자</th>
+        
+           <th>조회수</th>
+           </tr>
+           <thead>
+<c:forEach var="Rgsp" items="${gesipanlist}">
+   <tr>
+   <th>${Rgsp.rid}</th>
+   <th><a href="gesipanview?Rid=${Rgsp.rid}">${Rgsp.rname}</a></th>
+   <th>${Rgsp.rtitle}</th>
+   <th>${Rgsp.rdate}</th>
+   <th>${Rgsp.rhit}</th>
+  
+   </tr>   
+            </c:forEach>
+
+           
+           </table>
+  <a href="Rgesipanwriteform">글쓰기</a> 
+          
+           </div>
+      
+         </div>
+            </div> 
+  
+  
   
       </section>
 

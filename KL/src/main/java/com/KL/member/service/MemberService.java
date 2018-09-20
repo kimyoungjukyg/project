@@ -15,8 +15,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.KL.member.dao.GesipanDAO;
 import com.KL.member.dao.MemberDAO;
 import com.KL.member.dao.PtDAO;
+import com.KL.member.vo.CommentVO;
+import com.KL.member.vo.KLVO;
 import com.KL.member.vo.MemberVO;
 import com.KL.member.vo.PtVO;
 
@@ -30,7 +33,8 @@ public class MemberService {
 	private PtDAO ptDAO;
 	@Autowired
 	private BCryptPasswordEncoder passEncoder;
-
+	@Autowired
+	private GesipanDAO gdao;
 
 
 	@Autowired
@@ -210,6 +214,10 @@ public class MemberService {
 mav=new ModelAndView();
 List<MemberVO> textList =memberDAO.textList();
 mav.addObject("textList",textList);
+List<KLVO> gesipanlist = gdao.gesipanlist();
+mav.addObject("gesipanlist", gesipanlist);
+List<CommentVO> replyList = gdao.replyList();
+mav.addObject("replyList",replyList);
 
 mav.setViewName("text1");
 		
