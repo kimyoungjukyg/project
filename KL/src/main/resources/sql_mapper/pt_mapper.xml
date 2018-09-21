@@ -14,4 +14,8 @@ UPDATE FULLCALENDAR SET log=log+1 WHERE Id=#{id}
 </update>
 <select parameterType="pt" id="ptr" resultType="pt">
 SELECT * FROM FULLCALENDAR where LOG=#{log}</select>
+
+<insert parameterType="pt" id="ptpay"> 
+INSERT INTO PT VALUES(#{id},#{traner} #{title},#{starttime},#{endtime},#{price}) 
+</insert>
 </mapper>

@@ -9,6 +9,7 @@ private String starttime;
 private String endtime;
 private String allDay;
 private String className;
+private String traner;
 private int price;
 private int count;
 private int log;
@@ -20,6 +21,12 @@ public PtVO() {
 }
 
 
+public String getTraner() {
+	return traner;
+}
+public void setTraner(String traner) {
+	this.traner = traner;
+}
 public int getLog() {
 	return log;
 }

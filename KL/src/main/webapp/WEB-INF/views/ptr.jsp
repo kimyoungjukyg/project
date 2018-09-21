@@ -90,6 +90,7 @@ function doShow() {
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="PT">
      
         <div class="my-auto">
+          <form action="ptpay" method="post">
        <h2 class="mb-5">PT 결제</h2>
 <div class="resume-item d-flex flex-column flex-md-row mb-5">
             <div class="resume-content mr-auto">
@@ -97,6 +98,7 @@ function doShow() {
             </div>
 <div class="resume-date text-md-right">
               <span class="text-primary"><%=session.getAttribute("session_id") %></span>
+              
             </div>
             </div>
             <div class="resume-item d-flex flex-column flex-md-row mb-5">
@@ -105,6 +107,7 @@ function doShow() {
             </div>
 <div class="resume-date text-md-right">
               <span class="text-primary"><%=session.getAttribute("title") %></span>
+              
             </div>
              </div>
             <div class="resume-item d-flex flex-column flex-md-row mb-5">
@@ -113,6 +116,7 @@ function doShow() {
             </div>
 <div class="resume-date text-md-right">
               <span class="text-primary"><%=session.getAttribute("id") %></span>
+             
             </div>
              </div>
             <div class="resume-item d-flex flex-column flex-md-row mb-5">
@@ -121,6 +125,7 @@ function doShow() {
             </div>
 <div class="resume-date text-md-right">
               <span class="text-primary"><%=session.getAttribute("start") %></span>
+          
             </div> </div>
             <div class="resume-item d-flex flex-column flex-md-row mb-5">
              <div class="resume-content mr-auto">
@@ -128,6 +133,7 @@ function doShow() {
             </div>
 <div class="resume-date text-md-right">
               <span class="text-primary"><%=session.getAttribute("end") %></span>
+              
             </div> </div> 
             <div class="resume-item d-flex flex-column flex-md-row mb-5">
              <div class="resume-content mr-auto">
@@ -135,9 +141,10 @@ function doShow() {
             </div>
 <div class="resume-date text-md-right">
               <span class="text-primary"><%=session.getAttribute("price")+"원" %></span>
+              
             </div>
              </div>
-              <form action="ptpay" method="post">
+            
             <div class="resume-item d-flex flex-column flex-md-row mb-5">
 
 <input type="button" value="결제하기" onclick="javascript:doShow()" id="button1" class="byn btn-secondary">
@@ -174,6 +181,12 @@ function doShow() {
     
     
     </div>
+    <input type="hidden" name="id" value="<%=session.getAttribute("session_id")%>">
+      <input type="hidden" name="title" value="<%=session.getAttribute("title")%>">
+          <input type="hidden" name="starttime" value="<%=session.getAttribute("start")%>">
+        <input type="hidden" name="endtime" value="<%=session.getAttribute("end") %>">
+        <input type="hidden" name="traner" value="<%=session.getAttribute("id") %>">
+       <input type="hidden" name="price" value="<%=session.getAttribute("price") %>">
       </form>    
           </div>
       

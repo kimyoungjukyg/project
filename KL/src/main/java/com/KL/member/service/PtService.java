@@ -97,6 +97,22 @@ session.setAttribute("ptid", ptVo);
 	}
 
 
+	public ModelAndView ptpay(PtVO ptVO, HttpServletResponse response) {
+		mav=new ModelAndView();
+		int result = ptDAO.ptpay(ptVO);
+		if (result == 0) {
+			// 등록 실패하면 다시 joinForm으로 이동
+			mav.setViewName("redirect:/ptr");
+		} else {
+			
+			// 등록 성공하면 loginForm으로 이동
+			mav.setViewName("redirect:/textList#PT");
+		}
+
+		return mav;
+	}
+
+
 
 
 	

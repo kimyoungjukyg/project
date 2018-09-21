@@ -43,6 +43,11 @@ public class PtDAO {
 		return sqlSession.selectOne("Pt.ptup", ptVO);
 	}
 
+	public int ptpay(PtVO ptVO) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("Pt.ptpay",ptVO);
+	}
+
 	
 
 	

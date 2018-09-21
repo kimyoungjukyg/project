@@ -233,11 +233,11 @@ public class MemberController {
 	}
 	//카드결제진행
 	@RequestMapping(value = "/ptpay", method = RequestMethod.POST)
-	public ModelAndView ptpay(@ModelAttribute CardVO cardVO, HttpServletResponse response)
+	public ModelAndView ptpay(@ModelAttribute CardVO cardVO,@ModelAttribute PtVO ptVO,HttpServletResponse response)
 			throws IOException {
 		mav = new ModelAndView();
-		mav = ca.ptpay(cardVO, response);
-		
+		ca.ptpay(cardVO, response);
+		mav= pt.ptpay(ptVO,response);
 		return mav;
 	}
 	//글쓰기 화면 호출
