@@ -81,7 +81,7 @@ mav.setViewName("ptr");
 
 		if(cardVO.getPassword().equals(cardtest.getPassword())){
 			mav.addObject("cardtest", cardtest);
-			mav.setViewName("ptpay");	
+				
 		} else {
 			out.println("<script>");
 			out.println("alert('비밀번호가 틀립니다.');");

@@ -237,6 +237,7 @@ public class MemberController {
 			throws IOException {
 		mav = new ModelAndView();
 		mav = ca.ptpay(cardVO, response);
+		
 		return mav;
 	}
 	//글쓰기 화면 호출

@@ -162,7 +162,7 @@ public class MemberService {
 		// memberVO.getPassword() 사용자가 입력한 패스워드, loginMember.getPassword() DB 패스워드
 		if (passEncoder.matches(memberVO.getPassword(), loginMember.getPassword())) {
 			session.setAttribute("session_id", memberVO.getId());
-			
+			session.setAttribute("classify", loginMember.getClassify());
 			
 			mav.addObject("loginMember", loginMember);
 			if(memberVO.getId().equals("admin")) {

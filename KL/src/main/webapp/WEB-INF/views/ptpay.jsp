@@ -8,6 +8,6 @@
 </head>
 <body>
 <h2>결제완료</h2>
-
+${cardtest.id}
 </body>
 </html>
