@@ -1,52 +1,66 @@
 /회원정보
 CREATE TABLE MEMBER(
     ID NVARCHAR2(50) PRIMARY KEY,
-    PASSWORD NVARCHAR2(100),
-    NAME NVARCHAR2(50),
-    GENDER NVARCHAR2(10),
+    PASSWORD NVARCHAR2(100) not null,
+    NAME NVARCHAR2(50) not null,
+    GENDER NVARCHAR2(10) not null,
     ADDRESS NVARCHAR2(100),
     PHONE_NUMBER NVARCHAR2(50),
     EMAIL NVARCHAR2(50),
     CLASSIFY NUMBER,
-    PROFILE_IMG NVARCHAR2(50),
-    EMAIL_CONFIRM NVARCHAR2(50),
-    TRAINER_CONFIRM NVARCHAR2(50));
+   approval_status NVARCHAR2(50) not null,
+  approval_key NVARCHAR2(50));
+update member set approval_status='true' where classify='2';
+ insert into MEMBER (id,name,email,classify,approval_status) values('admin','관리자','kyg7414@naver.com','3','true');
+    select * from  member;
     
-    select * from member;
-    drop table member;
-    
+ commit;
+    delete from member where approval_status='false';
+       drop table MEMBER;
+      drop table cardlist;
+      DROP TABLE PT;
+      drop table FULLCALENDAR;
+//메시지
+CREATE TABLE MESSAGE(
+    MESSAGE_NUM NUMBER PRIMARY KEY,
+    WRITER NVARCHAR2(100),
+    READER NVARCHAR2(100),
+    CONTENT NVARCHAR2(500)
+);
+//쪽지번호
+CREATE SEQUENCE MESSAGE_NUM;
  //회원의 카드리스트
  create table cardlist(
  id NVARCHAR2(50) not null,
  cardnum NVARCHAR2(50) primary key,
  password NVARCHAR2(50) not null,
- num number,
+ num number NOT NULL,
 foreign key(id) references member(id)
 on delete cascade
-on update casecade
+
 
 );
   
   
   select * from cardlist;
-  drop table cardlist;
+
   
-    
+    select * from pt;
 CREATE TABLE PT(
 ID NVARCHAR2(50) NOT NULL, 
 tranl_ID NVARCHAR2(50) NOT NULL,  
-title  VARCHAR2(50)  primary key, 
-starttime VARCHAR2(50) NOT NULL,
-endtime VARCHAR2(50) NOT NULL,  
+title  NVARCHAR2(50)  primary key, 
+starttime NVARCHAR2(50) NOT NULL,
+endtime NVARCHAR2(50) NOT NULL,  
 PRICE NUMBER NOT NULL,
 foreign key(id) references member(id)
 on delete cascade
 );
 
-DROP TABLE PT;
+
 
 //강사가 생성하는 강의테이블
-drop table FULLCALENDAR;
+
 select * from FULLCALENDAR;
 
 create table FULLCALENDAR(
@@ -62,11 +76,33 @@ log number,
 foreign key(id) references member(id)
 on delete cascade
 );
-drop table schedule;
+drop table SCHEDULE;
 select * from SCHEDULE;
 create table SCHEDULE(
 employeeNo NVARCHAR2(50),
 starttime NVARCHAR2(50),
 endtime NVARCHAR2(50),
-scheduleContent NVARCHAR2(50))
+scheduleContent NVARCHAR2(50));
 
+drop table RGESIPAN;
+select * from RGESIPAN;
+CREATE TABLE RGESIPAN(
+RTYPE NVARCHAR2(10), --게시판 타입
+RID NUMBER PRIMARY KEY, --게시물번호
+RNAME NVARCHAR2(50), --등록자명
+RTITLE NVARCHAR2(50), --제목
+RCONTENT NVARCHAR2(500), --내용
+RDATE DATE, --해당날짜
+RHIT NUMBER DEFAULT 0, --조회수
+RFILE NVARCHAR2(50) );--파일첨부
+
+CREATE TABLE TOCOMMENT(
+ID VARCHAR2(100), --아이디
+CID NUMBER PRIMARY KEY, --댓글 번호
+RID NUMBER NOT NULL, --게시글 번호
+CCONTENT VARCHAR2(500) NOT NULL, --댓슬내용
+CWRITER VARCHAR2(20), --작성자
+CDATE DATE ); --댓글 작성시간
+
+CREATE SEQUENCE TOCOMMENT_SEQ;
+CREATE SEQUENCE RGESIPAN_SEQ;
