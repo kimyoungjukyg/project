@@ -40,9 +40,9 @@ public class emailController {
 	     
 	      mailSender.send(message);
 	    } catch(Exception e){
-	      System.out.println(e);
+	      System.out.println("전송오류"+e);
 	    }
 	   
-	    return "redirect:textList";
+	    return "redirect:/textList";
 	  }
 }

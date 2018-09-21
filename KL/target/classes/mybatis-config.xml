@@ -9,6 +9,6 @@
 <typeAlias alias="card" type="com.KL.member.vo.CardVO"/>
 <typeAlias alias="calendar" type="com.KL.member.vo.CalendarVO"/>
 <typeAlias alias="kl" type="com.KL.member.vo.KLVO"/>
-		<typeAlias alias="Com" type="com.KL.member.vo.CommentVO"/>
+<typeAlias alias="Com" type="com.KL.member.vo.CommentVO"/>
 </typeAliases>
 </configuration>

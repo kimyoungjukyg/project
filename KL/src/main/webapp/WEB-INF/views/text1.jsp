@@ -310,7 +310,9 @@
           
 
     <div class="resume-date text-md-right">
+       
            <table class="table">
+         
            <thead>
            <tr><th>글번호</th>
            <th>작성자</th>
@@ -320,19 +322,23 @@
            <th>조회수</th>
            </tr>
            <thead>
-<c:forEach var="Rgsp" items="${gesipanlist}">
+           
+           
+
    <tr>
+  <c:forEach var="Rgsp" items="${gesipanlist}">
    <th>${Rgsp.rid}</th>
    <th><a href="gesipanview?Rid=${Rgsp.rid}">${Rgsp.rname}</a></th>
    <th>${Rgsp.rtitle}</th>
    <th>${Rgsp.rdate}</th>
    <th>${Rgsp.rhit}</th>
-  
+  </c:forEach>   
    </tr>   
-            </c:forEach>
+       
 
            
            </table>
+             
   <a href="Rgesipanwriteform">글쓰기</a> 
           
            </div>

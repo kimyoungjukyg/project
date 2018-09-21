@@ -75,12 +75,12 @@ public class MemberService {
 	public void send_mail(MemberVO memberVO) throws Exception {
 		// Mail Server 설정
 		String charSet = "utf-8";
-		String hostSMTP = "smtp.naver.com";
-		String hostSMTPid = "kyg7414@naver.com";
-		String hostSMTPpwd = "ksym052207@";
+		String hostSMTP = "smtp.gmail.com";
+		String hostSMTPid = "kyg7414@gmail.com";
+		String hostSMTPpwd = "gvsggvdgdvermjjg";
 
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "kyg7414@naver.com";
+		String fromEmail = "kyg7414@gmail.com";
 		String fromName = "Spring Homepage";
 		String subject = "";
 		String msg = "";
@@ -105,7 +105,7 @@ public class MemberService {
 			email.setCharset(charSet);
 			email.setSSL(true);
 			email.setHostName(hostSMTP);
-			email.setSmtpPort(465);
+			email.setSmtpPort(587);
 
 			email.setAuthentication(hostSMTPid, hostSMTPpwd);
 			email.setTLS(true);
@@ -115,6 +115,9 @@ public class MemberService {
 			email.setHtmlMsg(msg);
 			email.send();
 		} catch (Exception e) {
+			
+			System.out.println(memberVO.getEmail());
+		
 			System.out.println("메일발송 실패 : " + e);
 		}
 	}

@@ -45,7 +45,7 @@ public class GesipanService {
 			
 			mav.setViewName("write_view");
 		}else {
-			mav.setViewName("redirect:/RgesipanList");
+			mav.setViewName("redirect:/textList");
 		}	
 		return mav;
 	}
@@ -59,7 +59,7 @@ public class GesipanService {
 			
 			mav.setViewName("write_view");
 		}else {
-			mav.setViewName("redirect:/RgesipanList");
+			mav.setViewName("redirect:/textList");
 		}
 		return mav;
 		

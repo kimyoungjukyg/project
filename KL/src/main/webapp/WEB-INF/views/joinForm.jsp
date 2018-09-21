@@ -234,7 +234,6 @@ function sample6_execDaumPostcode() {
 				 <select name="classify" id="classify">
 						<option value="0" selected="selected" id="classify">일반 회원</option>
 						<option value="1" id="classify">트레이너</option>
-						<option value="2" id="classify">관</option>
 				</select>
 			</p>
 		

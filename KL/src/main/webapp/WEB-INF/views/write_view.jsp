@@ -31,7 +31,7 @@ td, tr {
 			</tr>
 			<tr>
 				<td>글쓴이</td>
-				<td><input type="text" name="Rname" required="required"></td>
+				<td><input type="text" name="Rname" value="<%=session.getAttribute("session_id") %>" readonly ></td>
 			</tr>
 			<tr>
 				<td>제 목</td>

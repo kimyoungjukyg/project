@@ -161,8 +161,7 @@ public class MemberController {
 		return "redirect:/memberList";
 	}
 
-	//pt일정 /신청장소로넘어가기
-	
+	//트레이너만가능 pt생성단계로
 	@RequestMapping(value="/ptView",method=RequestMethod.GET)
 	public ModelAndView ptView(@RequestParam("id") String id) {
 		
@@ -176,7 +175,7 @@ public class MemberController {
 		
 	}
 	
-	//트레이너가 강의 설정
+	//트레이너가 강의 설정및 생성
 	@RequestMapping(value="/ptmake",method=RequestMethod.POST)
 	public ModelAndView ptmake(@ModelAttribute PtVO ptVo) throws IOException {
 	
@@ -186,6 +185,7 @@ public class MemberController {
 	return mav;
 		
 	}
+	//PT신청 페이지로
 	@RequestMapping(value="/ptr",method=RequestMethod.GET)
 	public ModelAndView ptr(@ModelAttribute PtVO ptVO,@RequestParam("id") String id) {
 	/*pt.increasHit(id);*/
@@ -231,6 +231,7 @@ public class MemberController {
 	return mav;
 		
 	}
+	//카드결제진행
 	@RequestMapping(value = "/ptpay", method = RequestMethod.POST)
 	public ModelAndView ptpay(@ModelAttribute CardVO cardVO, HttpServletResponse response)
 			throws IOException {
