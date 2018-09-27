@@ -14,8 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.KL.member.dao.CardDAO;
 import com.KL.member.dao.MemberDAO;
+import com.KL.member.dao.PtDAO;
 import com.KL.member.vo.CardVO;
 import com.KL.member.vo.MemberVO;
+import com.KL.member.vo.PtVO;
 
 @Service
 public class CardService {
@@ -32,6 +34,8 @@ public class CardService {
 	@Autowired
 	private CardDAO cardDAO;
 	private CardVO cardVO;
+	@Autowired
+	private PtDAO ptDAO;
 	
 
 	public ModelAndView cardlist(CardVO cardVO) throws IOException{
@@ -70,7 +74,7 @@ mav.setViewName("ptr");
 	}
 
 
-	public ModelAndView ptpay(CardVO cardVO, HttpServletResponse response) throws IOException {
+	public ModelAndView ptpay(CardVO cardVO,PtVO ptVO,HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		mav = new ModelAndView();
@@ -80,8 +84,23 @@ mav.setViewName("ptr");
 
 
 		if(cardVO.getPassword().equals(cardtest.getPassword())){
-			mav.addObject("cardtest", cardtest);
-			mav.setViewName("ptpay");	
+			int result = ptDAO.addpt(ptVO);
+
+			if (result == 0) {
+				// 등록 실패하면 
+				mav.setViewName("ptr");
+			} else {
+				// 등록 성공하면 
+				mav.addObject("cardtest", cardtest);
+				out.println("<script>");
+				out.println("alert('결제가완료되었습니다..');");
+				out.println("location href='text1'");
+				out.println("</script>");
+				
+				mav.setViewName("redirect:/textList");	
+			}
+
+			
 		} else {
 			out.println("<script>");
 			out.println("alert('비밀번호가 틀립니다.');");

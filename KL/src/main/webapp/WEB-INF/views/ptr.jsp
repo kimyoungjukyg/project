@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
   <head>
 
     <meta charset="utf-8">
@@ -27,22 +28,29 @@
     <!-- Custom styles for this template -->
     <link href="css/resume.min.css" rel="stylesheet">
   <script> 
+
+  
+  
 function doShow() { 
     if ($('#aa').is(":visible")) { 
         $('#aa').hide(); // id값을 받아서 숨기기 
         $('.bb').hide(); // 클래스값을 받아서 숨기기 
+        
         $('#button1').text('결제취소'); 
     } else { 
         $('#aa').show(); // id값을 받아서 보이기 
         $('.bb').show(); // 클래스값을 받아서 보이기 
+       
         $('#button1').text('결제하기'); 
     } 
-} 
+}
+
+
 </script> 
   </head>
 
   <body id="page-top">
-
+ <form action="ptpay" method="post">      
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
       <a class="navbar-brand js-scroll-trigger" href="textList" >
       
@@ -88,8 +96,9 @@ function doShow() {
  <hr class="m-0">
 
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="PT">
-     
+ 
         <div class="my-auto">
+          
        <h2 class="mb-5">PT 결제</h2>
 <div class="resume-item d-flex flex-column flex-md-row mb-5">
             <div class="resume-content mr-auto">
@@ -97,6 +106,7 @@ function doShow() {
             </div>
 <div class="resume-date text-md-right">
               <span class="text-primary"><%=session.getAttribute("session_id") %></span>
+           
             </div>
             </div>
             <div class="resume-item d-flex flex-column flex-md-row mb-5">
@@ -105,6 +115,7 @@ function doShow() {
             </div>
 <div class="resume-date text-md-right">
               <span class="text-primary"><%=session.getAttribute("title") %></span>
+       
             </div>
              </div>
             <div class="resume-item d-flex flex-column flex-md-row mb-5">
@@ -113,6 +124,7 @@ function doShow() {
             </div>
 <div class="resume-date text-md-right">
               <span class="text-primary"><%=session.getAttribute("id") %></span>
+             
             </div>
              </div>
             <div class="resume-item d-flex flex-column flex-md-row mb-5">
@@ -121,6 +133,7 @@ function doShow() {
             </div>
 <div class="resume-date text-md-right">
               <span class="text-primary"><%=session.getAttribute("start") %></span>
+       
             </div> </div>
             <div class="resume-item d-flex flex-column flex-md-row mb-5">
              <div class="resume-content mr-auto">
@@ -128,6 +141,7 @@ function doShow() {
             </div>
 <div class="resume-date text-md-right">
               <span class="text-primary"><%=session.getAttribute("end") %></span>
+              
             </div> </div> 
             <div class="resume-item d-flex flex-column flex-md-row mb-5">
              <div class="resume-content mr-auto">
@@ -135,13 +149,18 @@ function doShow() {
             </div>
 <div class="resume-date text-md-right">
               <span class="text-primary"><%=session.getAttribute("price")+"원" %></span>
+              
             </div>
              </div>
-              <form action="ptpay" method="post">
+             
+             
+         
             <div class="resume-item d-flex flex-column flex-md-row mb-5">
 
 <input type="button" value="결제하기" onclick="javascript:doShow()" id="button1" class="byn btn-secondary">
-</div>           
+       
+</div> 
+   
      <div id="aa" style="display:none">
     결제방식: 
     <input type="radio" name="paytype" id="paytype1" value="1" onclick="div_OnOff(this.value,'con');" class="byn btn-secondary">
@@ -150,22 +169,25 @@ function doShow() {
     <label for="paytype1">통장 송금</label>
     <div id="con" style="display:none">
     <h3>카드 결제</h3>
-      
+     
+        
       <select name="cardnum">
-      <option value="" selected>등록카드선택</option>
        
-       <c:forEach var="card" items="${cardread}">
-
+          <option value="" selected>등록카드선택</option>
+           <c:forEach var="card" items="${cardread}">
+     
        <option value="${card.cardnum }" >${card.cardnum}</option>
-       
-          </c:forEach>
-           </select> 
+         </c:forEach>
+      </select> 
+     
       <input type="button" class="byn btn-secondary" onclick="location.href='cardwrite?id=<%=session.getAttribute("session_id") %>'"value="카드등록">      
-    <br>비밀번호 : <input type="text" name="password" maxlength="4"  class="form-control"><br>
-     <input type="submit" value="결제" class="byn btn-secondary">
+    <br>비밀번호 : <input type="password" onkeyup="passCheck()" id="pass1"name="password" maxlength="4"  class="form-control"><br>
+   
+     <input type="button" value="결제" class="byn btn-secondary" data-target="#layerpop" data-toggle="modal">
+
       
     </div>
-   <div id="con2" style="display:none">
+   <div id="con2" style="display:none" >
     <h2>통장결제</h2>
      <select name="caselist">
       <option value="" selected>등록통장</option>
@@ -174,10 +196,10 @@ function doShow() {
     
     
     </div>
-      </form>    
+     
           </div>
       
-            </div> 
+       
            
           
       </section>
@@ -185,11 +207,39 @@ function doShow() {
 
 
 
-
-
-
+<div class="modal fade" id="layerpop" >
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <!-- header -->
+      <div class="modal-header">
+           <!-- header title -->
+      <h4 class="modal-title">경고창안뜨면 결재완료</h4>
+        <!-- 닫기(x) 버튼 -->
+        <button type="button" class="close" data-dismiss="modal">×</button>
+   
+        
+      </div>
+      <!-- body -->
+      <div class="modal-body">
+         <input type="hidden" name="id" id="id" value="<%=session.getAttribute("session_id") %>">
+          <input type="hidden" name="tranl" id="tranl" value="<%=session.getAttribute("id") %>">
+                  <input type="hidden" name="title" id="title" value="<%=session.getAttribute("title") %>">
+                  <input type="hidden" name="starttime" id="starttime" value="<%=session.getAttribute("start") %>">
+                  <input type="hidden" name="endtime" id="endtime" value="<%=session.getAttribute("end") %>">
+                   <input type="hidden" name="price" id="price" value="<%=session.getAttribute("price") %>">
+            결제중입니다...완료버튼을 눌러주세요.
+      </div>
+      <!-- Footer -->
+      <div class="modal-footer">
+      
+        <p><input type="submit" class="btn btn-default"  value="완료" ></p>
+      </div>
     </div>
+  </div>
 
+</div>
+     
+출처: http://hellogk.tistory.com/37 [IT Code Storage]
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -203,6 +253,8 @@ function doShow() {
 
     <!--chatting  -->
 <script type="text/javascript">
+
+
 function div_OnOff(v,id){
 	if(v=="1"){
 		
@@ -229,6 +281,7 @@ function div_OnOff2(v,con2){
 }
 
 </script>
+ </form> 
   </body>
 
 </html>

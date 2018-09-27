@@ -11,10 +11,6 @@
 	
 	
 <packaging>war</packaging>
-
-	
-
-
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.8</java-version>
@@ -22,7 +18,6 @@
 		<org.aspectj-version>1.8.10</org.aspectj-version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 	</properties>
-	
 	<repositories>
 		<repository>
 			<id>Oracle</id>
@@ -31,16 +26,13 @@
 		</repository>
 	</repositories>
 
-
 	<dependencies>
-
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework-version}</version>
 			<exclusions>
-				
 				<!-- Exclude Commons Logging in favor of SLF4j -->
 				<exclusion>
 					<groupId>commons-logging</groupId>
@@ -55,22 +47,23 @@
 		</dependency>
 
 		<!-- AspectJ -->
-
+<dependency>
+	<groupId>org.apache.commons</groupId>
+	<artifactId>commons-email</artifactId>
+	<version>1.2</version>
+</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>
+		
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-email</artifactId>
-			<version>1.2</version>
-		</dependency>
-	<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.8.8</version>
-</dependency>
+		</dependency>
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -108,27 +101,15 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- jackson-core -->
+
+		<!-- @Inject -->
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.9.2</version>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
 		</dependency>
 		
-		<!-- gson -->
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.8.2</version>
-		</dependency>
-			<!-- lombok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.16.18</version>
-			<scope>provided</scope>
-		</dependency>
-<!-- Java Mail API -->
+ <!-- Java Mail API -->
   <dependency>
      <groupId>javax.mail</groupId>
      <artifactId>mail</artifactId>
@@ -140,21 +121,6 @@
 	<artifactId>spring-context-support</artifactId>
 	<version>${org.springframework-version}</version>
 </dependency>
-
-
-		<!-- Test -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.7</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- @Inject -->
-		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>1</version>
-		</dependency>
 
 		<!-- javax.servlet-api -->
 		<dependency>
@@ -190,7 +156,7 @@
 		<!-- Mybatis : DB FrameWork -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
+			<artifactId>mybatis</artifactId><!-- 쿼리문을 날려주기 위한 DB와 관련된 부분 -->
 			<version>3.4.5</version>
 		</dependency>
 		<!-- Mybatis-spring -->
@@ -202,19 +168,19 @@
 		<!-- Ojdbc6.jar -->
 		<dependency>
 			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
+			<artifactId>ojdbc6</artifactId><!--  -->
 			<version>12.1.0.2</version>
 		</dependency>
 		
 		<!-- commons-fileupload -->
 		<dependency>
-			<groupId>commons-fileupload</groupId>
+			<groupId>commons-fileupload</groupId><!-- 파일업로드를 위한  -->
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.3.1</version>
 		</dependency>
 		
 		<dependency>
-			<groupId>org.springframework.security</groupId>
+			<groupId>org.springframework.security</groupId><!-- 155~169 파일 시큐리티를 위한 부분 -->
 			<artifactId>spring-security-core</artifactId>
 			<version>4.2.1.RELEASE</version>
 		</dependency>
@@ -262,8 +228,6 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
-		
-
 	</dependencies>
 	<build>
 		<plugins>
@@ -284,7 +248,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
+				<version>3.1</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>

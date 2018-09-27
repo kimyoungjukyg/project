@@ -2,9 +2,7 @@ package com.KL.member.service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -17,8 +15,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.KL.member.dao.GesipanDAO;
 import com.KL.member.dao.MemberDAO;
 import com.KL.member.dao.PtDAO;
+import com.KL.member.vo.CommentVO;
+import com.KL.member.vo.KLVO;
 import com.KL.member.vo.MemberVO;
 import com.KL.member.vo.PtVO;
 
@@ -28,13 +29,13 @@ public class MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 	private ModelAndView mav;
-	private MemberVO memberVO;
 	@Autowired
 	private PtDAO ptDAO;
-	private PtVO ptvo;
 	@Autowired
 	private BCryptPasswordEncoder passEncoder;
-	
+	@Autowired
+	private GesipanDAO gdao;
+
 
 	@Autowired
 	private HttpSession session;
@@ -74,12 +75,12 @@ public class MemberService {
 	public void send_mail(MemberVO memberVO) throws Exception {
 		// Mail Server 설정
 		String charSet = "utf-8";
-		String hostSMTP = "smtp.naver.com";
-		String hostSMTPid = "kyg7414@naver.com";
-		String hostSMTPpwd = "ksym052207@";
+		String hostSMTP = "smtp.gmail.com";
+		String hostSMTPid = "kyg7414@gmail.com";
+		String hostSMTPpwd = "gvsggvdgdvermjjg";
 
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "kyg7414@naver.com";
+		String fromEmail = "kyg7414@gmail.com";
 		String fromName = "Spring Homepage";
 		String subject = "";
 		String msg = "";
@@ -104,7 +105,7 @@ public class MemberService {
 			email.setCharset(charSet);
 			email.setSSL(true);
 			email.setHostName(hostSMTP);
-			email.setSmtpPort(465);
+			email.setSmtpPort(587);
 
 			email.setAuthentication(hostSMTPid, hostSMTPpwd);
 			email.setTLS(true);
@@ -114,6 +115,9 @@ public class MemberService {
 			email.setHtmlMsg(msg);
 			email.send();
 		} catch (Exception e) {
+			
+			System.out.println(memberVO.getEmail());
+		
 			System.out.println("메일발송 실패 : " + e);
 		}
 	}
@@ -131,7 +135,7 @@ public class MemberService {
 		} else { // 이메일 인증을 성공하였을 경우
 			out.println("<script>");
 			out.println("alert('인증이 완료되었습니다. 로그인 후 이용하세요.');");
-			out.println("location.href='./member/textlist';");
+			out.println("history.go(-1);");
 			out.println("</script>");
 			out.close();
 		}
@@ -159,8 +163,13 @@ public class MemberService {
 		if (passEncoder.matches(memberVO.getPassword(), loginMember.getPassword())) {
 			session.setAttribute("session_id", memberVO.getId());
 			
+			
 			mav.addObject("loginMember", loginMember);
-			mav.setViewName("redirect:/textList#mypage");
+			if(memberVO.getId().equals("admin")) {
+				mav.setViewName("redirect:/textList#admin");
+			}else {
+			
+			mav.setViewName("redirect:/textList#mypage");}
 		} 
 		else{
 			out.println("<script>");
@@ -182,13 +191,6 @@ public class MemberService {
 	}
 
 
-	
-
-
-	
-	
-	
-	
 	
 	public ModelAndView memberList() {
 		mav = new ModelAndView();
@@ -215,6 +217,10 @@ public class MemberService {
 mav=new ModelAndView();
 List<MemberVO> textList =memberDAO.textList();
 mav.addObject("textList",textList);
+List<KLVO> gesipanlist = gdao.gesipanlist();
+mav.addObject("gesipanlist", gesipanlist);
+List<CommentVO> replyList = gdao.replyList();
+mav.addObject("replyList",replyList);
 
 mav.setViewName("text1");
 		

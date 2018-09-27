@@ -13,9 +13,9 @@
 		</tr>
 		<tr align=center>
 			<td>아이디 : ${viewMember.id}</td>
-			<td>비밀번호 : ${viewMember.password}</td>
+			
 			<td>이름 : ${viewMember.name}</td>
-			<td>나이 : ${viewMember.age}</td>
+			<td>폰번호:${viewMember.phone_number}
 			<td>성별 : ${viewMember.gender}</td>
 			<td>이메일 : ${viewMember.email}</td>
 			<a href="memberList">리스트로 돌아가기</a>

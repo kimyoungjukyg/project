@@ -9,6 +9,7 @@ private String starttime;
 private String endtime;
 private String allDay;
 private String className;
+private String tranl;
 private int price;
 private int count;
 private int log;
@@ -20,6 +21,12 @@ public PtVO() {
 }
 
 
+public String getTranl() {
+	return tranl;
+}
+public void setTranl(String tranl) {
+	this.tranl = tranl;
+}
 public int getLog() {
 	return log;
 }
