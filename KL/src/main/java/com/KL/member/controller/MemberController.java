@@ -20,11 +20,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.KL.member.dao.MessageDAO;
 import com.KL.member.service.*;
 import com.KL.member.vo.CardVO;
 import com.KL.member.vo.CommentVO;
 import com.KL.member.vo.KLVO;
 import com.KL.member.vo.MemberVO;
+import com.KL.member.vo.MessageVO;
 import com.KL.member.vo.PtVO;
 
 
@@ -46,11 +48,14 @@ public class MemberController {
 	 */
 	@Autowired
 	private MemberService ms;
+	@Autowired
+	private MessageDAO mDAO;
 	
 	private ModelAndView mav;
 	@Autowired
 	private PtService pt;
-
+	@Autowired
+	private MessageService messages;
 	@Autowired
 	private GesipanService gs;
 	
@@ -236,7 +241,10 @@ public class MemberController {
 	public ModelAndView ptpay(@ModelAttribute CardVO cardVO,@ModelAttribute PtVO ptVO, HttpServletResponse response)
 			throws IOException {
 		mav = new ModelAndView();
+		String title=(String) session.getAttribute("title");
+		pt.increase(title);
 		mav = ca.ptpay(cardVO, ptVO, response);
+		
 		return mav;
 	}
 	//글쓰기 화면 호출
@@ -325,7 +333,66 @@ public class MemberController {
 					
 				}
 				
-				
+				//쪽지 목록 보기
+				 @RequestMapping(value ="/messageForm")
+				    public ModelAndView viewmessageList() {
+					 String id = (String) session.getAttribute("session_id");
+					 mav = new ModelAndView();
+					 mav = messages.messageList(id);
+					 System.out.println("쪽지목록에서 찍은 아이디"+id);
+					 session.setAttribute("nuMessage", mDAO.count(id));
+					 return mav;
+				    }
+				 
+				 //쪽지 작성 화면 호출
+				 @RequestMapping(value = "/messageWriteForm", method = RequestMethod.GET)
+					public String messageWriteForm(@RequestParam("id") String id) {
+					 session.setAttribute("session_id", id);
+						return "messageWriteForm";
+					}
+				 
+				 //쪽지 작성
+				 @RequestMapping(value = "/toMessage", method = RequestMethod.POST)
+				 public ModelAndView messageWrite(@ModelAttribute MessageVO mVO,@RequestParam("id") String id) throws IOException {
+					System.out.println("쪽지 작성 컨트롤러에서 받은 아이디 : "+id);
+					mav = new ModelAndView();
+					mav=messages.messageWrite(mVO,id);
+					return mav;
+				 }
+
+				 //받은 쪽지함
+				 @RequestMapping(value = "/mymessage")
+				 public ModelAndView myMessage() throws IOException {
+					 String id = (String) session.getAttribute("session_id");
+					 mav = new ModelAndView();
+					 mav = messages.myMessage(id);
+					return mav;
+				 }
+				 
+				 //쪽지 삭제
+				 @RequestMapping(value = "/messagedelete")
+				 public String messageDelete(@RequestParam ("mnum") int num) throws IOException {
+					 System.out.println("쪽지 삭제 번호"+num);
+					 messages.deleteMessage(num);
+					return "redirect:/mymessage";
+				 }
+			
+				 //신규 쪽지 확인?
+				 @RequestMapping(value = "/contentCheck")
+				 public String contentCheck(@RequestParam ("mnum") int num) {
+					 messages.contentCheck(num);
+					 return "redirect:/mymessage";
+				 }
+				 
+				 //안읽은 쪽지 확인
+				 @RequestMapping(value = "/nuMessage")
+				 public String count(@RequestParam ("id") String id) {
+					 int nu = messages.count(id);
+					 MessageVO mVO = null;
+					 mVO.setNucheckMessage(nu);
+					 System.out.println("안읽은 쪽지함 확인의 안읽은 쪽지"+nu);
+					 return "nuMessage";
+				 }			
 	
 	
 }

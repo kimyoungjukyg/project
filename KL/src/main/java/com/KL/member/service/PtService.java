@@ -97,6 +97,12 @@ session.setAttribute("ptid", ptVo);
 	}
 
 
+	public void increase(String title) {
+		ptDAO.increase(title);		
+		
+	}
+
+
 
 
 	

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Message">
+	
+	<!-- 쪽지함보기 -->
+	<select id="messageList" resultType="message">
+	SELECT * FROM MESSAGE WHERE WRITER=#{id} ORDER BY MESSAGE_DATE
+	</select>
+
+	<!-- 쪽지작성 -->
+   <insert id="messageWrite" parameterType="message"
+   useGeneratedKeys="true" keyProperty="message_num">
+   INSERT INTO MESSAGE VALUES(MESSAGE_SEQ.NEXTVAL, #{parameter1.writer}, #{parameter1.reader}, #{parameter1.content}, 0,(SELECT COUNT(*)+1 FROM MESSAGE WHERE READER=#{parameter2} AND CHECKMESSAGE=0), SYSDATE)
+   <selectKey keyProperty="message_num" resultType="int" order="AFTER">
+			SELECT MESSAGE_SEQ.CURRVAL FROM DUAL
+		</selectKey>
+   </insert>
+   
+   <!-- 받은 쪽지함 -->
+   <select id="mymessageList" resultType="message">
+	SELECT * FROM MESSAGE WHERE READER = #{id} ORDER BY MESSAGE_DATE
+	</select>
+	
+	<!-- 쪽지 삭제 -->
+	<delete id="deleteMessage" parameterType="message">
+	DELETE FROM MESSAGE WHERE MESSAGE_NUM = #{num}
+	</delete>
+    
+    <!-- 쪽지 조회수 -->
+    <update id="contentCheck" parameterType="int">
+    UPDATE MESSAGE SET CHECKMESSAGE=CHECKMESSAGE+1 WHERE MESSAGE_NUM = #{num}
+    </update>
+    
+    <!-- 쪽지확인함 -->
+	<select id="count" resultType="int">
+    SELECT COUNT(*) FROM MESSAGE WHERE READER=#{id} AND CHECKMESSAGE=0
+    </select>
+    
+</mapper>

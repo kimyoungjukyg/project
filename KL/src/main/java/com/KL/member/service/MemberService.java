@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.KL.member.dao.GesipanDAO;
 import com.KL.member.dao.MemberDAO;
+import com.KL.member.dao.MessageDAO;
 import com.KL.member.dao.PtDAO;
 import com.KL.member.vo.CommentVO;
 import com.KL.member.vo.KLVO;
@@ -35,7 +36,8 @@ public class MemberService {
 	private BCryptPasswordEncoder passEncoder;
 	@Autowired
 	private GesipanDAO gdao;
-
+	@Autowired
+	private MessageDAO mDAO;
 
 	@Autowired
 	private HttpSession session;
@@ -162,8 +164,8 @@ public class MemberService {
 		// memberVO.getPassword() 사용자가 입력한 패스워드, loginMember.getPassword() DB 패스워드
 		if (passEncoder.matches(memberVO.getPassword(), loginMember.getPassword())) {
 			session.setAttribute("session_id", memberVO.getId());
-			
-			
+			String id=(String) session.getAttribute("session_id");
+			 session.setAttribute("nuMessage", mDAO.count(id));
 			mav.addObject("loginMember", loginMember);
 			if(memberVO.getId().equals("admin")) {
 				mav.setViewName("redirect:/textList#admin");

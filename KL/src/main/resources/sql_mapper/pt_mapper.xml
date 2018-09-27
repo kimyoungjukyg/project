@@ -12,9 +12,13 @@ SELECT * FROM FULLCALENDAR where id=#{id}
 <update id="increaseHit" parameterType="pt">
 UPDATE FULLCALENDAR SET log=log+1 WHERE Id=#{id}
 </update>
+<update id="increase" parameterType="pt">
+UPDATE FULLCALENDAR SET count=(select count(*) from FULLCALENDAR where title=#{title}) WHERE title=#{title}
+</update>
 <select parameterType="pt" id="ptr" resultType="pt">
 SELECT * FROM FULLCALENDAR where LOG=#{log}</select>
 <insert parameterType="pt" id="addpt"> 
 INSERT INTO PT VALUES(#{id},#{tranl},#{title},#{starttime},#{endtime},#{price}) 
 </insert>
+<select parameterType="pt" id="cardtest" resultType="pt"> SELECT * FROM PT WHERE id= #{id} and title=#{title} </select>
 </mapper>

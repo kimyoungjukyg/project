@@ -43,12 +43,15 @@
           <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/test.jpg" alt="" >
         </span>
       </a>
+   
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
-       
+          <li class="nav-item">
+      새쪽지 : ${nuMessage}
+      </li>
           <li class="nav-item">
           <%if(session.getAttribute("session_id")==null){%>
             <a class="nav-link js-scroll-trigger" href="#login">로그인/회원가입</a>
@@ -150,6 +153,7 @@
           </div>
           <p class="lead mb-5">관리자페이지가 될공간</p>
           <div class="social-icons">
+             <button type="button" class="byn btn-secondary" onclick="location.href='messageForm?id=<%= session.getAttribute("session_id")%>'">쪽지함</button>
          <button type="button" class="byn btn-secondary" onclick="location.href='email'">회원들에게 메일보네기 </button>
              <button type="button" class="byn btn-secondary" onclick="location.href='memberList'">회원목록보기</button> 
  <button type="button" class="byn btn-secondary" onclick="location.href='logout'">로그아웃 </button>
@@ -172,7 +176,8 @@
           </div>
           <p class="lead mb-5">마이페이지가 될공간</p>
           <div class="social-icons">
-         
+      
+         <button type="button" class="byn btn-secondary" onclick="location.href='messageForm?id=<%= session.getAttribute("session_id")%>'">쪽지함</button>
  <button type="button" class="byn btn-secondary" onclick="location.href='logout'">로그아웃 </button>
        
           </div>

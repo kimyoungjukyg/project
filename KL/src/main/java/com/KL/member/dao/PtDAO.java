@@ -46,6 +46,16 @@ public class PtDAO {
 	public int addpt(PtVO ptVO) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("Pt.addpt",ptVO);}
+
+	public void increase(String title) {
+		sqlSession.update("Pt.increase",title);
+		
+	}
+
+	public PtVO cardtest(PtVO ptVO) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Pt.cardtest", ptVO);
+	}
 	
 
 	

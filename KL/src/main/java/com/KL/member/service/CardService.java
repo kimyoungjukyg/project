@@ -23,7 +23,9 @@ import com.KL.member.vo.PtVO;
 public class CardService {
 	
 	private ModelAndView mav;
-	
+	@Autowired
+	private PtService pt;
+
 
 	@Autowired
 	private BCryptPasswordEncoder passEncoder;
@@ -79,28 +81,54 @@ mav.setViewName("ptr");
 		PrintWriter out = response.getWriter();
 		mav = new ModelAndView();
 		CardVO cardtest =cardDAO.cardtest(cardVO);
+		PtVO cardtest2=ptDAO.cardtest(ptVO);
 		System.out.println("사용자 입력 비번 : " + cardVO.getPassword());
 		System.out.println("DB의 암호화된 비번 : " +cardtest.getPassword());
-
+	
 
 		if(cardVO.getPassword().equals(cardtest.getPassword())){
-			int result = ptDAO.addpt(ptVO);
-
+			try {
+			
+			if(ptVO.getId().equals(cardtest2.getId()) && ptVO.getTitle().equals(cardtest2.getTitle())){
+	out.println("<script>");
+	out.println("alert('동일한강의는 신청이 불가능 합니다.');");
+	out.println("history.go(-1)");// 이전 페이지로 이동!
+	out.println("</script>");
+	out.close();
+}
+			else {
+	int result = ptDAO.addpt(ptVO);
 			if (result == 0) {
 				// 등록 실패하면 
 				mav.setViewName("ptr");
 			} else {
 				// 등록 성공하면 
-				mav.addObject("cardtest", cardtest);
+			
 				out.println("<script>");
 				out.println("alert('결제가완료되었습니다..');");
-				out.println("location href='text1'");
+				out.println("location.href='textList'");
 				out.println("</script>");
-				
-				mav.setViewName("redirect:/textList");	
+				out.close();
+				/*mav.addObject("cardtest", cardtest);
+				mav.setViewName("redirect:/textList");	*/
 			}
 
-			
+}	}catch(NullPointerException ne){
+	int result = ptDAO.addpt(ptVO);
+	if (result == 0) {
+		// 등록 실패하면 
+		mav.setViewName("ptr");
+	} else {
+		// 등록 성공하면 
+	
+		out.println("<script>");
+		out.println("alert('결제가완료되었습니다..');");
+		out.println("location.href='textList'");
+		out.println("</script>");
+		out.close();
+		
+	}
+}
 		} else {
 			out.println("<script>");
 			out.println("alert('비밀번호가 틀립니다.');");
