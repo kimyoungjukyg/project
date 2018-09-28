@@ -92,7 +92,7 @@ mav.setViewName("ptr");
 			if(ptVO.getId().equals(cardtest2.getId()) && ptVO.getTitle().equals(cardtest2.getTitle())){
 	out.println("<script>");
 	out.println("alert('동일한강의는 신청이 불가능 합니다.');");
-	out.println("history.go(-1)");// 이전 페이지로 이동!
+	out.println("location.href='pton'");// 이전 페이지로 이동!
 	out.println("</script>");
 	out.close();
 }
@@ -106,7 +106,7 @@ mav.setViewName("ptr");
 			
 				out.println("<script>");
 				out.println("alert('결제가완료되었습니다..');");
-				out.println("location.href='textList'");
+				out.println("location.href='pton'");
 				out.println("</script>");
 				out.close();
 				/*mav.addObject("cardtest", cardtest);
@@ -123,7 +123,7 @@ mav.setViewName("ptr");
 	
 		out.println("<script>");
 		out.println("alert('결제가완료되었습니다..');");
-		out.println("location.href='textList'");
+		out.println("location.href='pton'");
 		out.println("</script>");
 		out.close();
 		

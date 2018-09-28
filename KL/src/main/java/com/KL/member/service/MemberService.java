@@ -168,10 +168,10 @@ public class MemberService {
 			 session.setAttribute("nuMessage", mDAO.count(id));
 			mav.addObject("loginMember", loginMember);
 			if(memberVO.getId().equals("admin")) {
-				mav.setViewName("redirect:/textList#admin");
+				mav.setViewName("testtama");
 			}else {
 			
-			mav.setViewName("redirect:/textList#mypage");}
+			mav.setViewName("testtama");}
 		} 
 		else{
 			out.println("<script>");
@@ -219,15 +219,25 @@ public class MemberService {
 mav=new ModelAndView();
 List<MemberVO> textList =memberDAO.textList();
 mav.addObject("textList",textList);
-List<KLVO> gesipanlist = gdao.gesipanlist();
-mav.addObject("gesipanlist", gesipanlist);
-List<CommentVO> replyList = gdao.replyList();
-mav.addObject("replyList",replyList);
 
-mav.setViewName("text1");
+
+mav.setViewName("Pt/pt");
 		
 		
 		return mav;
+	}
+
+	public ModelAndView board() {
+		mav=new ModelAndView();
+		List<KLVO> gesipanlist = gdao.gesipanlist();
+		mav.addObject("gesipanlist", gesipanlist);
+		List<CommentVO> replyList = gdao.replyList();
+		mav.addObject("replyList",replyList);
+
+		mav.setViewName("board/board");
+				
+				
+				return mav;
 	}
 
 

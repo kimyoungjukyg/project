@@ -7,10 +7,20 @@ public class CommentVO {
 	private int Rid;
 	private String Ccontent;
 	private String Cwriter;
+	private int Tolike;
 	private Date Cdate;
 public CommentVO() {
 		
 	}
+
+public int getTolike() {
+	return Tolike;
+}
+
+public void setTolike(int tolike) {
+	Tolike = tolike;
+}
+
 public int getCid() {
 	return Cid;
 }

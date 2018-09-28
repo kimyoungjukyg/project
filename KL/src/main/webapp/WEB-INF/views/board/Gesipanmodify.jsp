@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>글 수정</title>
 <style type="text/css">
 td, tr {
 	text-align: left;
@@ -24,23 +24,23 @@ td, tr {
 				<td>목록분류</td>
 				<td>
 				<select name= "Rtype" id="Rtype">
-				<option value="레시피">레시피</option>
+				<option value="레시피" >레시피</option>
 				<option value="운동기구">운동기구</option>
 				</select>
 				</td>
 			</tr>
 			<tr>
 				<td>글쓴이</td>
-				<td><input type="text" name="Rname" required="required"></td>
+					<td><input type="text" name="Rname" value="${gesipanview.rname}" readonly ></td>
 			</tr>
 			<tr>
 				<td>제 목</td>
-				<td><input type="text" name="Rtitle" required="required"></td>
+				<td><input type="text" name="Rtitle" required="required" value="${gesipanview.rtitle}"></td>
 			</tr>
 			<tr>
 				<td>내 용</td>
 				<td><textarea rows="20" cols="50" name="Rcontent"
-						required="required"></textarea></td>
+						required="required" >${gesipanview.rcontent}</textarea></td>
 			</tr>
 			<tr>
 				<td>파일 첨부</td>

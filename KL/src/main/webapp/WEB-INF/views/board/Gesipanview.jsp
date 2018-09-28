@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>글 내용</title>
 </head>
 <body>
 	<form action="modify" method="post">
@@ -35,8 +35,9 @@
 	<form action="Gesipanreply" method ="post">
 	<table border="1">
 	<tr>
+	
 	<td>글작성자</td>
-	<td><input type="text" name="cwriter" required="required"></td>	
+	<td><input type="text" name="cwriter" required="required"  value="<%=session.getAttribute("session_id")%>" readonly></td>	
 	</tr>
 	<tr>
 	<input type="hidden" name="Rid" value="${gesipanview.rid}">
@@ -53,8 +54,9 @@
 	<h3>댓글창</h3>
 	<table>
 	<c:forEach var="reply" items="${replyView}">
+	<input type="hidden" name="Cid" value="${reply.cid}">
 	<tr>
-	<td>글작성자:${reply.cwriter}</td>
+	<td>글작성자:${reply.cwriter}<a href="ReplyLike?Cid=${reply.cid}">좋아용!</a>:${reply.tolike}</td>
 	</tr>
 	<tr>
 	<td>내용:${reply.ccontent}</td>

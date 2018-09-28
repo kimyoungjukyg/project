@@ -75,9 +75,44 @@ public class MemberController {
 	// 프로젝트시작시에 뜨는페이지 지정
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
-		return "redirect:/textList";
+		return "testtama";
+		}
+	//홈화면으로이동
+	@RequestMapping(value = "/testtama", method = RequestMethod.GET)
+	public String testtama() {
+		return "testtama";
+		}
+	//로그인페이지로이동
+	@RequestMapping(value = "/login_join", method = RequestMethod.GET)
+	public String login_join() {
+		return "log/login_join";
 		}
 	
+	//관리자페이지
+		@RequestMapping(value = "/adminpage", method = RequestMethod.GET)
+		public String adminpage() {
+			return "log/adminpage";
+			}
+		//마이페이지
+				@RequestMapping(value = "/mypage", method = RequestMethod.GET)
+				public String mypage() {
+					return "log/mypage";
+					}
+				//마이페이지
+				@RequestMapping(value = "/board", method = RequestMethod.GET)
+				public ModelAndView board() {
+					mav=new ModelAndView();
+					mav=ms.board();
+					return mav;
+					}
+		//강의보러가기
+				@RequestMapping(value = "/pton", method = RequestMethod.GET)
+				public ModelAndView pton() {
+					mav=new ModelAndView();
+					mav=ms.textList();
+					return mav;
+					}
+		
 	
 	
 	
@@ -92,7 +127,7 @@ public class MemberController {
 	// 회원가입 페이지로 이동 요청 처리
 	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
 	public String joinForm() {
-		return "joinForm";
+		return "log/joinForm";
 	}
 
 	// 회원가입 처리
@@ -104,7 +139,7 @@ public class MemberController {
 		rttr.addFlashAttribute("result", ms.memberJoin(memberVO, response));
 
 		
-		return "redirect:/textList";
+		return "testtama";
 	}
 	// 회원 인증
 		@RequestMapping(value = "/approval_member.do", method = RequestMethod.POST)
@@ -134,7 +169,7 @@ public class MemberController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String memberLogout() {
 		session.invalidate();
-		return "redirect:/textList#login";
+		return "testtama";
 	}
 
 	// 회원 목록
@@ -252,6 +287,8 @@ public class MemberController {
 			public String gesipanwriteform() {
 				return "write_view";
 			}
+			
+			
 			//글 상세보기
 			@RequestMapping(value="/gesipanview" , method=RequestMethod.GET)
 			public ModelAndView gesipanview(@RequestParam("Rid") int Rid) {
@@ -290,7 +327,7 @@ public class MemberController {
 					
 				mav = new ModelAndView();
 				mav = gs.gesipanview(Rid);
-				mav.setViewName("Gesipanmodify");
+				mav.setViewName("board/Gesipanmodify");
 				
 				return mav;
 					
@@ -298,7 +335,7 @@ public class MemberController {
 				
 			//글 수정 업데이트
 				@RequestMapping(value = "/gesipanmodifyer", method = RequestMethod.POST)
-				public String gesipanmodifyer(@ModelAttribute KLVO klvo) throws IllegalStateException , IOException{
+				public String gesipanmodifyer(@ModelAttribute KLVO klvo,HttpServletResponse response) throws IllegalStateException , IOException{
 					
 					MultipartFile rfile = klvo.getRfile();
 					if(!rfile.isEmpty()) {
@@ -306,8 +343,8 @@ public class MemberController {
 						rfile.transferTo(new File("C:\\Users\\user\\git\\project\\KL\\src\\main\\webapp\\WEB-INF\\uploadFile\\"+fileName));
 					}
 					klvo.setRfilename(rfile.getOriginalFilename());
-					gs.gesipanmodifyer(klvo);
-					return "redirect:/RgesipanList";
+					gs.gesipanmodifyer(klvo,response);
+					return "redirect:/board";
 				
 				}
 				
