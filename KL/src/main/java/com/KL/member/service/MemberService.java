@@ -164,6 +164,7 @@ public class MemberService {
 		// memberVO.getPassword() 사용자가 입력한 패스워드, loginMember.getPassword() DB 패스워드
 		if (passEncoder.matches(memberVO.getPassword(), loginMember.getPassword())) {
 			session.setAttribute("session_id", memberVO.getId());
+			session.setAttribute("classify", loginMember.getClassify());
 			String id=(String) session.getAttribute("session_id");
 			 session.setAttribute("nuMessage", mDAO.count(id));
 			mav.addObject("loginMember", loginMember);

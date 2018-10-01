@@ -197,15 +197,7 @@ function doShow() {
          							 <li> <a  href="mypage">마이페이지</a></li>
           									 <%} %>
           								
-										<li>
-											<span class="opener">운동영상</span>
-											<ul>
-												<li><a href="#">Lorem Dolor</a></li>
-												<li><a href="#">Ipsum Adipiscing</a></li>
-												<li><a href="#">Tempus Magna</a></li>
-												<li><a href="#">Feugiat Veroeros</a></li>
-											</ul>
-										</li>
+										<li><a href="video">운동영상</a></li>
 									
 										<li>
 											<span class="opener">정보 공유</span>

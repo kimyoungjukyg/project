@@ -44,6 +44,7 @@
 											<h1>이곳에 오신 것을 환영합니다<br />
 											by KL</h1>
 											<p>이 곳은 운동법 공유 및 pt신청을 할 수 있는 곳 입니다.</p>
+											 
 										</header>
 										<p>9/28일 테마수정했습니다.</p>
 										<ul class="actions">
@@ -171,15 +172,7 @@
          							 <li> <a  href="mypage">마이페이지</a></li>
           									 <%} %>
           								
-										<li>
-											<span class="opener">운동영상</span>
-											<ul>
-												<li><a href="#">Lorem Dolor</a></li>
-												<li><a href="#">Ipsum Adipiscing</a></li>
-												<li><a href="#">Tempus Magna</a></li>
-												<li><a href="#">Feugiat Veroeros</a></li>
-											</ul>
-										</li>
+										<li><a href="video">운동영상</a></li>
 									
 										<li>
 											<span class="opener">정보 공유</span>

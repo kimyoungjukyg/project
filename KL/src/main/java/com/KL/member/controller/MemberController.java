@@ -28,6 +28,7 @@ import com.KL.member.vo.KLVO;
 import com.KL.member.vo.MemberVO;
 import com.KL.member.vo.MessageVO;
 import com.KL.member.vo.PtVO;
+import com.KL.member.vo.VideoVO;
 
 
 
@@ -61,7 +62,8 @@ public class MemberController {
 	
 	@Autowired
 	private CardService ca;
-	
+	@Autowired
+	private VideoService vs;
 	@Autowired
 	private BCryptPasswordEncoder passEncoder;
 	@Autowired
@@ -171,6 +173,11 @@ public class MemberController {
 		session.invalidate();
 		return "testtama";
 	}
+	// 영상 보러가기
+		@RequestMapping(value = "/video", method = RequestMethod.GET)
+		public String video() {
+			return "video/video";
+		}
 
 	// 회원 목록
 	@RequestMapping(value = "/memberList", method = RequestMethod.GET)
@@ -431,7 +438,46 @@ public class MemberController {
 					 return "nuMessage";
 				 }			
 	
-	
+				// 맞춤 비디오 리스트
+					@RequestMapping(value = "/orderVideo", method = RequestMethod.GET)
+					public ModelAndView orderVideo(HttpServletResponse response, @RequestParam("exe_Category") String muscle)
+							throws IOException {
+						mav = new ModelAndView();
+						System.out.println("controller muscle print !!! ; " + muscle);
+						mav = vs.orderVideo(muscle, response);
+						return mav;
+					}
+
+					// 게시글 등록
+					@RequestMapping(value = "/exeWrite", method = RequestMethod.POST)
+					public ModelAndView exeWrite(@ModelAttribute VideoVO videoVO, HttpServletResponse response) throws IOException {
+						mav = new ModelAndView();
+						mav = vs.exeWrite(videoVO, response);
+						return mav;
+					}
+
+					// 글 상세보기
+					@RequestMapping(value = "/videoView", method = RequestMethod.GET)
+					public ModelAndView vidoView(@RequestParam("exe_Num") int exe_Num) {
+						System.out.println("글 상세보기 EXE_NUM?" + exe_Num);
+						// vs.increaseHit(EXE_NUM); 조회 수 증가
+						mav = new ModelAndView();
+						mav = vs.videoView(exe_Num);
+						return mav;
+					}
+
+					// 게시글 삭제
+					@RequestMapping(value = "/videoDelete", method = RequestMethod.GET)
+					public void videoDelete(@RequestParam("exe_Num") int exe_Num, HttpServletResponse response) throws IOException {
+						vs.videoDelete(exe_Num, response);
+					}
+					
+					// 게시글 좋아요
+					@RequestMapping(value= "/videoLike" , method= RequestMethod.GET)
+					public void videoLike(@RequestParam("exe_Num") int exe_Num, HttpServletResponse response)throws IOException{
+						vs.videoLike(exe_Num, response);
+					}
+
 }
 	
 	

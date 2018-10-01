@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Video">
+
+	<!-- parameterType >> mybatis의 alias 이름 -->
+
+	<!-- 글 목록 -->
+	<select id="orderVideo" resultType="video">
+		SELECT * FROM EXERCISE_VIDEO
+		WHERE EXE_CATEGORY LIKE '%'||#{muscle}||'%'
+
+
+	</select>
+
+	<!-- 글 작성 -->
+	<insert id="exeWrite" parameterType="video"
+		useGeneratedKeys="true" keyProperty="exe_Num">
+		INSERT INTO EXERCISE_VIDEO (ID, EXE_NUM, EXE_NAME, EXE_VIDEO,
+		EXE_CATEGORY, EXE_DATE, YOUTUBE_ID)
+		VALUES('0',
+		EXERCISE_VIDEO_SEQ.NEXTVAL, #{exe_Name}, #{exe_Video},
+		#{exe_Category}, SYSDATE, #{youtube_id})
+		<selectKey keyProperty="exe_Num" resultType="int"
+			order="AFTER">
+			SELECT EXERCISE_VIDEO_SEQ.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+
+	<!-- 글 상세보기 -->
+	<select id="videoView" parameterType="int" resultType="video">
+		SELECT *
+		FROM EXERCISE_VIDEO WHERE EXE_NUM = #{exe_Num}
+	</select>
+
+	<!-- 글 삭제 -->
+	<delete id="videoDelete" parameterType="int">
+		DELETE FROM EXERCISE_VIDEO WHERE EXE_NUM = #{exe_Num}
+	</delete>
+	
+	<!-- 좋아요 -->
+	<update id="videoLike" parameterType="int">
+		UPDATE EXERCISE_VIDEO SET EXE_LIKECOUNT = EXE_LIKECOUNT + 1 WHERE EXE_NUM = #{exe_Num}
+	</update>
+
+
+
+</mapper>

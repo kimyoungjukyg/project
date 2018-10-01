@@ -8,6 +8,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+<link href='css/fullcalendar.min.css' rel='stylesheet' />
+<link href='css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<script src='js/moment.min.js'></script>
+<script src='js/jquery.min.js'></script>
+<script src='js/fullcalendar.min.js'></script>
+
+
+
 		<link rel="stylesheet" href="assets/css/main.css" />
 		
 
@@ -43,6 +52,7 @@
 									<header class="major">
 										<h2>PT신청</h2>
 									</header>
+									
 									<div class="features">
 									
 											
@@ -125,16 +135,7 @@
           									<%}else{ %>
          							 <li> <a  href="mypage">마이페이지</a></li>
           									 <%} %>
-          								
-										<li>
-											<span class="opener">운동영상</span>
-											<ul>
-												<li><a href="#">Lorem Dolor</a></li>
-												<li><a href="#">Ipsum Adipiscing</a></li>
-												<li><a href="#">Tempus Magna</a></li>
-												<li><a href="#">Feugiat Veroeros</a></li>
-											</ul>
-										</li>
+          							<li><a href="video">운동영상</a></li>
 									
 										<li>
 											<span class="opener">정보 공유</span>

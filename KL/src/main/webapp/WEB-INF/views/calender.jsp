@@ -1,88 +1,81 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
- <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<meta charset='utf-8' />
+<link href='css/fullcalendar.min.css' rel='stylesheet' />
+<link href='css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<script src='js/moment.min.js'></script>
+<script src='js/jquery.min.js'></script>
+<script src='js/fullcalendar.min.js'></script>
+<script>
+var curDate = new Date();
 
-    <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
 
 
-    <!-- Custom styles for this template -->
-    <link href="css/resume.min.css" rel="stylesheet">
-    <script type="text/javascript">
-var objArr=new List();
-$(document).ready(function)(){
-	var date=new Date();
-	var d=date.getDate();
-	var m=date.getMonth();
-	var y=date.getFullYear();
+  $(document).ready(function() {
 
-}
-$.getList();
-$('#calendar').fullCalendar({
-	theme:true,
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,basicWeek,basicDay'
+      },
+      
+      defaultDate: curDate,
+      navLinks: true, // can click day/week names to navigate views
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events: dataset
+      
+    });
 
-	header{
-		left:'prev,next,today',
-		center:'title',
-		right:'meonth,agendaWeek,agendaDay'
-	},
-	editable:false,
-	events;objArr
-});
-});
+  });
+
 </script>
 <script type="text/javascript">
-$.extend({
-	getList:function(){
-		$.ajax({
-			url:"./member/getProject"
-			type:"get",
-			dataType:"json",
-			asyn:false,
-			success:function(data){
-				$.each(data.resultList,fuction(idx,result)){
-					var obj=new Object();
-					obj.title=result.title;
-					if(result.starttime!=null){
-						obj.start=new Date(result.starttime);
-					}
-					if(result.endtime !=null){
-						obj.end=new Data(result.endtime);
-					}
-objArr.puch(obj);
-				
-				});
-		console.log(JSON.stringify(objArr));
-			},
-			error:function(request,status,error){
-				console.log("code:"+request.status+"\n"+request.responseText+"\n"+"error:"+error);
-			}
-		})
-	}
-})
+
+var dataset = [
+	
+	 <c:forEach var="pt" items="${callender}" varStatus="status">
+   <c:if test="${pt.starttime != ''}">
+   {"id":"<c:out value='${pt.id}' />"
+   ,"title":"<c:out value="${pt.title}" />"
+   ,"start":"<c:out value="${pt.starttime}" />"
+   <c:if test="${pt.endtime != ''}">
+       ,"end":"<c:out value="${pt.endtime}" />"
+   </c:if> 
+   } <c:if test="${!status.last}">,</c:if>
+</c:if>
+</c:forEach>
+];
 
 </script>
+<style>
+
+  body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    font-size: 14px;
+  }
+
+  #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+</style>
+
+
+
+
 </head>
 <body>
-<div id='calendar'></div>
 
- <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <div id='calendar'></div>
 
-    <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for this template -->
-    <script src="js/resume.min.js"></script>
 </body>
 </html>

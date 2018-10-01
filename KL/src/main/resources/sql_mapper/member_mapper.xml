@@ -43,7 +43,7 @@
 
 
 <select id="textList" parameterType="member" resultType="member">
-SELECT * FROM MEMBER WHERE CLASSIFY=1 ORDER BY ID
+SELECT * FROM MEMBER WHERE CLASSIFY=1 and APPROVAL_STATUS='true'
 </select>
 <select id="ptView" parameterType="member" resultType="member">
 SELECT * FROM MEMBER where id=#{id}

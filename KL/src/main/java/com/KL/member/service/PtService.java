@@ -49,7 +49,7 @@ mav.setViewName("ptView");
 		mav=new ModelAndView();
 		List<PtVO> callender=ptDAO.callender(id);
 		mav.addObject("callender",callender);
-		mav.setViewName("Pt/ptgo");
+		mav.setViewName("calender");
 		return mav;
 	}
 	
