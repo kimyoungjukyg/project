@@ -48,6 +48,7 @@ td, tr {
 			</tr>
 			<tr>
 				<td colspan="2" id="sub"><input type="submit" value="등록">
+				 <input type="button" value="뒤로가기" class="btn btn-warning" onclick="location.href=history.go(-1)">
 					<input type="reset" value="다시쓰기"></td>
 			</tr>
 		</table>

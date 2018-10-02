@@ -925,10 +925,12 @@ NOTE: use percentage font sizes or else old IE chokes
 
 .fc-toolbar .fc-left {
 	float: left;
+	font-color:black;
 }
 
 .fc-toolbar .fc-right {
 	float: right;
+	font-color:black;
 }
 
 .fc-toolbar .fc-center {
@@ -955,7 +957,7 @@ NOTE: use percentage font sizes or else old IE chokes
 /* button layering (for border precedence) */
 
 .fc-toolbar button {
-	position: relative;
+	position: auto;
 }
 
 .fc-toolbar .fc-state-hover,

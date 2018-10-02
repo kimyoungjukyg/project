@@ -65,6 +65,6 @@
 	</table>
 	
 	
-	
+	 <input type="button" value="뒤로가기" class="btn btn-warning" onclick="location.href=history.go(-1)">
 </body>
 </html>

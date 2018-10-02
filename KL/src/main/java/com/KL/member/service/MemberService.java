@@ -94,7 +94,7 @@ public class MemberService {
 		msg += memberVO.getId() + "님 회원가입을 환영합니다.</h3>";
 		msg += "<div style='font-size: 130%'>";
 		msg += "하단의 인증 버튼 클릭 시 정상적으로 회원가입이 완료됩니다.</div><br/>";
-		msg += "<form method='post' action='http://localhost:8090/member/approval_member.do'>";
+		msg += "<form method='post' action='http://192.168.0.169:8090/member/approval_member.do'>";
 		msg += "<input type='hidden' name='email' value='" + memberVO.getEmail() + "'>";
 		msg += "<input type='hidden' name='approval_key' value='" + memberVO.getApproval_key() + "'>";
 		msg += "<input type='submit' value='인증'></form><br/></div>";
@@ -137,7 +137,7 @@ public class MemberService {
 		} else { // 이메일 인증을 성공하였을 경우
 			out.println("<script>");
 			out.println("alert('인증이 완료되었습니다. 로그인 후 이용하세요.');");
-			out.println("history.go(-1);");
+			out.println("location.href='login_join'");
 			out.println("</script>");
 			out.close();
 		}
@@ -150,9 +150,9 @@ public class MemberService {
 		MemberVO loginMember = memberDAO.memberLogin(memberVO);
 		PrintWriter out = response.getWriter();
 
-		System.out.println("사용자 입력 비번 : " + memberVO.getPassword());
-		System.out.println("DB의 암호화된 비번 : " + loginMember.getPassword());
-	if(!loginMember.getApproval_status().equals("true")){
+		
+		try {
+		if(!loginMember.getApproval_status().equals("true")){
 			out.println("<script>");
 			out.println("alert('이메일 인증 후 로그인 하세요.');");
 			out.println("history.go(-1);");
@@ -181,6 +181,13 @@ public class MemberService {
 			out.println("</script>");
 			out.close();
 		}
+		}
+		}catch(NullPointerException ne){
+			out.println("<script>");
+			out.println("alert('회원이 아닙니다.');");
+			out.println("history.go(-1)");// 이전 페이지로 이동!
+			out.println("</script>");
+			out.close();
 		}
 		return mav;
 

@@ -44,15 +44,26 @@ public class GesipanService {
 
 
 		//글쓰기
-	public ModelAndView gesipanwrite(KLVO klvo) {
+	public ModelAndView gesipanwrite(KLVO klvo,HttpServletResponse response) throws IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
 		mav = new ModelAndView();
+		if(session.getAttribute("session_id")==null) {
+			out.println("<script>");
+			out.println("alert('로그인이 필요합니다.');");
+			out.println("history.go(-1)");// 이전 페이지로 이동!
+			out.println("</script>");
+			out.close();
+		}
+		else {
 		int result = gdao.gesipanwrite(klvo);
 		if(result==0) {
 			
 			mav.setViewName("board/write_view");
 		}else {
 			mav.setViewName("testtama");
-		}	
+		}	}
 		return mav;
 	}
 
@@ -62,6 +73,14 @@ public class GesipanService {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		mav = new ModelAndView();
+		if(session.getAttribute("session_id")==null) {
+			out.println("<script>");
+			out.println("alert('로그인이 필요합니다.');");
+			out.println("history.go(-1)");// 이전 페이지로 이동!
+			out.println("</script>");
+			out.close();
+		}
+		else {
 		if(session.getAttribute("session_id").equals(klvo.getRname())) {
 			int result = gdao.gesipanmodifyer(klvo);
 			if(result==0) {
@@ -77,7 +96,7 @@ public class GesipanService {
 		out.println("history.go(-1)");// 이전 페이지로 이동!
 		out.println("</script>");
 		out.close();
-		}
+		}}
 		return mav;
 		
 	

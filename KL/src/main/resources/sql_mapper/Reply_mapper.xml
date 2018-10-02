@@ -5,7 +5,13 @@
 
 <mapper namespace="Com">
 	
-<!-- 댓글이 써지는 쿼리이이이 쿼리 -->
+<!-- 작성된 댓글에 대한리스트 -->
+	
+	<select id="replyList" resultType="Com">
+	 SELECT * FROM RGESIPAN ORDER BY RID
+	 </select>
+
+	<!-- 댓글이 써지는 쿼리이이이 쿼리 -->
 	<insert id="gesipanreply" parameterType="Com" useGeneratedKeys="true"
 			keyProperty="Cid">
 			INSERT INTO TOCOMMENT VALUES(TOCOMMENT_SEQ.nextval,#{rid},#{ccontent},
@@ -25,5 +31,5 @@
 	<!--  좋아요를 누르면 +1 좆까 누르면 -1 될끄야ㅏㅏ -->
 	<update id="ReplyLike" parameterType="int">
 		UPDATE TOCOMMENT SET TOLIKE=TOLIKE+1 WHERE CID=#{cid}
-		</update>
+	</update>
 </mapper>

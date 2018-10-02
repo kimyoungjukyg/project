@@ -36,6 +36,7 @@
     <p>
     <div align="center">
       <input type="submit" value="메일 보내기" class="btn btn-warning">
+      <input type="button" value="뒤로가기" class="btn btn-warning" onclick="location.href=history.go(-1)">
     </div>
   </form>
 </div>

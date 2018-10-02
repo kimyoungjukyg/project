@@ -3,6 +3,7 @@ package com.KL.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -207,7 +208,11 @@ public class MemberController {
 		
 		return "redirect:/memberList";
 	}
-
+	//길찾기
+	@RequestMapping(value = "/find", method = RequestMethod.GET)
+	public String find() {
+		return "Pt/way";
+		}
 	//트레이너만가능 pt생성단계로
 	@RequestMapping(value="/ptView",method=RequestMethod.GET)
 	public ModelAndView ptView(@RequestParam("id") String id) {
@@ -291,8 +296,13 @@ public class MemberController {
 	}
 	//글쓰기 화면 호출
 			@RequestMapping(value="Rgesipanwriteform", method = RequestMethod.GET)
-			public String gesipanwriteform() {
-				return "write_view";
+			public String gesipanwriteform(HttpServletResponse response) throws IOException {
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				if(session.getAttribute("session_id")==null) {
+					
+				}
+				return "board/write_view";
 			}
 			
 			
@@ -312,16 +322,16 @@ public class MemberController {
 				
 			//글 쓰기
 			@RequestMapping(value="/Rgesipanwrite", method=RequestMethod.POST)
-			public ModelAndView gesipanwrite(@ModelAttribute KLVO klvo) throws IOException {
+			public ModelAndView gesipanwrite(@ModelAttribute KLVO klvo,HttpServletResponse response) throws IOException {
 				mav = new ModelAndView();
 				MultipartFile rfile = klvo.getRfile();
 				if(!rfile.isEmpty()) {
 					String fileName = rfile.getOriginalFilename();
-					rfile.transferTo(new File("D:\\Spring\\Re\\src\\main\\webapp\\WEB-INF\\uploadFile\\"+fileName));
+					rfile.transferTo(new File("C:\\Users\\user\\git\\project\\KL\\src\\main\\webapp\\WEB-INF\\uploadFile"+fileName));
 				}
 				klvo.setRfilename(rfile.getOriginalFilename());
 				
-				mav = gs.gesipanwrite(klvo);
+				mav = gs.gesipanwrite(klvo,response);
 				
 				return mav;
 				
@@ -360,7 +370,7 @@ public class MemberController {
 				@RequestMapping(value ="/gesipandelete", method = RequestMethod.GET)
 				public String gesipandelete(@RequestParam("Rid") int Rid) {
 					gs.gesipandelete(Rid);
-					return "redirect:/RgesipanList";
+					return "redirect:/Rgesipanwriteform";
 					
 				}
 				

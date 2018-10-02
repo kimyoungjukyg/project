@@ -183,12 +183,12 @@ table {
 										<!-- <img src="./resources/images/muscle_front.jpg" alt="front"
 											style="position: relative; z-index: 1; height: 30%; width: 30%;"> -->
 										<div id="div111">
-											<!-- <img class="map" id="modal_front"
-												src="./resources/images/muscle_front.jpg" width="30%"
+											<img class="map" id="modal_front"
+												src="images/muscle_front.jpg" width="30%"
 												height="30%" usemap="#modal_front" style="z-index: 0;">
 											<img class="map" id="modal_back" style="display: none;"
-												src="./resources/images/muscle_back.jpg" widtzh="30%"
-												height="30%" usemap="#modal_back"> -->
+												src="images/muscle_back.jpg" widtzh="30%"
+												height="30%" usemap="#modal_back">
 											<input
 												style="position: relative; z-index: 2; top: 00px; left: 0px;"
 												type="checkbox" name="exe_Category" id="상완이두근" value="상완이두근">상완이두근<br>
@@ -295,6 +295,7 @@ table {
 						<c:set var="i" value="${i+1 }" />
 					</c:forEach> --%>
 				</table>
+				 <input type="button" value="뒤로가기" class="btn btn-warning" onclick="location.href=history.go(-1)">
 			</div>
 
 		</div>
