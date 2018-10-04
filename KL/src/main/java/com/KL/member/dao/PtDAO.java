@@ -56,6 +56,36 @@ public class PtDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Pt.cardtest", ptVO);
 	}
+
+	public List<PtVO> ptList(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("Pt.ptList",id);
+	}
+
+	public PtVO reptmake(PtVO ptVO) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Pt.reptmake",ptVO);
+	}
+
+	public int ptremake(PtVO ptVO) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("Pt.ptremake", ptVO);
+	}
+
+	public void ptdelete(int log) {
+		sqlSession.delete("Pt.ptdelete",log);
+		
+	}
+
+	public List<PtVO> ptoff(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("Pt.ptoff",id);
+	}
+
+	public void ptcancel(String title) {
+		sqlSession.delete("Pt.ptcancel",title);
+		
+	}
 	
 
 	

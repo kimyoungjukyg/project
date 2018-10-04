@@ -100,7 +100,7 @@ mav.setViewName("ptr");
 	int result = ptDAO.addpt(ptVO);
 			if (result == 0) {
 				// 등록 실패하면 
-				mav.setViewName("ptr");
+				mav.setViewName("Pt/ptr");
 			} else {
 				// 등록 성공하면 
 			

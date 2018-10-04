@@ -317,7 +317,7 @@ function sample6_execDaumPostcode() {
 											<span class="opener">PT</span>
 											<ul>
 												<li><a href="pton">개설 강의</a></li>
-												<li><a href="#">강의 취소</a></li>
+												<li><a href="ptoff">강의 취소</a></li>
 												
 											</ul>
 										</li>

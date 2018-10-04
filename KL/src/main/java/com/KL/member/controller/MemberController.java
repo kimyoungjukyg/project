@@ -227,6 +227,42 @@ public class MemberController {
 		
 	}
 	
+	
+	//트레이너>자신강의 보기
+	@RequestMapping(value="/ptList",method=RequestMethod.GET)
+	public ModelAndView ptList(@RequestParam("id") String id) {
+	
+		mav=new ModelAndView();
+		
+	mav=pt.ptList(id);
+	
+	return mav;
+		
+	}
+	
+	//수정페이지로
+		@RequestMapping(value="/reptmake",method=RequestMethod.GET)
+		public ModelAndView reptmake(@ModelAttribute PtVO ptVO) {
+			mav=new ModelAndView();
+		mav=pt.reptmake(ptVO);
+		return mav;
+			
+		}
+		
+		
+		//수정
+		@RequestMapping(value="/ptremake",method=RequestMethod.POST)
+				public ModelAndView ptremake(@ModelAttribute PtVO ptVO,HttpServletResponse response){
+			mav=new ModelAndView();
+			mav=pt.ptremake(ptVO,response);
+				return mav;
+				}
+		//pt 삭제
+		@RequestMapping(value ="/ptdelete", method = RequestMethod.GET)
+		public String ptdelete(@RequestParam("log") int log) {
+			pt.ptdelete(log);
+				return "Pt/pt";	
+		}
 	//트레이너가 강의 설정및 생성
 	@RequestMapping(value="/ptmake",method=RequestMethod.POST)
 	public ModelAndView ptmake(@ModelAttribute PtVO ptVo) throws IOException {
@@ -249,6 +285,24 @@ public class MemberController {
 	return mav;
 		
 	}
+	//PT취소페이지로
+		@RequestMapping(value="/ptoff",method=RequestMethod.GET)
+		public ModelAndView ptoff() {
+		String id=(String) session.getAttribute("session_id");
+		
+		mav=new ModelAndView();
+			
+		mav=pt.ptoff(id);
+		return mav;
+			
+		}
+		//pt취소
+				@RequestMapping(value ="/ptcancel", method = RequestMethod.GET)
+				public String ptcancel(@RequestParam("title") String title) {
+					pt.ptcancel(title);
+					pt.increase(title);
+						return "redirect:/pton";	 
+				}
 	
 //일반회원이 개설강의 리스트보기
 	@RequestMapping(value = "/callender", method = RequestMethod.GET)
@@ -289,16 +343,15 @@ public class MemberController {
 			throws IOException {
 		mav = new ModelAndView();
 		String title=(String) session.getAttribute("title");
-		pt.increase(title);
 		mav = ca.ptpay(cardVO, ptVO, response);
-		
+		pt.increase(title);
 		return mav;
 	}
 	//글쓰기 화면 호출
 			@RequestMapping(value="Rgesipanwriteform", method = RequestMethod.GET)
 			public String gesipanwriteform(HttpServletResponse response) throws IOException {
 				response.setContentType("text/html;charset=UTF-8");
-				PrintWriter out = response.getWriter();
+				
 				if(session.getAttribute("session_id")==null) {
 					
 				}

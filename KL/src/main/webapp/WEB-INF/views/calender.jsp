@@ -46,9 +46,9 @@ var dataset = [
 	  ,"title":"<c:out value="${pt.title}" />"
 	  ,"start":"<c:out value="${pt.starttime}" />"
 	  <c:if test="${pt.endtime != ''}">
-     ,"end":"<c:out value="${pt.endtime}" />"
- </c:if> 
- } <c:if test="${!status.last}">,</c:if>
+    ,"end":"<c:out value="${pt.endtime}" />"
+</c:if> 
+} <c:if test="${!status.last}">,</c:if>
 </c:if>
 </c:forEach>
 	
@@ -91,7 +91,35 @@ var dataset = [
 								</header>
 								
 
-  <div id='calendar'></div></div></div>
+  <div id='calendar'></div>
+  </div>
+  <div class="inner">
+    <table class="table">
+           <thead>
+           <tr><th>강의 명</th>
+           <th>트레이너 명</th>
+           <th>시작 시간</th>
+           <th>종료 시간</th>
+           <th>신청자 수</th>
+           <th>신청 버튼</th>
+           </tr>
+           <thead>
+ 
+<c:forEach var="pt" items="${callender}">
+   <tr>
+   <th>${pt.title}</th>
+   <th>${pt.id}</th>
+   <th>${pt.starttime }</th>
+   <th>${pt.endtime }</th>
+   <th>${pt.count}</th>
+   <th><button type="submit" class="byn btn-secondary" onclick="location.href='ptr?log=${pt.log}&id=<%=session.getAttribute("session_id") %>'" >신청</button><br></th>
+   </tr>   
+            </c:forEach>
+
+           
+           </table>
+        </div>
+  </div>
   
   
 <jsp:include page="side.jsp"  />

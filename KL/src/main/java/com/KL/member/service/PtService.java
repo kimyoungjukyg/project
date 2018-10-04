@@ -39,7 +39,7 @@ public class PtService {
 mav=new ModelAndView();
 MemberVO ptView=ptDAO.ptView(id);
 mav.addObject("ptView",ptView);
-mav.setViewName("ptView");
+mav.setViewName("Pt/ptView");
 
 		return mav;
 	}
@@ -49,6 +49,7 @@ mav.setViewName("ptView");
 		mav=new ModelAndView();
 		List<PtVO> callender=ptDAO.callender(id);
 		mav.addObject("callender",callender);
+		
 		mav.setViewName("calender");
 		return mav;
 	}
@@ -99,6 +100,64 @@ session.setAttribute("ptid", ptVo);
 
 	public void increase(String title) {
 		ptDAO.increase(title);		
+		
+	}
+
+
+	public ModelAndView ptList(String id) {
+		mav=new ModelAndView();
+		List<PtVO> ptList=ptDAO.ptList(id);
+		mav.addObject("ptList",ptList);
+		mav.setViewName("Pt/ptgo");
+		return mav;
+	}
+
+
+	public ModelAndView reptmake(PtVO ptVO) {
+		mav=new ModelAndView();
+		PtVO reptmake=ptDAO.reptmake(ptVO);
+		mav.addObject("reptmake",reptmake);
+		mav.setViewName("Pt/remake");
+		return mav;
+	}
+
+
+	public ModelAndView ptremake(PtVO ptVO,HttpServletResponse response) {
+		mav=new ModelAndView();
+		int result =ptDAO.ptremake(ptVO);
+		if (result == 0) {
+			// 등록 실패하면 다시 joinForm으로 이동
+			mav.setViewName("Pt/pt");
+		} else {
+			
+			// 등록 성공하면 loginForm으로 이동
+			mav.setViewName("Pt/pt");
+		}
+
+		return mav;
+	}
+
+
+	public void ptdelete(int log) {
+		ptDAO.ptdelete(log);
+		
+	}
+
+
+	public ModelAndView ptoff(String id) {
+		mav=new ModelAndView();
+		List<PtVO> ptoff =ptDAO.ptoff(id);
+		mav.addObject("ptoff",ptoff);
+
+		mav.setViewName("Pt/ptoff");
+				
+				
+				return mav;
+	}
+
+
+	public void ptcancel(String title) {
+		ptDAO.ptcancel(title);
 		
 	}
 

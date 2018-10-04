@@ -7,12 +7,13 @@ private String id;
 private String title;
 private String starttime;
 private String endtime;
-private String allDay;
-private String className;
+
 private String tranl;
 private int price;
 private int count;
 private int log;
+
+
 public String getId() {
 	return id;
 }
@@ -55,7 +56,6 @@ public void setTitle(String title) {
 	this.title = title;
 }
 
-
 public String getStarttime() {
 	return starttime;
 }
@@ -68,17 +68,6 @@ public String getEndtime() {
 public void setEndtime(String endtime) {
 	this.endtime = endtime;
 }
-public String getAllDay() {
-	return allDay;
-}
-public void setAllDay(String allDay) {
-	this.allDay = allDay;
-}
-public String getClassName() {
-	return className;
-}
-public void setClassName(String className) {
-	this.className = className;
-}
+
 
 }

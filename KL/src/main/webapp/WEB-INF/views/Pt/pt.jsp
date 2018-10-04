@@ -42,7 +42,8 @@
 				<div class="content">
 		 <div class="resume-date text-md-right">
              <%if("1".equals(session.getAttribute("classify"))){%>
-               <button type="button" class="byn btn-secondary" onclick="location.href='ptView?id=<%=session.getAttribute("session_id")%>'">자기 강의 만들기</button>     
+               <button type="button" class="byn btn-secondary" onclick="location.href='ptView?id=<%=session.getAttribute("session_id")%>'">자기 강의 만들기</button> 
+               <button type="button" class="byn btn-secondary" onclick="location.href='ptList?id=<%=session.getAttribute("session_id")%>'">자기 강의 보기</button>         
           <%}else{%>
           
           <%} %>
@@ -66,17 +67,18 @@
           
           
           <%if("1".equals(session.getAttribute("classify"))){%>
-            
+         
      <%}else { %>
     
     
      <input type="button" class="byn btn-secondary" onclick="location.href='callender?id=${member.id}'" value="강의 신청하기">
       <%} %>
-     
-       
-        <button type="button" class="byn btn-secondary" onclick="ptReview?id=${member.id}">리뷰 보기</button>      
+    
+      
+         <button type="button" class="byn btn-secondary" onclick="ptReview?id=${member.id}">리뷰 보기</button>      
             </div>
           
+     
            
             </c:forEach>
            
@@ -141,7 +143,7 @@
 											<span class="opener">PT</span>
 											<ul>
 												<li><a href="pton">개설 강의</a></li>
-												<li><a href="#">강의 취소</a></li>
+												<li><a href="ptoff">강의 취소</a></li>
 												
 											</ul>
 										</li>

@@ -13,7 +13,7 @@
 
 <!-- 아이디 중복 검사 -->
 	<select id="check_id" parameterType="member" resultType="int">
-		select count(*) from member where id = #{id}
+		select count(*) from member where id = #{id} order by id asc
 	</select>
 	
 
@@ -29,12 +29,12 @@
 <!-- 멤버 리스트 -->
 
 
-<select id="memberList" resultType="member"> SELECT * FROM MEMBER </select>
+<select id="memberList" resultType="member"> SELECT * FROM MEMBER order by id asc</select>
 
 <!-- 멤버 상세 보기 -->
 
 
-<select parameterType="member" id="memberView" resultType="member"> SELECT * FROM MEMBER WHERE ID= #{id} </select>
+<select parameterType="member" id="memberView" resultType="member"> SELECT * FROM MEMBER WHERE ID= #{id} order by id asc</select>
 
 <!-- 멤버 삭제 -->
 
@@ -43,10 +43,10 @@
 
 
 <select id="textList" parameterType="member" resultType="member">
-SELECT * FROM MEMBER WHERE CLASSIFY=1 and APPROVAL_STATUS='true'
+SELECT * FROM MEMBER WHERE CLASSIFY=1 and APPROVAL_STATUS='true' order by id asc
 </select>
 <select id="ptView" parameterType="member" resultType="member">
-SELECT * FROM MEMBER where id=#{id}
+SELECT * FROM MEMBER where id=#{id} order by id asc
 </select>
 
 

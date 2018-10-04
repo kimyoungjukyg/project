@@ -51,8 +51,8 @@
 											<li><a href="#" class="button big">Learn More</a></li>
 										</ul>
 									</div>
-									<span class="image object">
-										<img src="images/pic10.jpg" alt="" />
+									<span class="image object"> 
+										<img src="img/images.png" alt="" />
 									</span>
 								</section>
 
@@ -186,7 +186,7 @@
 											<span class="opener">PT</span>
 											<ul>
 												<li><a href="pton">개설 강의</a></li>
-												<li><a href="#">강의 취소</a></li>
+												<li><a href="ptoff">강의 취소</a></li>
 												
 											</ul>
 										</li>

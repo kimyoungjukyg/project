@@ -64,8 +64,10 @@
 
            
            </table>
+           <%if(session.getAttribute("session_id")==null){ %>
+           <%}else{ %>
          <a href="Rgesipanwriteform">글쓰기</a> 
-          
+          <%} %>
         
           
 											
@@ -134,7 +136,7 @@
 											<span class="opener">PT</span>
 											<ul>
 												<li><a href="pton">개설 강의</a></li>
-												<li><a href="#">강의 취소</a></li>
+												<li><a href="ptoff">강의 취소</a></li>
 												
 											</ul>
 										</li>

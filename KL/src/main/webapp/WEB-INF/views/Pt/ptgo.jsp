@@ -50,10 +50,9 @@
 								<!-- Section -->
 								<section>
 									<header class="major">
-										<h2>PT신청</h2>
+										<h2>PT</h2>
 									</header>
-									
-									<div class="features">
+									<div class="inner">
 									
 											
 			
@@ -69,17 +68,19 @@
            <th>시작 시간</th>
            <th>종료 시간</th>
            <th>신청자 수</th>
-           <th>신청 버튼</th>
+           <th>수정 버튼</th>
+           <th>삭제 버튼</th>
            </tr>
            <thead>
-   <c:forEach var="pt" items="${callender}">
+   <c:forEach var="pt" items="${ptList}">
    <tr>
    <th>${pt.title}</th>
    <th>${pt.id}</th>
    <th>${pt.starttime }</th>
    <th>${pt.endtime }</th>
    <th>${pt.count}</th>
-   <th><button type="submit" class="byn btn-secondary" onclick="location.href='ptr?log=${pt.log}&id=<%=session.getAttribute("session_id") %>'" >신청</button><br></th>
+    <th><button type="submit" class="byn btn-secondary" onclick="location.href='reptmake?log=${pt.log}&id=<%=session.getAttribute("session_id") %>'" >수정</button><br></th>
+   <th><button type="submit" class="byn btn-secondary" onclick="location.href='ptdelete?log=${pt.log}'" >삭제</button><br></th>
    </tr>   
             </c:forEach>
 
@@ -91,7 +92,6 @@
           
 											
 										
-									
 									</div>
 								</section>
 								
@@ -149,7 +149,7 @@
 											<span class="opener">PT</span>
 											<ul>
 												<li><a href="pton">개설 강의</a></li>
-												<li><a href="#">강의 취소</a></li>
+												<li><a href="ptoff">강의 취소</a></li>
 												
 											</ul>
 										</li>
