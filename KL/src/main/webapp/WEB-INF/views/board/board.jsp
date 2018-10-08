@@ -8,7 +8,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//rawgithub.com/ashleydw/lightbox/master/dist/ekko-lightbox.js"></script>
 <title>게시판</title>
 </head>
 <body>
@@ -35,39 +38,49 @@
 								<section>
 									<header class="major">
 										<h2>운동법 공유 게시판</h2>
+										
 									</header>
+									     <%if(session.getAttribute("session_id")==null){ %>
+           <%}else{ %>
+         <a href="Rgesipanwriteform">글쓰기</a> 
+          <%} %>
 									<div class="features">
 									
 											
 			
-    
-           <table class="table">
-           <thead>
-          <tr><th>글번호</th>
-           <th>작성자</th>
-           <th>글제목</th>
-           <th>작성일자</th>
-        
-           <th>조회수</th>
-           </tr>
-           <thead>
-           
-  <tr>
-  <c:forEach var="Rgsp" items="${gesipanlist}">
-   <th>${Rgsp.rid}</th>
-   <th><a href="gesipanview?Rid=${Rgsp.rid}">${Rgsp.rname}</a></th>
-   <th>${Rgsp.rtitle}</th>
-   <th>${Rgsp.rdate}</th>
-   <th>${Rgsp.rhit}</th>
-  </c:forEach>   
-   </tr>   
+  
+         
+    <div class="container mt40">
+    <section class="row">
+<c:forEach var="Rgsp" items="${gesipanlist}">
+      <div class="panel-body">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="gesipanview?Rid=${Rgsp.rid}" title="Nature Portfolio" class="zoom" data-title="Amazing Nature" data-footer="The beauty of nature" data-type="image" data-toggle="lightbox">
+              
+             <img src="uploadFile/${Rgsp.rfilename}"alt="${Rgsp.rfilename}" width="300"height="250"/>
+                        <span class="overlay"><i class="glyphicon glyphicon-fullscreen"></i></span>
+                    </a>
+                </div>
+                <div class="panel-footer">
+                    <h3><a href="gesipanview?Rid=${Rgsp.rid}">${Rgsp.rtitle}</a></h3>
+                    <p>${Rgsp.rname}</p>
+                    <p>${Rgsp.rdate}</p>
+    <a href="#" class="btn"><i class="icon-thumbs-up"></i>좋아요!</a>
+    <span class="rating pull-right"><i class="icon-heart"></i>조회수: ${Rgsp.rhit}</span>
+   
+                </div>
+            </div>
+             
+</div>        </c:forEach> 
+    </section>
+    </div>       
+
+  
 
            
-           </table>
-           <%if(session.getAttribute("session_id")==null){ %>
-           <%}else{ %>
-         <a href="Rgesipanwriteform">글쓰기</a> 
-          <%} %>
+           
+      
         
           
 											
@@ -88,6 +101,25 @@
 								
 								</div>
 								</div>
+								<!-- 페이지 정보 출력및 페이지 링크 -->
+      <div style="padding:-50px;">
+      <ul class="pageUL" style="text-align:center;list-style:none;">
+         <c:if test="${pageMaker.prev}">
+            <li><a href='RgesipanList?page=${pageMaker.start -1}'>이전</a></li>
+         </c:if>
+         
+         <c:forEach begin="${pagevo.start}" end="${pagevo.end}" var="idx">
+            <li class='<c:out value="${idx == pagevo.page?'current':''}"/>' style="display:inline;font-size:15px;">
+               <a href='RgesipanList?page=${idx}'>${idx}&nbsp;&nbsp;&nbsp;</a>
+            </li>
+         </c:forEach>
+         
+         <c:if test="${pagevo.next}">
+            <li><a href='RgesipanList?page=${pagevo.end +1}'>다음</a></li>
+         </c:if>
+      </ul>
+      </div>
+								
 									<!-- Sidebar -->
 					<div id="sidebar">
 						<div class="inner">
@@ -128,7 +160,7 @@
 											<span class="opener">정보 공유</span>
 											<ul>
 												<li><a href="board">운동법</a></li>
-												<li><a href="#">레시피</a></li>
+												<li><a href="foodlist">레시피</a></li>
 												
 											</ul>
 										</li>

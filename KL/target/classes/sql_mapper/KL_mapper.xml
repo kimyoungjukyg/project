@@ -7,7 +7,10 @@
 <!-- 글 목록 쿼리 -->
 	
 	<select id="gesipanlist" resultType="kl">
-	 SELECT * FROM RGESIPAN ORDER BY RID
+	 SELECT * FROM RGESIPAN where RTYPE='운동기구' ORDER BY RID
+	</select>
+	<select id="gesipanlist2" resultType="kl">
+	 SELECT * FROM RGESIPAN where RTYPE='레시피' ORDER BY RID
 	</select>
 	
 	<!-- 조회수 증가 쿼리 -->
@@ -24,7 +27,8 @@
 	<!-- 글쓰기 쿼리 -->
 	<insert id="gesipanwrite" parameterType="kl" useGeneratedKeys="true"
 			keyProperty="Rid">
-			INSERT INTO RGESIPAN VALUES(#{rtype},RGESIPAN_SEQ.nextval, #{rname},#{rtitle},#{rcontent},SYSDATE,0,#{rfilename})
+			INSERT INTO RGESIPAN VALUES(#{rtype},RGESIPAN_SEQ.nextval, #{rname},
+			#{rtitle},#{rcontent},SYSDATE,0,#{rfilename},#{videourl})
 			<selectKey keyProperty="Rid" resultType="int" order="AFTER">
 				SELECT RGESIPAN_SEQ.CURRVAL FROM DUAL
 			</selectKey>
@@ -34,7 +38,7 @@
 	<update id="gesipanmodifyer" parameterType="kl" >
 	
 		UPDATE RGESIPAN SET RTYPE=#{rtype},RNAME=#{rname},
-		RTITLE=#{rtitle},RCONTENT=#{rcontent},RFILE=#{rfilename}
+		RTITLE=#{rtitle},RCONTENT=#{rcontent},RFILE=#{rfilename},VIDEOURL=#{videourl}
 		WHERE RID=#{rid}
 	
 	</update>
@@ -44,5 +48,14 @@
 	DELETE FROM RGESIPAN WHERE RID=#{rid}
 	
 	</delete>
+ <!-- 카운트 -->
+   <select id="getListCount" parameterType="int" resultType="int">
+      SELECT COUNT(*) FROM RGESIPAN
+   </select>
+   
+   <!-- 짜르게 -->
+   <select id="getRead" parameterType="kl" resultType="kl">
+      select * from(select RID, rownum as rnum from(select RID from RGESIPAN))r1, RGESIPAN r2 where r1.RID = r2.RID and rnum between #{start} and #{end} order by r2.RDATE
+   </select>
  
 </mapper>

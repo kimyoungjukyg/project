@@ -112,7 +112,7 @@
 											<span class="opener">정보 공유</span>
 											<ul>
 												<li><a href="board">운동법</a></li>
-												<li><a href="#">레시피</a></li>
+												<li><a href="foodlist">레시피</a></li>
 												
 											</ul>
 										</li>

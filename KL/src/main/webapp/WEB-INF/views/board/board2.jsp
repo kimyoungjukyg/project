@@ -2,31 +2,17 @@
     pageEncoding="UTF-8"%>
     <%@ page import="java.util.*" %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-
-<link href='css/fullcalendar.min.css' rel='stylesheet' />
-<link href='css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-<script src='js/moment.min.js'></script>
-<script src='js/jquery.min.js'></script>
-<script src='js/fullcalendar.min.js'></script>
-
-
-
 		<link rel="stylesheet" href="assets/css/main.css" />
-		
-
-    <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-
-
-<title>PT취소</title>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//rawgithub.com/ashleydw/lightbox/master/dist/ekko-lightbox.js"></script>
+<title>게시판</title>
 </head>
 <body>
 <!-- Wrapper -->
@@ -47,51 +33,65 @@
 										<li><a  class="icon fa-medium"><span class="label">Medium</span></a></li>
 									</ul>
 								</header>
+								
 								<!-- Section -->
 								<section>
 									<header class="major">
-										<h2>PT</h2>
+										<h2>레시피 공유 게시판</h2>
 									</header>
-									<div class="inner">
+									    
+           
+           <%if(session.getAttribute("session_id")==null){ %>
+           <%}else{ %>
+         <a href="Rgesipanwriteform">글쓰기</a> 
+          <%} %>
+        
+          
+									
+									<div class="features">
 									
 											
 			
-        
-          
+  
+         
+    <div class="container mt40">
+    <section class="row">
+<c:forEach var="Rgsp" items="${gesipanlist2}">
+         <div class="panel-body">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="gesipanview?Rid=${Rgsp.rid}" title="Nature Portfolio" class="zoom" data-title="Amazing Nature" data-footer="The beauty of nature" data-type="image" data-toggle="lightbox">
+              
+ 	<img src="./uploadFile/${Rgsp.rfilename}" alt="" width="300" height="250"/>
+                        <span class="overlay"><i class="glyphicon glyphicon-fullscreen"></i></span>
+                    </a>
+                </div>
+                <div class="panel-footer">
+                    <h3><a href="gesipanview?Rid=${Rgsp.rid}">${Rgsp.rtitle}</a></h3>
+                    <p>${Rgsp.rname}</p>
+                    <p>${Rgsp.rdate}</p>
+    <a href="#" class="btn"><i class="icon-thumbs-up"></i>좋아요!</a>
+    <span class="rating pull-right"><i class="icon-heart"></i>조회수: ${Rgsp.rhit}</span>
+   
+                </div>
+            </div>
+             
+</div>        </c:forEach> 
+    </section>
+    </div>       
 
   
-    
-           <table class="table">
-           <thead>
-           <tr><th>강의 명</th>
-           <th>트레이너 명</th>
-           <th>시작 시간</th>
-           <th>종료 시간</th>
-           <th>취소 버튼</th>
-           </tr>
-           <thead>
-   <c:forEach var="pt" items="${ptoff}">
-   <tr>
-   <th>${pt.title}</th>
-   <th>${pt.tranl}</th>
-   <th>${pt.starttime }</th>
-   <th>${pt.endtime }</th>
 
-    <th><button type="submit" class="byn btn-secondary" onclick="location.href='ptcancel?title=${pt.title}'" >취소</button><br></th>
-   
-   </tr>   
-            </c:forEach>
-
-           
-           </table>
-        
-          
-        
-          
-											
+       		
 										
+									
 									</div>
 								</section>
+								
+								
+								
+								
+								
 								
 								
 								
@@ -122,7 +122,7 @@
       </c:when>
       <c:when test="${nuMessage != 0}">
       새쪽지:${nuMessage}
-     <img src="img/q.png" width="13"height="13"></c:when>
+      <img src="img/q.png" width="20"height="20"></c:when>
       </c:choose>
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
@@ -133,7 +133,8 @@
           									<%}else{ %>
          							 <li> <a  href="mypage">마이페이지</a></li>
           									 <%} %>
-          							<li><a href="video">운동영상</a></li>
+          								
+										<li><a href="video">운동영상</a></li>
 									
 										<li>
 											<span class="opener">정보 공유</span>

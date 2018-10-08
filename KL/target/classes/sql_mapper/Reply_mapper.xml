@@ -8,7 +8,10 @@
 <!-- 작성된 댓글에 대한리스트 -->
 	
 	<select id="replyList" resultType="Com">
-	 SELECT * FROM RGESIPAN ORDER BY RID
+	 SELECT * FROM RGESIPAN where RTYPE='운동기구' ORDER BY RID
+	 </select>
+	 <select id="replyList2" resultType="Com">
+	 SELECT * FROM RGESIPAN where RTYPE='레시피' ORDER BY RID
 	 </select>
 
 	<!-- 댓글이 써지는 쿼리이이이 쿼리 -->

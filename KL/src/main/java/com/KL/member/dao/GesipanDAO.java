@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.KL.member.vo.CommentVO;
 import com.KL.member.vo.KLVO;
+import com.KL.member.vo.Pagingvo;
 
 
 @Repository
@@ -57,6 +58,30 @@ public class GesipanDAO {
 
 	public List<CommentVO> replyView(int Rid) {
 		return sqlSession.selectList("Com.replyView",Rid);
+	}
+
+	public List<KLVO> gesipanlist2() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("kl.gesipanlist2");
+	}
+
+	public List<CommentVO> replyList2() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("Com.replyList2"); 
+	}
+
+	public List<KLVO> getRead(Pagingvo pagevo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("kl.getRead", pagevo);
+	}
+
+	public int GesipanCount(int count) {
+		// TODO Auto-generated method stub
+		 return sqlSession.selectOne("kl.getListCount", count);
+	}
+
+	public int ReplyLike(int cid) {
+		return sqlSession.update("Com.ReplyLike", cid);
 	}		
 
 

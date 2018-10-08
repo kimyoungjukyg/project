@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.KL.member.dao.GesipanDAO;
 import com.KL.member.vo.CommentVO;
 import com.KL.member.vo.KLVO;
+import com.KL.member.vo.Pagingvo;
 
 @Service
 public class GesipanService {
@@ -62,6 +63,7 @@ public class GesipanService {
 			
 			mav.setViewName("board/write_view");
 		}else {
+		
 			mav.setViewName("testtama");
 		}	}
 		return mav;
@@ -121,6 +123,37 @@ public class GesipanService {
 		}
 		return mav;
 	}
-	
+
+
+	public List<KLVO> getRead(Pagingvo pagevo) {
+		System.out.println("서비스 pageMaker"+pagevo.toString());
+	      return gdao.getRead(pagevo);
+
+	}
+
+
+	public int count(int count) {
+		// TODO Auto-generated method stub
+		return gdao.GesipanCount(count);
+	}
+
+	//오홍홍 조와용 DB저장 시키기
+			public ModelAndView ReplyLike(int Cid) {
+				mav = new ModelAndView();
+				
+				int result = gdao.ReplyLike(Cid);
+				if(result==0) {
+					
+					mav.setViewName("write_view");
+				}else {
+					mav.setViewName("redirect:/RgesipanList");
+					
+				}
+				
+				return mav;
+				
+			}
+
+
 	
 }

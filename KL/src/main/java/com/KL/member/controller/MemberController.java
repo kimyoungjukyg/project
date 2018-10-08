@@ -1,9 +1,11 @@
+
 package com.KL.member.controller;
 
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +32,8 @@ import com.KL.member.vo.MemberVO;
 import com.KL.member.vo.MessageVO;
 import com.KL.member.vo.PtVO;
 import com.KL.member.vo.VideoVO;
+
+import com.KL.member.vo.Pagingvo;
 
 
 
@@ -78,7 +82,7 @@ public class MemberController {
 	// 프로젝트시작시에 뜨는페이지 지정
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
-		return "testtama";
+		return "pay";
 		}
 	//홈화면으로이동
 	@RequestMapping(value = "/testtama", method = RequestMethod.GET)
@@ -101,11 +105,50 @@ public class MemberController {
 				public String mypage() {
 					return "log/mypage";
 					}
-				//마이페이지
+			//운동법
 				@RequestMapping(value = "/board", method = RequestMethod.GET)
-				public ModelAndView board() {
+				public ModelAndView board(Pagingvo pagevo, Model model, Object logger) {
 					mav=new ModelAndView();
 					mav=ms.board();
+					int count = 0;
+				      pagevo.setPage(pagevo.getPage());// 처음 결과 1 아무것도 없는 상태
+				      count = gs.count(count);//게시글 전체 개수를 가져옴
+				      System.out.println("count의 값 : " + count);
+				      // 레코드 총 갯수 구함
+				      pagevo.setCount(count);//해당 페이지메이커에개수를 입력해줌
+				      System.out.println("count의 값 : " + count);
+				      // 페이지 계산
+				      System.out.println("컨트롤 " + pagevo.getPage());
+				      System.out.println("페이지 메이커 VO start"+pagevo.getStart());
+				      System.out.println("페이지 메이커 VO end"+pagevo.getEnd());
+				      List<KLVO> list = gs.getRead(pagevo);
+				      System.out.println("list.size의 값은? " + list.size());
+				      model.addAttribute("result", list);
+				      model.addAttribute("pagevo", pagevo);
+				      
+					return mav;
+					}
+				//레시피
+				@RequestMapping(value = "/foodlist", method = RequestMethod.GET)
+				public ModelAndView foodlist(Pagingvo pagevo, Model model, Object logger) {
+					mav=new ModelAndView();
+					mav=ms.foodlist();
+					int count = 0;
+				      pagevo.setPage(pagevo.getPage());// 처음 결과 1 아무것도 없는 상태
+				      count = gs.count(count);//게시글 전체 개수를 가져옴
+				      System.out.println("count의 값 : " + count);
+				      // 레코드 총 갯수 구함
+				      pagevo.setCount(count);//해당 페이지메이커에개수를 입력해줌
+				      System.out.println("count의 값 : " + count);
+				      // 페이지 계산
+				      System.out.println("컨트롤 " + pagevo.getPage());
+				      System.out.println("페이지 메이커 VO start"+pagevo.getStart());
+				      System.out.println("페이지 메이커 VO end"+pagevo.getEnd());
+				      List<KLVO> list = gs.getRead(pagevo);
+				      System.out.println("list.size의 값은? " + list.size());
+				      model.addAttribute("result", list);
+				      model.addAttribute("pagevo", pagevo);
+				      
 					return mav;
 					}
 		//강의보러가기
@@ -116,7 +159,14 @@ public class MemberController {
 					return mav;
 					}
 		
-	
+				//좋아요?싫어요!
+				@RequestMapping(value= "/ReplyLike" , method= RequestMethod.GET)
+				public ModelAndView ReplyLike(@RequestParam("Cid") int Cid)throws IOException{
+					
+					mav = new ModelAndView();
+					mav = gs.ReplyLike(Cid);
+					return mav;
+				}
 	
 	
 	//pt트레이너 리스트 소환
@@ -380,7 +430,7 @@ public class MemberController {
 				MultipartFile rfile = klvo.getRfile();
 				if(!rfile.isEmpty()) {
 					String fileName = rfile.getOriginalFilename();
-					rfile.transferTo(new File("C:\\Users\\user\\git\\project\\KL\\src\\main\\webapp\\WEB-INF\\uploadFile"+fileName));
+					rfile.transferTo(new File("C:\\Users\\user\\git\\project\\KL\\src\\main\\webapp\\resources\\test\\uploadFile\\"+fileName));
 				}
 				klvo.setRfilename(rfile.getOriginalFilename());
 				

@@ -47,6 +47,10 @@ td, tr {
 				<td><input type="file" name="rfile"></td>
 			</tr>
 			<tr>
+				<td>동영상 첨부</td>
+				<td><input type="text" name="videourl"value="${gesipanview.videourl}">(유튜브소스복사해서 붙여주세요!)</td>
+			</tr>
+			<tr>
 				<td colspan="2" id="sub"><input type="submit" value="재등록">
 				 <input type="button" value="뒤로가기" class="btn btn-warning" onclick="location.href=history.go(-1)">
 					<input type="reset" value="다시쓰기"></td>

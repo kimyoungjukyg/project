@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 
-<title>관리자페이지</title>
+<title>마이페이지</title>
 </head>
 <body>
 <!-- Wrapper -->
@@ -99,7 +99,7 @@
 											<span class="opener">정보 공유</span>
 											<ul>
 												<li><a href="board">운동법</a></li>
-												<li><a href="#">레시피</a></li>
+												<li><a href="foodlist">레시피</a></li>
 												
 											</ul>
 										</li>

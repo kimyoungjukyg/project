@@ -13,11 +13,21 @@ public class KLVO {
 	private Date Rdate;
 	private int Rhit;
 	private MultipartFile Rfile;
+	private String Rfilename;
+	private String Videourl;
 	
-	private String Rfilename = null;
+
 	
 	public KLVO() {
 		
+	}
+
+	public String getVideourl() {
+		return Videourl;
+	}
+
+	public void setVideourl(String videourl) {
+		Videourl = videourl;
 	}
 
 	public String getRtype() {
