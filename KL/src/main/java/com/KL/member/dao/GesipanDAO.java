@@ -82,6 +82,16 @@ public class GesipanDAO {
 
 	public int ReplyLike(int cid) {
 		return sqlSession.update("Com.ReplyLike", cid);
+	}
+
+	public List<KLVO> gesipanlist3() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("kl.gesipanlist3");
+	}
+
+	public List<CommentVO> replyList3() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("Com.replyList3");
 	}		
 
 

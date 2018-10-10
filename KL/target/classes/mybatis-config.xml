@@ -6,7 +6,6 @@
 <typeAliases>
 <typeAlias alias="member" type="com.KL.member.vo.MemberVO"/>
 <typeAlias alias="pt" type="com.KL.member.vo.PtVO"/>
-<typeAlias alias="card" type="com.KL.member.vo.CardVO"/>
 <typeAlias alias="video" type="com.KL.member.vo.VideoVO"/>
 <typeAlias alias="kl" type="com.KL.member.vo.KLVO"/>
 <typeAlias alias="Com" type="com.KL.member.vo.CommentVO"/>

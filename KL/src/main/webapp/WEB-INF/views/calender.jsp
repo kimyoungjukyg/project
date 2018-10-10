@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +48,7 @@ var dataset = [
 	  ,"title":"<c:out value="${pt.title}" />"
 	  ,"start":"<c:out value="${pt.starttime}" />"
 	  <c:if test="${pt.endtime != ''}">
-    ,"end":"<c:out value="${pt.endtime}" />"
+   ,"end":"<c:out value="${pt.endtime}" />"
 </c:if> 
 } <c:if test="${!status.last}">,</c:if>
 </c:if>
@@ -106,13 +108,25 @@ var dataset = [
            <thead>
  
 <c:forEach var="pt" items="${callender}">
+
+<c:set var="today" value="<%=new java.util.Date()%>"/>
+<c:set var="day" value="${pt.starttime}"/>
+<fmt:formatDate var="now" type="date" value="${today}" pattern="MM.dd.yyyy"/>
+
+<fmt:parseDate var="_from" value="${day}" pattern="MM.dd.yyyy"/>
+<fmt:formatDate var="from" type="date" value="${_from}" pattern="MM.dd.yyyy"/>
    <tr>
    <th>${pt.title}</th>
    <th>${pt.id}</th>
    <th>${pt.starttime }</th>
    <th>${pt.endtime }</th>
    <th>${pt.count}</th>
+<c:if test="${now>from}">
+ <th><input type="checkbox" disabled value="선택불가"> </th></c:if>
+ 
+<c:if test="${now<=from}">
    <th><button type="submit" class="byn btn-secondary" onclick="location.href='ptr?log=${pt.log}&id=<%=session.getAttribute("session_id") %>'" >신청</button><br></th>
+</c:if>
    </tr>   
             </c:forEach>
 
@@ -124,5 +138,7 @@ var dataset = [
   
 <jsp:include page="side.jsp"  />
 </div>
+
+
 </body>
 </html>

@@ -2,19 +2,21 @@
     pageEncoding="UTF-8"%>
     <%@ page import="java.util.*" %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 페이지</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" /></head>
- <!-- Bootstrap core CSS -->
-
-    <!-- Custom styles for this template -->
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//rawgithub.com/ashleydw/lightbox/master/dist/ekko-lightbox.js"></script>
+<title>게시판</title>
+</head>
 <body>
-<div id="wrapper">
+<!-- Wrapper -->
+			<div id="wrapper">
 
 				<!-- Main -->
 					<div id="main">
@@ -28,51 +30,77 @@
 										<li><a  class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 										<li><a  class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
 										<li><a  class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a class="icon fa-medium"><span class="label">Medium</span></a></li>
+										<li><a  class="icon fa-medium"><span class="label">Medium</span></a></li>
 									</ul>
 								</header>
-
-
-
-<!-- Section -->
+								
+								<!-- Section -->
 								<section>
 									<header class="major">
-										<h2>admin page</h2>
+										<h2>리뷰 게시판</h2>
 									</header>
-									<div class="features">
-										<article>
-											
-				<div class="content">
-		
-       <div class="resume-item d-flex flex-column flex-md-row mb-5">
-		<section>
-									<header class="major">
+									    
+           
+           <%if(session.getAttribute("session_id")==null){ %>
+           <%}else{ %>
+         <a href="Rgesipanwriteform">글쓰기</a> 
+          <%} %>
+        
+          
 									
-									</header>
-									<p>홈페이지 관리자 정보 입니다. 문의할 내용은 해당 정보로 해주시기 바랍니다.</p>
-							 		<ul class="contact">
-										<li class="fa-envelope-o">kyg7414@gmail.com</li>
-										<li class="fa-phone">(010) 0000-0000</li>
-										<li class="fa-home">찾아서 머하실라고요<br />
-										경기도, TN 00000-0000</li>
-									</ul>
-								</section>
-		
-		
-		</div>
-		  <button type="button" class="byn btn-secondary" onclick="location.href='messageForm?id=<%= session.getAttribute("session_id")%>'">쪽지함</button>
-         <button type="button" class="byn btn-secondary" onclick="location.href='email'">회원들에게 메일보네기 </button>
-             <button type="button" class="byn btn-secondary" onclick="location.href='memberList'">회원목록보기</button> 
- <button type="button" class="byn btn-secondary" onclick="location.href='logout'">로그아웃 </button>
-	
-											</div>
-										</article>
+									<div class="features">
+									
+											
+			
+  
+         
+    <div class="container mt40">
+    <section class="row">
+<c:forEach var="Rgsp" items="${gesipanlist3}">
+         <div class="panel-body">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="gesipanview?Rid=${Rgsp.rid}" title="Nature Portfolio" class="zoom" data-title="Amazing Nature" data-footer="The beauty of nature" data-type="image" data-toggle="lightbox">
+              
+ 	<img src="./uploadFile/${Rgsp.rfilename}" alt="" width="300" height="250"/>
+                        <span class="overlay"><i class="glyphicon glyphicon-fullscreen"></i></span>
+                    </a>
+                </div>
+                <div class="panel-footer">
+                    <h3><a href="gesipanview?Rid=${Rgsp.rid}">${Rgsp.rtitle}</a></h3>
+                    <p>${Rgsp.rname}</p>
+                    <p>${Rgsp.rdate}</p>
+    <a href="#" class="btn"><i class="icon-thumbs-up"></i>좋아요!</a>
+    <span class="rating pull-right"><i class="icon-heart"></i>조회수: ${Rgsp.rhit}</span>
+   
+                </div>
+            </div>
+             
+</div>        </c:forEach> 
+    </section>
+    </div>       
+
+  
+
+       		
+										
 									
 									</div>
 								</section>
-</div>
-	</div>
-		<!-- Sidebar -->
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								</div>
+								</div>
+									<!-- Sidebar -->
 					<div id="sidebar">
 						<div class="inner">
 
@@ -89,12 +117,12 @@
 										<h2>Menu</h2>
 									</header>
 									<ul>
-					<c:choose>
+									<c:choose>
       <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
       </c:when>
       <c:when test="${nuMessage != 0}">
       새쪽지:${nuMessage}
-     <img src="img/q.png" width="13"height="13"></c:when>
+      <img src="img/q.png" width="20"height="20"></c:when>
       </c:choose>
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
@@ -120,7 +148,7 @@
 											<span class="opener">PT</span>
 											<ul>
 												<li><a href="pton">개설 강의</a></li>
-													  <%if(null==session.getAttribute("session_id")){ %>
+												  <%if(null==session.getAttribute("session_id")){ %>
                <%}else{ %>
 												<li><a href="ptoff">강의 취소</a></li>
 												<%} %>
@@ -132,8 +160,21 @@
 									</ul>
 								</nav>
 
-						
+							
 
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>관리자정보</h2>
+									</header>
+									<p>홈페이지 관리자 정보 입니다. 문의할 내용은 해당 정보로 해주시기 바랍니다.</p>
+									<ul class="contact">
+										<li class="fa-envelope-o">kyg7414@gmail.com</li>
+										<li class="fa-phone">(010) 0000-0000</li>
+										<li class="fa-home">찾아서 머하실라고요<br />
+										경기도, TN 00000-0000</li>
+									</ul>
+								</section>
 
 							<!-- Footer -->
 								<footer id="footer">
@@ -142,10 +183,9 @@
 
 						</div>
 					</div>
-
- </div>
- <!-- Tocplus 15.1 -->
-<script type="text/javascript">
+								
+								</div>
+								<script type="text/javascript">
 tocplusTop=1150;
 tocplusLeft=5;
 tocplusMinimizedImage='img/test.jpg';
@@ -158,14 +198,12 @@ tocplusFloatingWindow=true;
 var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http://");
 document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr07.tocplus007.com/chatLoader.do?userId=whddus19' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
 </script>
-<!-- End of Tocplus -->
-     <!-- Scripts -->
+								 <!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
      
-  
 </body>
 </html>

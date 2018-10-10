@@ -1,0 +1,119 @@
+var userInfo = (function (jq) {
+	"use strict";
+
+	var validTel = false;
+	var validBirthDate = false;
+	var validSubmit = false;
+	var paymentStopMsg = "op";
+
+	function eventBind() {
+		jq("#tfPhone").on('focus', activateInput);
+		jq("#tfPhone").on('blur', inactivateInput);
+		jq("#tfBirthday").on('focus', activateInput);
+		jq("#tfBirthday").on('blur', inactivateInput);
+		
+		jq("#tfPhone").on("change keyup paste input cut", checkTelFormat);
+		jq("#tfBirthday").on("change keyup paste input cut", checkBirthdayFormat);
+
+		
+		jq("#userPost").submit(function (e) {
+			var tel = jq("#tfPhone").val();
+			var birthDate = jq("#tfBirthday").val();
+			e.preventDefault();
+			sendUserInfo(tel, birthDate);
+		});
+
+		jq(".btn_close").on('click', function () {
+            teslaBaseCommon.payConfirm(paymentStopMsg,
+				function(){return teslaCommonPayment.paymentStop(hash, isCancelPost, blockUserEvents, "#actionPost");}
+			);
+		});
+	}
+
+	function activateInput(e) {
+		jq(e.target).parent().toggleClass("data_focus");
+	}
+
+	function inactivateInput(e) {
+		jq(e.target).parent().removeClass("data_focus");
+	}
+
+	function isValidTel(tel) {
+		var regexTel = /^0\d{9,10}$/;
+		if (regexTel.test(tel)) {
+			validTel = true;
+		} else {
+			validTel = false;
+		}
+	}
+
+	function isValidBirthday(birthDay) {
+		var regexBirthDay = /^\d{6}$/;
+		if (regexBirthDay.test(birthDay)) {
+			validBirthDate = true;
+		} else {
+			validBirthDate = false;
+		}
+	}
+
+	function updateSubmitStatus() {
+		if (validTel === true && validBirthDate === true) {
+			validSubmit = true;
+			jq(".btn_submit").removeAttr("disabled");
+		} else {
+			validSubmit = false;
+			jq(".btn_submit").attr("disabled", "disabled");
+		}
+	}
+
+	function checkTelFormat(e) {
+		var tel = jq(this).val();
+		isValidTel(tel);
+		updateSubmitStatus();
+	}
+
+	function checkBirthdayFormat(e) {
+		var birthDay = jq(this).val();
+		isValidBirthday(birthDay);
+		updateSubmitStatus();
+	}
+
+	function blockUserEvents() {
+		$("#userPost").attr("disabled", "disabled");
+		$(".btn_close").click(
+			function (e) {
+				e.preventDefault();
+			}
+		)
+	}
+
+	function sendUserInfo(tel, birthDate) {
+		var tmsInfo = {tel: tel, birthDate: birthDate};
+		jq.ajax({
+			type: "POST",
+			url : '/v1/'+hash+'/uinfo',
+			data: tmsInfo
+		}).done(function (data, status) {
+			
+			location.reload(true);
+		}).fail(function ($xhr, status) {
+			var response = $xhr.responseJSON;
+
+			if ($xhr.status == 500) {
+                teslaBaseCommon.payAlert(response.client_message,
+                    function() {return teslaCommonPayment.redirectToUrlWithMethod(isFailPost, failUrl, "#actionPost");}
+                );
+            }
+
+            teslaBaseCommon.payAlert(response.client_message);
+		})
+	}
+
+	return {
+		"eventBind": eventBind
+	}
+
+})(jQuery);
+jQuery(document).ready(function () {
+	userInfo.eventBind();
+});

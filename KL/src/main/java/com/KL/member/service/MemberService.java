@@ -261,6 +261,19 @@ mav.setViewName("Pt/pt");
 				return mav;
 	}
 
+	public ModelAndView ptReview() {
+		mav=new ModelAndView();
+		List<KLVO> gesipanlist3 = gdao.gesipanlist3();
+		mav.addObject("gesipanlist3", gesipanlist3);
+		List<CommentVO> replyList3 = gdao.replyList3();
+		mav.addObject("replyList3",replyList3);
+
+		mav.setViewName("board/board3");
+				
+				
+				return mav;
+	}
+
 
 
 	

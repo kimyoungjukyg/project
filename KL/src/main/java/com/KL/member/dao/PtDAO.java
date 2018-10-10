@@ -6,7 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.KL.member.vo.CardVO;
 import com.KL.member.vo.MemberVO;
 import com.KL.member.vo.PtVO;
 

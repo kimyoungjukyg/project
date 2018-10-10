@@ -15,6 +15,7 @@ td, tr {
 	text-align: center;
 }
 </style>
+
 </head>
 <body>
 	<h2>게시판글등록</h2>

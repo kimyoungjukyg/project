@@ -55,7 +55,10 @@
 									<div class="inner">
 									
 											
-			
+			  <%if(null==session.getAttribute("session_id")){ %>
+               
+     <button type="button" class="byn btn-secondary" onclick="location.href='login_join'">로그인이 필요합니다</button>
+     <%}else{ %>
         
           
 
@@ -85,7 +88,7 @@
            
            </table>
         
-          
+          <%} %>
         
           
 											
@@ -147,7 +150,10 @@
 											<span class="opener">PT</span>
 											<ul>
 												<li><a href="pton">개설 강의</a></li>
+													  <%if(null==session.getAttribute("session_id")){ %>
+               <%}else{ %>
 												<li><a href="ptoff">강의 취소</a></li>
+												<%} %>
 												
 											</ul>
 										</li>

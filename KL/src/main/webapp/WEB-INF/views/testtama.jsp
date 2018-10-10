@@ -15,8 +15,15 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<script src="//developers.kakao.com/sdk/js/kakao.min.js"   ></script>
+
+
+
+
+
 	</head>
 	<body class="is-preload">
+
 
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -44,7 +51,37 @@
 											<h1>이곳에 오신 것을 환영합니다<br />
 											by KL</h1>
 											<p>이 곳은 운동법 공유 및 pt신청을 할 수 있는 곳 입니다.</p>
-											 
+											 <a class="no-uline btn" id="kakao-link-btn" href="javascript:;">
+
+<img style="margin-left:5px; height:22px;" src="http://dn.api1.kage.kakao.co.kr/14/dn/btqa9B90G1b/GESkkYjKCwJdYOkLvIBKZ0/o.jpg" />
+<script type="text/javascript">
+
+
+Kakao.init('cad954d034fd4058bc91dddb7cb4faae');
+
+Kakao.Link.createTalkLinkButton({
+
+    container: '#kakao-link-btn',
+
+    label: '링크 테스트',
+
+   
+    webButton: {
+
+        text: 'LINK TEST',
+
+        url: 'http://192.168.0.169/member'
+
+    }
+
+});
+
+</script>
+ 카카오톡을 통해 친구들과 공유할래요.
+</a>
+
+
+
 										</header>
 										<p>9/28일 테마수정했습니다.</p>
 										<ul class="actions">
@@ -186,7 +223,10 @@
 											<span class="opener">PT</span>
 											<ul>
 												<li><a href="pton">개설 강의</a></li>
+												  <%if(null==session.getAttribute("session_id")){ %>
+               <%}else{ %>
 												<li><a href="ptoff">강의 취소</a></li>
+												<%} %>
 												
 											</ul>
 										</li>

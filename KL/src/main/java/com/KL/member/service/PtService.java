@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.KL.member.dao.*;
-import com.KL.member.vo.CardVO;
 import com.KL.member.vo.MemberVO;
 import com.KL.member.vo.PtVO;
 
@@ -26,10 +25,6 @@ public class PtService {
 	@Autowired
 	private PtDAO ptDAO;
 	private PtVO ptVO;
-	private CardVO cardVO;
-	@Autowired
-	private CardDAO cardDAO;
-	
 	@Autowired
 	private HttpSession session;
 	@Autowired
@@ -89,11 +84,9 @@ session.setAttribute("ptid", ptVo);
 		session.setAttribute("start", ptr.getStarttime());
 		session.setAttribute("end", ptr.getEndtime());
 		session.setAttribute("price", ptr.getPrice());
-		List<CardVO> cardread=cardDAO.cardread(id);
 		
-		mav.addObject("cardread",cardread);
 		mav.addObject("ptr", ptr);
-		mav.setViewName("Pt/ptr");
+		mav.setViewName("Pt/pay");
 		return mav;
 	}
 
