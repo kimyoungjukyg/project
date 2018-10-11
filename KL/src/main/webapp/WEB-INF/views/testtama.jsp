@@ -9,14 +9,36 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
+
 <html>
+
+
 	<head>
+<style>
+.gsc-search-button gsc-search-button-v2{
+width: 200px;
+height: 100px;
+}
+
+</style>	
+	<script>
+	//검색부분
+  (function() {
+    var cx = '005390764898483465964:ppy_c337lam';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
 		<title>Editorial by HTML5 UP</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<script src="//developers.kakao.com/sdk/js/kakao.min.js"   ></script>
-
+<link rel="stylesheet" href="/yts/cssbin/player-vfla5p03n/www-player-webp.css" name="player/www-player" id="player-css"><link rel="stylesheet" href="/yts/cssbin/www-main-desktop-player-skeleton-webp-vflqcz7cy.css" name="www-main-desktop-player-skeleton"><link rel="stylesheet" href="/yts/cssbin/www-main-desktop-watch-page-skeleton-webp-vflQ9GNSj.css" name="www-main-desktop-watch-page-skeleton">
 
 
 
@@ -180,11 +202,10 @@ Kakao.Link.createTalkLinkButton({
 						<div class="inner">
 
 							<!-- Search -->
-								<section id="search" class="alt">
-									<form method="post" action="#">
-										<input type="text" name="query" id="query" placeholder="Search" />
-									</form>
-								</section>
+							
+								
+									<gcse:search></gcse:search>
+						
 
 							<!-- Menu -->
 								<nav id="menu">
@@ -231,7 +252,7 @@ Kakao.Link.createTalkLinkButton({
 											</ul>
 										</li>
 										<li><a href="find">Sapien Mauris</a></li>
-										<li><a href="#">Amet Lacinia</a></li>
+										<li><a href="serch">Amet Lacinia</a></li>
 									</ul>
 								</nav>
 

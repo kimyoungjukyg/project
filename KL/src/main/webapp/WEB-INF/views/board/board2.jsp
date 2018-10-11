@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ page import="java.util.*" %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,7 +70,7 @@
                 <div class="panel-footer">
                     <h3><a href="gesipanview?Rid=${Rgsp.rid}">${Rgsp.rtitle}</a></h3>
                     <p>${Rgsp.rname}</p>
-                    <p>${Rgsp.rdate}</p>
+                    <p><fmt:formatDate value="${Rgsp.rdate}" pattern="yyyy'년'-MM'월'-dd'일 'HH:mm:ss "/></p>
     <a href="#" class="btn"><i class="icon-thumbs-up"></i>좋아요!</a>
     <span class="rating pull-right"><i class="icon-heart"></i>조회수: ${Rgsp.rhit}</span>
    

@@ -112,7 +112,7 @@ function passCheck() {
 			$("#pass1").addClass("warn");
 			$("#pass2").addClass("warn")
 		} else {
-			$("#passCheckMessage").html("");
+			$("#passCheckMessage").html("비밀번호가 일치합니다.");
 			$("#pass1").removeClass("warn");
 			$("#pass2").removeClass("warn");
 		}

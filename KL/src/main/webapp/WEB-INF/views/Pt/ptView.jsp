@@ -76,7 +76,7 @@
 <input type="hidden" id="id" value="${ptView.id}">
    <div class='col-md-5'>
         시작일: <div class="form-group">
-            <div class='input-group date' id='datetimepicker6'>
+            <div class='input-group date' id='datetimepicker3'>
                 <input type='text' class="form-control" name="starttime" required/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
@@ -98,8 +98,8 @@
     강의료:
     <div class="form-group">
          
-<input type='text' class="form-control" name="price" id="price" required/>원
-
+<input type='text' class="form-control" name="price" id="price" value="${reptmake.price}" onkeyup="formcheck2()"required/>
+	<p style="color: red;" id="priceCheckMessage"></p>
 </div>
 
 </div>
@@ -156,22 +156,29 @@ function formcheck(){
 		
 		
 	}
-
+function formcheck2(){
+	var price2=$("#price").val();
+	if(price2<1000){
+		$("#priceCheckMessage").html("가격은 천원부터 입니다.");
+	}else{
+		$("#priceCheckMessage").html("");	
+	}
+}
 	
 
 </script>
 <script type="text/javascript">
     $(function () {
-        $('#datetimepicker6').datetimepicker();
+        $('#datetimepicker3').datetimepicker();
         $('#datetimepicker7').datetimepicker({
             useCurrent: false
        
         });
-        $("#datetimepicker6").on("dp.change", function (e) {
+        $("#datetimepicker3").on("dp.change", function (e) {
             $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
         });
         $("#datetimepicker7").on("dp.change", function (e) {
-            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+            $('#datetimepicker3').data("DateTimePicker").maxDate(e.date);
         });
     });
 </script>

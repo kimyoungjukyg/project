@@ -85,6 +85,11 @@ public class PtDAO {
 		sqlSession.delete("Pt.ptcancel",title);
 		
 	}
+
+
+	
+
+	
 	
 
 	

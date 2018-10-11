@@ -48,24 +48,24 @@ var dataset = [
 	  ,"title":"<c:out value="${pt.title}" />"
 	  ,"start":"<c:out value="${pt.starttime}" />"
 	  <c:if test="${pt.endtime != ''}">
-   ,"end":"<c:out value="${pt.endtime}" />"
+  ,"end":"<c:out value="${pt.endtime}" />"
 </c:if> 
 } <c:if test="${!status.last}">,</c:if>
 </c:if>
 </c:forEach>
-	
+	 
 ];
 </script>
 <style>
 
-  body {
-    margin: 40px 10px;
-    padding: 0;
-    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-    font-size: 14px;
-  }
+ body {
+   margin: 40px 10px;
+   padding: 0;
+   font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+   font-size: 14px;
+ }
 
-  #calendar {
+ #calendar {
     max-width: 900px;
     margin: 0 auto;
   }
@@ -106,26 +106,28 @@ var dataset = [
            <th>신청 버튼</th>
            </tr>
            <thead>
- 
-<c:forEach var="pt" items="${callender}">
 
+<c:forEach var="pt" items="${callender}">
 <c:set var="today" value="<%=new java.util.Date()%>"/>
 <c:set var="day" value="${pt.starttime}"/>
-<fmt:formatDate var="now" type="date" value="${today}" pattern="MM.dd.yyyy"/>
 
-<fmt:parseDate var="_from" value="${day}" pattern="MM.dd.yyyy"/>
-<fmt:formatDate var="from" type="date" value="${_from}" pattern="MM.dd.yyyy"/>
+<fmt:formatDate var="now" type="date" value="${today}" pattern="MM/dd/yyyy"/>
+
+
+
+
    <tr>
+   
    <th>${pt.title}</th>
    <th>${pt.id}</th>
    <th>${pt.starttime }</th>
    <th>${pt.endtime }</th>
    <th>${pt.count}</th>
-<c:if test="${now>from}">
- <th><input type="checkbox" disabled value="선택불가"> </th></c:if>
+<c:if test="${now>day}">
+ <th><button type="checkbox" class="byn btn-secondary" disabled >신청 불가 </button> </th></c:if>
  
-<c:if test="${now<=from}">
-   <th><button type="submit" class="byn btn-secondary" onclick="location.href='ptr?log=${pt.log}&id=<%=session.getAttribute("session_id") %>'" >신청</button><br></th>
+<c:if test="${now<=day}">
+   <th><button type="submit" class="byn btn-secondary" onclick="location.href='ptr?log=${pt.log}&id=<%=session.getAttribute("session_id") %>&starttime=<%=session.getAttribute("start") %>'" >신청 하기</button><br></th>
 </c:if>
    </tr>   
             </c:forEach>

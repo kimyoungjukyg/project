@@ -5,6 +5,7 @@ package com.KL.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -82,6 +83,10 @@ public class MemberController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		return "testtama";
+		}
+	@RequestMapping(value = "/serch", method = RequestMethod.GET)
+	public String serch() {
+		return "serch";
 		}
 	//홈화면으로이동
 	@RequestMapping(value = "/testtama", method = RequestMethod.GET)
@@ -391,7 +396,9 @@ public class MemberController {
 			throws IOException {
 		mav = new ModelAndView();
 		String title=(String) session.getAttribute("title");
-		mav = ca.ptpay(ptVO, response);
+		String starttime=(String)session.getAttribute("start");
+		String id=(String)session.getAttribute("session_id");
+		mav = ca.ptpay(ptVO, response,id);
 		pt.increase(title);
 		return mav;
 	}

@@ -41,7 +41,7 @@ public class CardService {
 
 
 
-	public ModelAndView ptpay(PtVO ptVO,HttpServletResponse response) throws IOException {
+	public ModelAndView ptpay(PtVO ptVO,HttpServletResponse response,String id) throws IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		mav = new ModelAndView();
@@ -49,7 +49,13 @@ public class CardService {
 		PtVO cardtest2=ptDAO.cardtest(ptVO);
 	
 			try {
-			
+			if(ptVO.getId().equals(cardtest2.getId()) ) {
+				out.println("<script>");
+				out.println("alert('신청시간에 이미 수강하는 강의가 있습니다.');");
+				out.println("location.href='pton'");// 이전 페이지로 이동!
+				out.println("</script>");
+				out.close();
+			}else {
 			if(ptVO.getId().equals(cardtest2.getId()) && ptVO.getTitle().equals(cardtest2.getTitle())){
 	out.println("<script>");
 	out.println("alert('동일한강의는 신청이 불가능 합니다.');");
@@ -74,7 +80,8 @@ public class CardService {
 				mav.setViewName("redirect:/textList");	*/
 			}
 
-}	}catch(NullPointerException ne){
+}	}
+			}catch(NullPointerException ne){
 	int result = ptDAO.addpt(ptVO);
 	if (result == 0) {
 		// 등록 실패하면 
@@ -90,6 +97,7 @@ public class CardService {
 		
 	}
 }
+
 		
 		return mav;
 

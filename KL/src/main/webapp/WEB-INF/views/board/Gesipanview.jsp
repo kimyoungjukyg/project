@@ -8,8 +8,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+      jQuery( document ).ready( function( $ ) {
+        $( 'iframe[src^="https://www.youtube.com/"]' ).wrap( '<div class="youtubeWrap"></div>' );
+      } );
+    </script>
 <title>상세보기</title>
+<style>
+.youtubeWrap {
+        position: relative;
+        width:  640px;
+        height: 400px;
+        padding-bottom: 56.25%;
+      }
+      .youtubeWrap iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+</style>
 </head>
 <body>
 <!-- Wrapper -->
@@ -46,11 +64,13 @@
 		<tr>
 		
 		
-		<tr><td>첨부파일</td>
+		<tr><td>썸네일</td>
 			<td><img src="uploadFile/${gesipanview.rfilename}" width="300"/></td></tr>
 		<tr>
 		<tr><td>동영상!</td>
 			<td>${gesipanview.videourl}</td>
+			
+    
 			</tr>
 		
 		<tr>
@@ -73,8 +93,8 @@
 	<td><input type="text" name="cwriter" required="required"  value="<%=session.getAttribute("session_id")%>" readonly></td>	
 	</tr>
 	<tr>
-	<input type="hidden" name="Rid" value="${gesipanview.rid}">
-	<td><input type="text" name="ccontent" required="required" style="text-align:center; width:200px; height:50px;" "placeholder="내용을입력하거라 애송이"></td>
+	<input type="hidden" name="Rid" value="${gesipanview.rid}"> 
+	<td><input type="text" name="ccontent" required="required" style="text-align:center; width:200px; height:50px;" placeholder="내용을입력하거라 애송이"></td>
 	<td><input type="submit" value="댓글달기"></td>
 	</tr>
 	</table>

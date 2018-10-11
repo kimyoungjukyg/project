@@ -97,8 +97,8 @@
     강의료:
     <div class="form-group">
          
-<input type='text' class="form-control" name="price" id="price" value="${reptmake.price}"required/>원
-
+<input type='text' class="form-control" name="price" id="price" value="${reptmake.price}" onkeyup="formcheck2()"required/>
+	<p style="color: red;" id="priceCheckMessage"></p>
 </div>
 
 </div>
@@ -112,7 +112,7 @@
  <div class='col-md-5'>
 
 
- <button type="submit" class="byn btn-secondary" onclick="formcheck()" >수정</button>
+ <button type="submit" class="byn btn-secondary" onclick="formcheck()2" >수정</button>
 
 </div>
  </form>
@@ -153,7 +153,14 @@ function formcheck(){
 		
 		
 	}
-
+function formcheck2(){
+	var price2=$("#price").val();
+	if(!price2<1000){
+		$("#priceCheckMessage").html("가격은 천원부터 입니다.");
+	}else{
+		$("#priceCheckMessage").html("");	
+	}
+}
 	
 
 </script>

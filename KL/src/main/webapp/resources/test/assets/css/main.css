@@ -112,7 +112,10 @@ input, select, textarea {
 			-ms-transition: none !important;
 			transition: none !important;
 		}
-
+.gsc-search-button gsc-search-button-v2{
+width: 200px;
+height: 100px;
+}
 /* Type */
 
 	body, input, select, textarea {
