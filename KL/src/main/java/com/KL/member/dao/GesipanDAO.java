@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.KL.member.vo.CommentVO;
 import com.KL.member.vo.KLVO;
 import com.KL.member.vo.Pagingvo;
+import com.KL.member.vo.reVO;
 
 
 @Repository
@@ -84,15 +85,17 @@ public class GesipanDAO {
 		return sqlSession.update("Com.ReplyLike", cid);
 	}
 
-	public List<KLVO> gesipanlist3() {
+	
+	public int Reviewwrite(reVO revo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("kl.gesipanlist3");
+		return sqlSession.insert("Re.Reviewwrite",revo);
 	}
 
-	public List<CommentVO> replyList3() {
+	public List<reVO> relist(String tranl) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("Com.replyList3");
-	}		
+		return sqlSession.selectList("Re.relist", tranl);
+	}
 
-
+	
+	
 }

@@ -32,7 +32,7 @@ import com.KL.member.vo.MemberVO;
 import com.KL.member.vo.MessageVO;
 import com.KL.member.vo.PtVO;
 import com.KL.member.vo.VideoVO;
-
+import com.KL.member.vo.reVO;
 import com.KL.member.vo.Pagingvo;
 
 
@@ -157,26 +157,31 @@ public class MemberController {
 					}
 				//리뷰
 				@RequestMapping(value = "/ptReview", method = RequestMethod.GET)
-				public ModelAndView ptReview(Pagingvo pagevo, Model model, Object logger) {
+				public ModelAndView ptReview(@ModelAttribute reVO revo,@RequestParam("id") String tranl) {
 					mav=new ModelAndView();
-					mav=ms.ptReview();
-					int count = 0;
-				      pagevo.setPage(pagevo.getPage());// 처음 결과 1 아무것도 없는 상태
-				      count = gs.count(count);//게시글 전체 개수를 가져옴
-				      System.out.println("count의 값 : " + count);
-				      // 레코드 총 갯수 구함
-				      pagevo.setCount(count);//해당 페이지메이커에개수를 입력해줌
-				      System.out.println("count의 값 : " + count);
-				      // 페이지 계산
-				      System.out.println("컨트롤 " + pagevo.getPage());
-				      System.out.println("페이지 메이커 VO start"+pagevo.getStart());
-				      System.out.println("페이지 메이커 VO end"+pagevo.getEnd());
-				      List<KLVO> list = gs.getRead(pagevo);
-				      System.out.println("list.size의 값은? " + list.size());
-				      model.addAttribute("result", list);
-				      model.addAttribute("pagevo", pagevo);
-				      
+			mav=gs.relist(tranl);
 					return mav;
+					}
+				//리뷰글쓰기 화면 호출
+				@RequestMapping(value="reviewwrite_view", method = RequestMethod.GET)
+				public ModelAndView reviewwrite_view(HttpServletResponse response,@RequestParam("id") String id) throws IOException {
+					response.setContentType("text/html;charset=UTF-8");
+					mav = new ModelAndView();
+			     	mav=pt.relistview(id); 
+			    	return mav;
+				}
+				
+				//리뷰 쓰기
+				@RequestMapping(value="/Reviewwrite", method=RequestMethod.POST)
+				public ModelAndView Reviewwrite(@ModelAttribute reVO revo,HttpServletResponse response) throws IOException {
+					mav = new ModelAndView();
+				
+					
+					mav = gs.Reviewwrite(revo,response);
+					
+					return mav;
+					
+				
 					}
 		//강의보러가기
 				@RequestMapping(value = "/pton", method = RequestMethod.GET)
@@ -407,11 +412,10 @@ public class MemberController {
 			public String gesipanwriteform(HttpServletResponse response) throws IOException {
 				response.setContentType("text/html;charset=UTF-8");
 				
-				if(session.getAttribute("session_id")==null) {
-					
-				}
+				
 				return "board/write_view";
 			}
+			
 			
 			
 			//글 상세보기
@@ -427,7 +431,7 @@ public class MemberController {
 				
 				
 			}
-				
+			
 			//글 쓰기
 			@RequestMapping(value="/Rgesipanwrite", method=RequestMethod.POST)
 			public ModelAndView gesipanwrite(@ModelAttribute KLVO klvo,HttpServletResponse response) throws IOException {
@@ -510,7 +514,7 @@ public class MemberController {
 				 @RequestMapping(value = "/messageWriteForm", method = RequestMethod.GET)
 					public String messageWriteForm(@RequestParam("id") String id) {
 					 session.setAttribute("session_id", id);
-						return "messageWriteForm";
+						return "message/messageWriteForm";
 					}
 				 
 				 //쪽지 작성

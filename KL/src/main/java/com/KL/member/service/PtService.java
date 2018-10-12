@@ -157,6 +157,20 @@ session.setAttribute("ptid", ptVo);
 
 
 
+
+	public ModelAndView relistview(String id) {
+		mav=new ModelAndView(); 
+		List<PtVO> relistview =ptDAO.relistview(id);
+		mav.addObject("relistview",relistview);
+
+		mav.setViewName("board/write_review");
+				
+		return mav;
+	}
+
+
+
+
 	
 
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+		 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,10 +16,7 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 <link rel="stylesheet" href="assets/css/main.css" />
 <style type="text/css">
-td, tr {
-	text-align: left;
-	border: 1px solid black;
-} 
+
 
 #sub {
 	text-align: center;
@@ -72,12 +70,12 @@ td, tr {
     			$('#summernote').summernote({
     				placeholder: 'Insert content',
     		        tabsize: 2,
-    		        height: 100
+    		        height: 500
     			});
     		});
       			</script>
 				
-      			<textarea id="summernote" name="Rcontent"></textarea>
+      			<textarea id="summernote" name="Rcontent"  rows="25" cols="30"></textarea>
       			</td>
 			</tr>
 			<tr>
@@ -114,13 +112,17 @@ td, tr {
 										<h2>Menu</h2>
 									</header>
 									<ul>
-									<c:choose>
+										<%if(session.getAttribute("session_id")==null){%>
+  
+   <%}else{ %>
+  <c:choose>
       <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
       </c:when>
       <c:when test="${nuMessage != 0}">
       새쪽지:${nuMessage}
      <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
+    <%} %>
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
 										<li><a href="login_join">로그인/회원가입</a></li>
@@ -147,7 +149,7 @@ td, tr {
 												<li><a href="pton">개설 강의</a></li>
 												  <%if(null==session.getAttribute("session_id")){ %>
                <%}else{ %>
-												<li><a href="ptoff">강의 취소</a></li>
+												<li><a href="ptoff">등록강의</a></li>
 												<%} %>
 												
 											</ul>

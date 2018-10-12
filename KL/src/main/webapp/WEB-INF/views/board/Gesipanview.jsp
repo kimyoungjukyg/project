@@ -28,6 +28,26 @@
         height: 100%;
       }
 </style>
+<script> 
+
+  
+  
+function doShow() { 
+    if ($('#aa').is(":visible")) { 
+        $('#aa').hide(); // id값을 받아서 숨기기 
+        $('.bb').hide(); // 클래스값을 받아서 숨기기 
+        
+        $('#button1').text("댓글가리기"); 
+    } else { 
+        $('#aa').show(); // id값을 받아서 보이기 
+        $('.bb').show(); // 클래스값을 받아서 보이기 
+       
+        $('#button1').text('댓글보기'); 
+    } 
+}
+
+
+</script> 
 </head>
 <body>
 <!-- Wrapper -->
@@ -80,10 +100,24 @@
 			<a href="gesipanmodify?Rid=${gesipanview.rid}">수정</a> &nbsp;&nbsp;
 			<a href="RgesipanList">목록보기</a> &nbsp;&nbsp;
 			<a href="gesipandelete?Rid=${gesipanview.rid}">삭제</a> &nbsp;&nbsp;
+			<input type="button" value="댓글보기" onclick="javascript:doShow()" id="button1" class="byn btn-secondary">
 			</td>
 		</tr>
 	</table>
 	</form>
+	  <div id="aa" style="display:none">
+	  <h3>댓글창</h3>
+	<table>
+	<c:forEach var="reply" items="${replyView}">
+	<input type="hidden" name="Cid" value="${reply.cid}">
+	<tr>
+	<td>글작성자:${reply.cwriter}<a href="ReplyLike?Cid=${reply.cid}">좋아용!</a>:${reply.tolike}</td>
+	</tr>
+	<tr>
+	<td>내용:${reply.ccontent}</td>
+	</tr>
+		</c:forEach>
+	</table>
 	<h3>댓글을 달아봅시다</h3>
 	<form action="Gesipanreply" method ="post">
 	<table border="1">
@@ -104,21 +138,9 @@
 	<br>
 	
 	
-	<h3>댓글창</h3>
-	<table>
-	<c:forEach var="reply" items="${replyView}">
-	<input type="hidden" name="Cid" value="${reply.cid}">
-	<tr>
-	<td>글작성자:${reply.cwriter}<a href="ReplyLike?Cid=${reply.cid}">좋아용!</a>:${reply.tolike}</td>
-	</tr>
-	<tr>
-	<td>내용:${reply.ccontent}</td>
-	</tr>
-		</c:forEach>
-	</table>
 	
+	 </div>
 	
-	 <input type="button" value="뒤로가기" class="btn btn-warning" onclick="location.href=history.go(-1)">
 	 
 	 
 	 
@@ -141,13 +163,17 @@
 										<h2>Menu</h2>
 									</header>
 									<ul>
-									<c:choose>
+										<%if(session.getAttribute("session_id")==null){%>
+  
+   <%}else{ %>
+  <c:choose>
       <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
       </c:when>
       <c:when test="${nuMessage != 0}">
       새쪽지:${nuMessage}
-      <img src="img/q.png" width="20"height="20"></c:when>
+     <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
+    <%} %>
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
 										<li><a href="login_join">로그인/회원가입</a></li>
@@ -171,7 +197,7 @@
 											<span class="opener">PT</span>
 											<ul>
 												<li><a href="pton">개설 강의</a></li>
-												<li><a href="ptoff">강의 취소</a></li>
+												<li><a href="ptoff">등록강의</a></li>
 												
 											</ul>
 										</li>

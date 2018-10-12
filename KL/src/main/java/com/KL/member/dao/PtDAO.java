@@ -86,6 +86,12 @@ public class PtDAO {
 		
 	}
 
+	public List<PtVO> relistview(String id) {
+		
+		return sqlSession.selectList("Pt.relistview",id);
+	}
+
+	
 
 	
 

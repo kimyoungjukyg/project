@@ -13,6 +13,11 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="//rawgithub.com/ashleydw/lightbox/master/dist/ekko-lightbox.js"></script>
+
+
+  
+  
+
 <title>게시판</title>
 </head>
 <body>
@@ -138,13 +143,17 @@
 										<h2>Menu</h2>
 									</header>
 									<ul>
-									<c:choose>
+									<%if(session.getAttribute("session_id")==null){%>
+  
+   <%}else{ %>
+  <c:choose>
       <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
       </c:when>
       <c:when test="${nuMessage != 0}">
       새쪽지:${nuMessage}
-      <img src="img/q.png" width="20"height="20"></c:when>
+     <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
+    <%} %>
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
 										<li><a href="login_join">로그인/회원가입</a></li>
@@ -171,7 +180,7 @@
 												<li><a href="pton">개설 강의</a></li>
 													  <%if(null==session.getAttribute("session_id")){ %>
                <%}else{ %>
-												<li><a href="ptoff">강의 취소</a></li>
+												<li><a href="ptoff">등록강의</a></li>
 												<%} %>
 												
 											</ul>

@@ -44,43 +44,34 @@
            
            <%if(session.getAttribute("session_id")==null){ %>
            <%}else{ %>
-         <a href="Rgesipanwriteform">글쓰기</a> 
+         <a href="reviewwrite_view?id=<%=session.getAttribute("session_id")%>">글쓰기</a> 
           <%} %>
         
-          
-									
-									<div class="features">
-									
-											
-			
+     									<div class="features">
+						   <table class="table">
+           <thead>
+           <tr><th>제목</th>
+           <th>작성자</th>
+           <th>평가트레이너</th>
+           <th>작성시간</th>
+         
+           <th>별점</th>
+           </tr>
+           <thead>			
+		<c:forEach var="re" items="${relist}">									
+			 <tr>
+   
+   <th><a href="gesipanview?Rid=${re.id}">${re.title}</a></th>
+   <th>${re.id}</th>
+   <th>${re.tranl }</th>
+   <th><fmt:formatDate value="${re.redate }" pattern="yyyy'년'-MM'월'-dd'일 'HH:mm:ss "/></th>
+   <th>${re.star} 점</th>
   
          
-    <div class="container mt40">
-    <section class="row">
-<c:forEach var="Rgsp" items="${gesipanlist3}">
-         <div class="panel-body">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <a href="gesipanview?Rid=${Rgsp.rid}" title="Nature Portfolio" class="zoom" data-title="Amazing Nature" data-footer="The beauty of nature" data-type="image" data-toggle="lightbox">
-              
- 	<img src="./uploadFile/${Rgsp.rfilename}" alt="" width="300" height="250"/>
-                        <span class="overlay"><i class="glyphicon glyphicon-fullscreen"></i></span>
-                    </a>
-                </div>
-                <div class="panel-footer">
-                    <h3><a href="gesipanview?Rid=${Rgsp.rid}">${Rgsp.rtitle}</a></h3>
-                    <p>${Rgsp.rname}</p>
-                    <p><fmt:formatDate value="${Rgsp.rdate}" pattern="yyyy'년'-MM'월'-dd'일 'HH:mm:ss "/></p>
-    <a href="#" class="btn"><i class="icon-thumbs-up"></i>좋아요!</a>
-    <span class="rating pull-right"><i class="icon-heart"></i>조회수: ${Rgsp.rhit}</span>
-   
-                </div>
-            </div>
-             
-</div>        </c:forEach> 
-    </section>
-    </div>       
-
+  
+        </c:forEach> 
+        
+ </table>
   
 
        		
@@ -118,13 +109,17 @@
 										<h2>Menu</h2>
 									</header>
 									<ul>
-									<c:choose>
+								<%if(session.getAttribute("session_id")==null){%>
+  
+   <%}else{ %>
+  <c:choose>
       <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
       </c:when>
       <c:when test="${nuMessage != 0}">
       새쪽지:${nuMessage}
-      <img src="img/q.png" width="20"height="20"></c:when>
+     <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
+    <%} %>
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
 										<li><a href="login_join">로그인/회원가입</a></li>
@@ -151,7 +146,7 @@
 												<li><a href="pton">개설 강의</a></li>
 												  <%if(null==session.getAttribute("session_id")){ %>
                <%}else{ %>
-												<li><a href="ptoff">강의 취소</a></li>
+												<li><a href="ptoff">등록강의</a></li>
 												<%} %>
 												
 											</ul>

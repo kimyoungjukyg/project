@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,7 +84,7 @@ td, tr {
 			</tr>
 			<tr>
 				<td>동영상 첨부</td>
-				<td><input type="text" name="videourl"value="${gesipanview.videourl}">(유튜브소스복사해서 붙여주세요!)</td>
+				<td><input type="text" name="videourl"value='${gesipanview.videourl}'>(유튜브소스복사해서 붙여주세요!)</td>
 			</tr>
 			<tr>
 				<td colspan="2" id="sub"><input type="submit" value="재등록">
@@ -109,13 +110,17 @@ td, tr {
 										<h2>Menu</h2>
 									</header>
 									<ul>
-									<c:choose>
+									<%if(session.getAttribute("session_id")==null){%>
+  
+   <%}else{ %>
+  <c:choose>
       <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
       </c:when>
       <c:when test="${nuMessage != 0}">
       새쪽지:${nuMessage}
      <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
+    <%} %>
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
 										<li><a href="login_join">로그인/회원가입</a></li>
@@ -142,7 +147,7 @@ td, tr {
 												<li><a href="pton">개설 강의</a></li>
 												  <%if(null==session.getAttribute("session_id")){ %>
                <%}else{ %>
-												<li><a href="ptoff">강의 취소</a></li>
+												<li><a href="ptoff">등록강의</a></li>
 												<%} %>
 												
 											</ul>

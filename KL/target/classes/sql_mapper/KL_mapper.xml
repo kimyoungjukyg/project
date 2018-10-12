@@ -12,9 +12,7 @@
 	<select id="gesipanlist2" resultType="kl">
 	 SELECT * FROM RGESIPAN where RTYPE='레시피' ORDER BY RID
 	</select>
-	<select id="gesipanlist3" resultType="kl">
-	 SELECT * FROM RGESIPAN where RTYPE='리뷰' ORDER BY RID
-	</select>
+	
 	
 	<!-- 조회수 증가 쿼리 -->
 	<update id="increaseHit" parameterType="int">

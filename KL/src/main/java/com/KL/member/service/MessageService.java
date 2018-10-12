@@ -33,7 +33,7 @@ public class MessageService {
 		mav = new ModelAndView();
 		List<MessageVO> mlist = mDAO.toMessage(id);
 		mav.addObject("message", mlist);
-		mav.setViewName("messageForm");
+		mav.setViewName("message/messageForm");
 		return mav;
 	}
 
@@ -46,7 +46,7 @@ public class MessageService {
 		int result = mDAO.messageWrite(map);
 		System.out.println("쪽지번호"+mVO.getMessage_num());
 		if(result==0) {
-			mav.setViewName("home");
+			mav.setViewName("testtama");
 		} else {
 			session.setAttribute("session_id", id);
 			mav.setViewName("redirect:/messageForm");
@@ -59,7 +59,7 @@ public class MessageService {
 		mav = new ModelAndView();
 		List<MessageVO> mylist = mDAO.myMessage(id);
 		mav.addObject("mymessage", mylist);
-		mav.setViewName("toMessageForm");
+		mav.setViewName("message/toMessageForm");
 		return mav;
 	}
 

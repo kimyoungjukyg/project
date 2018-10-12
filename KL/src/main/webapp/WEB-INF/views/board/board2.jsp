@@ -62,9 +62,14 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <a href="gesipanview?Rid=${Rgsp.rid}" title="Nature Portfolio" class="zoom" data-title="Amazing Nature" data-footer="The beauty of nature" data-type="image" data-toggle="lightbox">
+              <c:if test="${Rgsp.rfilename == null}">
+              <img src="img/lo.png" alt="" width="300" height="250"/>
+               </c:if>
               
- 	<img src="./uploadFile/${Rgsp.rfilename}" alt="" width="300" height="250"/>
+ 	<img src="./uploadFile/${Rgsp.rfilename}" alt="${Rgsp.rfilename}" width="300" height="250"/>
+ 	
                         <span class="overlay"><i class="glyphicon glyphicon-fullscreen"></i></span>
+                       
                     </a>
                 </div>
                 <div class="panel-footer">
@@ -118,13 +123,17 @@
 										<h2>Menu</h2>
 									</header>
 									<ul>
-									<c:choose>
+								<%if(session.getAttribute("session_id")==null){%>
+  
+   <%}else{ %>
+  <c:choose>
       <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
       </c:when>
       <c:when test="${nuMessage != 0}">
       새쪽지:${nuMessage}
-      <img src="img/q.png" width="20"height="20"></c:when>
+     <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
+    <%} %>
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
 										<li><a href="login_join">로그인/회원가입</a></li>
@@ -151,7 +160,7 @@
 												<li><a href="pton">개설 강의</a></li>
 												  <%if(null==session.getAttribute("session_id")){ %>
                <%}else{ %>
-												<li><a href="ptoff">강의 취소</a></li>
+												<li><a href="ptoff">등록강의</a></li>
 												<%} %>
 												
 											</ul>

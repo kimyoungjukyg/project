@@ -13,10 +13,7 @@
 	 <select id="replyList2" resultType="Com">
 	 SELECT * FROM RGESIPAN where RTYPE='레시피' ORDER BY RID
 	 </select>
-	  <select id="replyList3" resultType="Com">
-	 SELECT * FROM RGESIPAN where RTYPE='리뷰' ORDER BY RID
-	 </select>
-
+	
 	<!-- 댓글이 써지는 쿼리이이이 쿼리 -->
 	<insert id="gesipanreply" parameterType="Com" useGeneratedKeys="true"
 			keyProperty="Cid">

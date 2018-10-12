@@ -15,6 +15,7 @@ import com.KL.member.dao.GesipanDAO;
 import com.KL.member.vo.CommentVO;
 import com.KL.member.vo.KLVO;
 import com.KL.member.vo.Pagingvo;
+import com.KL.member.vo.reVO;
 
 @Service
 public class GesipanService {
@@ -146,12 +147,48 @@ public class GesipanService {
 					
 					mav.setViewName("write_view");
 				}else {
-					mav.setViewName("redirect:/RgesipanList");
+					mav.setViewName("redirect:/gesipanview");
 					
 				}
 				
 				return mav;
 				
+			}
+
+
+			public ModelAndView relist(String tranl) {
+				mav=new ModelAndView(); 
+				List<reVO> relist=gdao.relist(tranl);
+				mav.addObject("relist",relist);
+				mav.setViewName("board/board3");
+				return mav;
+			}
+
+
+			public ModelAndView Reviewwrite(reVO revo, HttpServletResponse response) throws IOException {
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				
+				mav = new ModelAndView();
+				
+				if(session.getAttribute("session_id")==null) {
+					out.println("<script>");
+					out.println("alert('로그인이 필요합니다.');");
+					out.println("history.go(-1)");// 이전 페이지로 이동!
+					out.println("</script>");
+					out.close();
+				}
+				else {
+				int result = gdao.Reviewwrite(revo);
+				if(result==0) {
+					
+					mav.setViewName("board/write_review");
+				}else {
+				
+					mav.setViewName("testtama");
+				}	}
+				
+				return mav;
 			}
 
 

@@ -17,13 +17,13 @@ public class emailController {
 	private JavaMailSender mailSender;
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String email() {
-		return "mail";
+		return "message/mail";
 	}
 	  // mailSending 코드
 	  @RequestMapping(value = "/mailSending")
 	  public String mailSending(HttpServletRequest request) {
 	   
-	    String setfrom = "wnwhddus19@gmail.com";         
+	    String setfrom = "kyg7414@gmail.com";         
 	    String tomail  = request.getParameter("tomail");     // 받는 사람 이메일
 	    String title   = request.getParameter("title");      // 제목
 	    String content = request.getParameter("content");    // 내용

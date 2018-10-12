@@ -207,7 +207,7 @@ public class MemberService {
 		List<MemberVO> memberList = memberDAO.memberList();
 
 		mav.addObject("memberList", memberList);// View에서 사용할 parameter 이름
-		mav.setViewName("memberList");// 목적지를 사용할 메소드 "memberList.jsp"
+		mav.setViewName("log/memberList");// 목적지를 사용할 메소드 "memberList.jsp"
 		return mav;
 	}
 
@@ -215,7 +215,7 @@ public class MemberService {
 		mav = new ModelAndView();
 		MemberVO viewMember = memberDAO.memberView(id);
 		mav.addObject("viewMember", viewMember);
-		mav.setViewName("memberView");
+		mav.setViewName("log/memberView");
 		return mav;
 	}
 
@@ -261,18 +261,6 @@ mav.setViewName("Pt/pt");
 				return mav;
 	}
 
-	public ModelAndView ptReview() {
-		mav=new ModelAndView();
-		List<KLVO> gesipanlist3 = gdao.gesipanlist3();
-		mav.addObject("gesipanlist3", gesipanlist3);
-		List<CommentVO> replyList3 = gdao.replyList3();
-		mav.addObject("replyList3",replyList3);
-
-		mav.setViewName("board/board3");
-				
-				
-				return mav;
-	}
 
 
 
