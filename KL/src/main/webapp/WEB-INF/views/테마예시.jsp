@@ -94,8 +94,7 @@
 												
 											</ul>
 										</li>
-										<li><a href="find">Sapien Mauris</a></li>
-										<li><a href="#">Amet Lacinia</a></li>
+										<li><a href="find">찾아오는 길</a></li>
 									</ul>
 								</nav>
 

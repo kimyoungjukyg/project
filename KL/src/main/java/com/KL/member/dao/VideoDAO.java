@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.KL.member.vo.CommentVO;
 import com.KL.member.vo.VideoVO;
 
 
@@ -35,6 +36,19 @@ public class VideoDAO {
 	public int videoLike(int exe_Num) {
 		return sqlSession.update("Video.videoLike", exe_Num);
 	}
+
+	public void increaseHit(int exe_Num) {
+		sqlSession.update("Video.increaseHit", exe_Num);
+	}
+
+	public void videoRelpy(CommentVO comvo) {
+		sqlSession.insert("Com.videoReply",comvo);
+		
+	}
+
+	public List<CommentVO> videoReplyView(int exe_Num) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("Com.videoReplyView", exe_Num);}
 
 	
 	/*public List<commentVO> replyView(int eXE_NUM) {

@@ -52,5 +52,9 @@ public class MemberDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Member.textList");
 	}
+	public int rewriteme(MemberVO memberVO) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("Member.rewriteme", memberVO);
+	}
 
 }

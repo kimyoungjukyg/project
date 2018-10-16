@@ -6,6 +6,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script>
+	//검색부분
+  (function() {
+    var cx = '005390764898483465964:ppy_c337lam';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
 <meta charset="UTF-8">
 <title>회원가입</title>
 <!-- ajax를 이용한 아이디 중복확인 기능 -->
@@ -50,7 +62,24 @@
 		
 		
 	})
-
+	function idCheck() {
+		$.ajax({
+			url : "/check_id.do",
+			type : "POST",
+			data : {
+				id : $("#id").val()
+			},
+			success : function(result) {
+				if (result == 1) {
+					$("#id_check").html("중복된 아이디가 있습니다.");
+					$("#joinBtn").attr("disabled", "disabled");
+				} else {
+					$("#id_check").html("");
+					$("#joinBtn").removeAttr("disabled");
+				}
+			},
+		})
+	}
 
 	
 
@@ -188,7 +217,7 @@ function sample6_execDaumPostcode() {
 <div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
 			<div class="w3-center w3-large w3-margin-top">
-				<h3>Member Join Form</h3>
+				<h3>회원가입</h3>
 			</div>
 			<div>
 
@@ -196,7 +225,8 @@ function sample6_execDaumPostcode() {
  
 		<p>
 				<label>아이디 </label>
-				 <input class="w3-input" type="text" id="id" name="id" required> 
+				 <input class="w3-input" type="text" id="id" name="id" required
+				 onkeyup="idCheck()"> 
 						<span id="id_check" class="w3-text-red"></span>
 			
 			</p>	
@@ -275,12 +305,10 @@ function sample6_execDaumPostcode() {
 						<div class="inner">
 
 							<!-- Search -->
-								<section id="search" class="alt">
-									<form method="post" action="#">
-										<input type="text" name="query" id="query" placeholder="Search" />
-									</form>
-								</section>
-
+								<div style="inherited:no;">
+								
+<gcse:search></gcse:search>
+						</div>
 							<!-- Menu -->
 								<nav id="menu">
 									<header class="major">
@@ -328,8 +356,7 @@ function sample6_execDaumPostcode() {
 												
 											</ul>
 										</li>
-										<li><a href="find">Sapien Mauris</a></li>
-										<li><a href="#">Amet Lacinia</a></li>
+										<li><a href="find">찾아오는길</a></li>
 									</ul>
 								</nav>
 
@@ -357,8 +384,11 @@ function sample6_execDaumPostcode() {
 						</div>
 						</div>
 	
-	<script type="text/javascript">
-tocplusTop=1150;
+	<%if(session.getAttribute("session_id")=="admin"||session.getAttribute("session_id")=="null"){%>
+<%}else{%>
+								<script type="text/javascript">
+							
+								tocplusTop=1150;
 tocplusLeft=5;
 tocplusMinimizedImage='img/test.jpg';
 tocplusHAlign='right';
@@ -369,7 +399,9 @@ tocplusFrameColor='#ff2d3f';
 tocplusFloatingWindow=true;
 var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http://");
 document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr07.tocplus007.com/chatLoader.do?userId=whddus19' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
+
 </script>
+<%}%>
 		<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>

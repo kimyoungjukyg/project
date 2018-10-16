@@ -4,6 +4,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script>
+	//검색부분
+  (function() {
+    var cx = '005390764898483465964:ppy_c337lam';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -65,7 +77,7 @@
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-          ${me.content}
+        <label for="recipient-name"><font color="black">  ${me.content}</font></label>
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
@@ -82,21 +94,19 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">쪽지 삭제 확인!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h4 class="modal-title">쪽지 삭제 확인!</h4>
+        <button type="button" class="button big" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label"><font color="black">쪽지를 삭제하시겠습니까?</font></label>
-          </div>
+            <label for="recipient-name"><font color="black">쪽지를 삭제하시겠습니까?</font></label>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="delete" onClick="deleteCheck();" >삭제</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="button big" id="delete" onClick="deleteCheck();" >삭제</button>
+        <button type="button" class="button big" data-dismiss="modal">취소</button>
       </div>
     </div>
   </div>
@@ -143,11 +153,10 @@ function fuckyou(){
 						<div class="inner">
 
 							<!-- Search -->
-								<section id="search" class="alt">
-									<form method="post" action="#">
-										<input type="text" name="query" id="query" placeholder="Search" />
-									</form>
-								</section>
+								<div style="inherited:no;">
+								
+<gcse:search></gcse:search>
+						</div>
 
 							<!-- Menu -->
 								<nav id="menu">
@@ -193,8 +202,7 @@ function fuckyou(){
 												
 											</ul>
 										</li>
-										<li><a href="find">Sapien Mauris</a></li>
-										<li><a href="#">Amet Lacinia</a></li>
+										<li><a href="find">찾아오는 길</a></li>
 									</ul>
 								</nav>
 
@@ -223,6 +231,24 @@ function fuckyou(){
 					</div>
 								
 								</div>
+									<%if(session.getAttribute("session_id")=="admin"||session.getAttribute("session_id")=="null"){%>
+<%}else{%>
+								<script type="text/javascript">
+							
+								tocplusTop=1150;
+tocplusLeft=5;
+tocplusMinimizedImage='img/test.jpg';
+tocplusHAlign='right';
+tocplusWidth=250;
+tocplusHeight=350;
+tocplusUserName='${session_id}';
+tocplusFrameColor='#ff2d3f';
+tocplusFloatingWindow=true;
+var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr07.tocplus007.com/chatLoader.do?userId=whddus19' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
+
+</script>
+<%}%>
 								 <!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>

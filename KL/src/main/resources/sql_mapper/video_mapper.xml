@@ -6,28 +6,30 @@
 
 	<!-- parameterType >> mybatis의 alias 이름 -->
 
-	<!-- 글 목록 -->
-	<select id="orderVideo" resultType="video">
-		SELECT * FROM EXERCISE_VIDEO
-		WHERE EXE_CATEGORY LIKE '%'||#{muscle}||'%'
+<!-- 조회수 증가 쿼리 -->
+   <update id="increaseHit" parameterType="int">
+      UPDATE EXERCISE_VIDEO SET
+      EXE_EHITS=EXE_EHITS+1 WHERE EXE_NUM=#{exe_Num}
+   </update>
 
+   <!-- 글 목록 -->
+   <select id="orderVideo" resultType="video">
+      SELECT * FROM EXERCISE_VIDEO
+      WHERE EXE_CATEGORY LIKE '%'||#{muscle}||'%' order by EXE_NUM DESC
+   </select>
 
-	</select>
-
-	<!-- 글 작성 -->
-	<insert id="exeWrite" parameterType="video"
-		useGeneratedKeys="true" keyProperty="exe_Num">
-		INSERT INTO EXERCISE_VIDEO (ID, EXE_NUM, EXE_NAME, EXE_VIDEO,
-		EXE_CATEGORY, EXE_DATE, YOUTUBE_ID)
-		VALUES('0',
-		EXERCISE_VIDEO_SEQ.NEXTVAL, #{exe_Name}, #{exe_Video},
-		#{exe_Category}, SYSDATE, #{youtube_id})
-		<selectKey keyProperty="exe_Num" resultType="int"
-			order="AFTER">
-			SELECT EXERCISE_VIDEO_SEQ.CURRVAL FROM DUAL
-		</selectKey>
-	</insert>
-
+   <!-- 글 작성 -->
+   <insert id="exeWrite" parameterType="video"
+      useGeneratedKeys="true" keyProperty="exe_Num">
+      INSERT INTO EXERCISE_VIDEO (ID, EXE_NUM, EXE_NAME, EXE_VIDEO,
+      EXE_CATEGORY, EXE_DATE, YOUTUBE_ID)
+      VALUES(#{id},EXERCISE_VIDEO_SEQ.NEXTVAL, #{exe_Name}, #{exe_Video},
+      #{exe_Category}, SYSDATE, #{youtube_id})
+      <selectKey keyProperty="exe_Num" resultType="int"
+         order="AFTER">
+         SELECT EXERCISE_VIDEO_SEQ.CURRVAL FROM DUAL
+      </selectKey>
+   </insert>
 	<!-- 글 상세보기 -->
 	<select id="videoView" parameterType="int" resultType="video">
 		SELECT *

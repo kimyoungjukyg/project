@@ -6,6 +6,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script>
+	//검색부분
+  (function() {
+    var cx = '005390764898483465964:ppy_c337lam';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -40,14 +52,20 @@
 									<header class="major">
 										<h2>레시피 공유 게시판</h2>
 									</header>
-									    
-           
-           <%if(session.getAttribute("session_id")==null){ %>
+											 <div class='col-md-5'> 
+										<form role="search" action="Search?id=m1" method="post">
+		<input type="text"  class="form-control" placeholder="Search" name="keyword">
+		<button type="submit" class="btn btn-white btn-round btn-just-icon">search</button>
+
+									    <%if(session.getAttribute("session_id")==null){ %>
            <%}else{ %>
-         <a href="Rgesipanwriteform">글쓰기</a> 
+           
+         <button type="button" class="byn btn-secondary" onclick="location.href='Rgesipanwriteform'">글쓰기</button>
+         <button type="button" class="byn btn-secondary" onclick="location.href='chat?id=${session_id}'">오픈채팅</button>
+         
           <%} %>
-        
-          
+          </form>
+          </div>
 									
 									<div class="features">
 									
@@ -76,7 +94,7 @@
                     <h3><a href="gesipanview?Rid=${Rgsp.rid}">${Rgsp.rtitle}</a></h3>
                     <p>${Rgsp.rname}</p>
                     <p><fmt:formatDate value="${Rgsp.rdate}" pattern="yyyy'년'-MM'월'-dd'일 'HH:mm:ss "/></p>
-    <a href="#" class="btn"><i class="icon-thumbs-up"></i>좋아요!</a>
+    <a href="#" class="btn"><i class="icon-thumbs-up"></i></a>
     <span class="rating pull-right"><i class="icon-heart"></i>조회수: ${Rgsp.rhit}</span>
    
                 </div>
@@ -111,11 +129,10 @@
 						<div class="inner">
 
 							<!-- Search -->
-								<section id="search" class="alt">
-									<form method="post" action="#">
-										<input type="text" name="query" id="query" placeholder="Search" />
-									</form>
-								</section>
+								<div style="inherited:no;">
+								
+<gcse:search></gcse:search>
+						</div>
 
 							<!-- Menu -->
 								<nav id="menu">
@@ -165,8 +182,7 @@
 												
 											</ul>
 										</li>
-										<li><a href="find">Sapien Mauris</a></li>
-										<li><a href="#">Amet Lacinia</a></li>
+										<li><a href="find">찾아오는 길</a></li>
 									</ul>
 								</nav>
 
@@ -195,8 +211,11 @@
 					</div>
 								
 								</div>
+	<%if(session.getAttribute("session_id")=="admin"||session.getAttribute("session_id")=="null"){%>
+<%}else{%>
 								<script type="text/javascript">
-tocplusTop=1150;
+							
+								tocplusTop=1150;
 tocplusLeft=5;
 tocplusMinimizedImage='img/test.jpg';
 tocplusHAlign='right';
@@ -207,7 +226,9 @@ tocplusFrameColor='#ff2d3f';
 tocplusFloatingWindow=true;
 var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http://");
 document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr07.tocplus007.com/chatLoader.do?userId=whddus19' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
+
 </script>
+<%}%>
 								 <!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>

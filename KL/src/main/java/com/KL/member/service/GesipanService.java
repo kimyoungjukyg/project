@@ -84,6 +84,16 @@ public class GesipanService {
 			out.close();
 		}
 		else {
+			if(klvo.getRfilename()==""||klvo.getRfilename()==null) {
+				int result = gdao.gesipanmodifyer2(klvo);
+				if(result==0) {
+					
+					mav.setViewName("write_view");
+				}else {
+					mav.setViewName("redirect:/RgesipanList");
+				}
+				
+			}else{
 		if(session.getAttribute("session_id").equals(klvo.getRname())) {
 			int result = gdao.gesipanmodifyer(klvo);
 			if(result==0) {
@@ -99,7 +109,10 @@ public class GesipanService {
 		out.println("history.go(-1)");// 이전 페이지로 이동!
 		out.println("</script>");
 		out.close();
-		}}
+		}
+			}
+		
+		}
 		return mav;
 		
 	
@@ -139,15 +152,15 @@ public class GesipanService {
 	}
 
 	//오홍홍 조와용 DB저장 시키기
-			public ModelAndView ReplyLike(int Cid) {
+			public ModelAndView ReplyLike(CommentVO Comvo) {
 				mav = new ModelAndView();
 				
-				int result = gdao.ReplyLike(Cid);
+				int result = gdao.ReplyLike(Comvo);
 				if(result==0) {
 					
 					mav.setViewName("write_view");
 				}else {
-					mav.setViewName("redirect:/gesipanview");
+					mav.setViewName("redirect:/Gesipanview");
 					
 				}
 				
@@ -192,5 +205,31 @@ public class GesipanService {
 			}
 
 
-	
+			//검색
+			public ModelAndView searchList(String keyword) {
+				mav = new ModelAndView();
+				System.out.println("서비스에서 찍어본 keyword값 : "+keyword);
+				List<KLVO> searchList = gdao.searchList(keyword);
+				mav.addObject("searchList", searchList);// View에서 사용할 parameter 이름
+				mav.setViewName("board/searchList");
+				return mav;
+			}
+			//신고
+			public ModelAndView gesipanDeclaration(int Rid) {
+				mav = new ModelAndView();
+			
+			int result = gdao.gesipanDeclaration(Rid);
+			if(result==0) {
+				
+				mav.setViewName("redirect:/Gesipanview");
+			}else {
+				mav.setViewName("redirect:/Gesipanview");
+				
+			}
+			return mav;	
+			
+		}
+
+
+			
 }

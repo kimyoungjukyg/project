@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.KL.member.dao.VideoDAO;
+import com.KL.member.vo.CommentVO;
 import com.KL.member.vo.VideoVO;
 
 
@@ -76,8 +77,8 @@ public class VideoService {
 
 		VideoVO videoView = videoDAO.videoView(exe_Num);
 		mav.addObject("videoView", videoView);
-		// List<commentVO> replyView = videoDAO.replyView(eXE_NUM);
-		// mav.addObject("replyView", replyView);
+		 List<CommentVO> videoReplyView = videoDAO.videoReplyView(exe_Num);
+		 mav.addObject("replyView", videoReplyView);
 		mav.setViewName("video/videoView");
 		return mav;
 	}
@@ -102,6 +103,16 @@ public class VideoService {
 		out.println("alert('좋아요!');");
 		out.println("history.go(-1)");// 이전 페이지로 이동!
 		out.println("</script>");
+	}
+
+	public void increaseHit(int exe_Num) {
+		videoDAO.increaseHit(exe_Num);
+		
+	}
+
+	public void videoReply(CommentVO comvo) {
+		videoDAO.videoRelpy(comvo);
+		
 	}
 
 	/*

@@ -15,9 +15,17 @@ public class KLVO {
 	private MultipartFile Rfile;
 	private String Rfilename;
 	private String Videourl;
-	
+	private int Rdeclaration;
 
 	
+	public int getRdeclaration() {
+		return Rdeclaration;
+	}
+
+	public void setRdeclaration(int rdeclaration) {
+		Rdeclaration = rdeclaration;
+	}
+
 	public KLVO() {
 		
 	}

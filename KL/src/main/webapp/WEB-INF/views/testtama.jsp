@@ -2,9 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
 <!DOCTYPE HTML>
-<!--
+<!--  
 	Editorial by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
@@ -15,6 +14,10 @@
 
 	<head>
 <style>
+#serch{
+
+}
+
 .gsc-search-button gsc-search-button-v2{
 width: 200px;
 height: 100px;
@@ -73,36 +76,7 @@ height: 100px;
 											<h1>이곳에 오신 것을 환영합니다<br />
 											by KL</h1>
 											<p>이 곳은 운동법 공유 및 pt신청을 할 수 있는 곳 입니다.</p>
-											 <a class="no-uline btn" id="kakao-link-btn" href="javascript:;">
-
-<img style="margin-left:5px; height:22px;" src="http://dn.api1.kage.kakao.co.kr/14/dn/btqa9B90G1b/GESkkYjKCwJdYOkLvIBKZ0/o.jpg" />
-<script type="text/javascript">
-
-
-Kakao.init('cad954d034fd4058bc91dddb7cb4faae');
-
-Kakao.Link.createTalkLinkButton({
-
-    container: '#kakao-link-btn',
-
-    label: '링크 테스트',
-
-   
-    webButton: {
-
-        text: 'LINK TEST',
-
-        url: 'http://192.168.0.169/member'
-
-    }
-
-});
-
-</script>
- 카카오톡을 통해 친구들과 공유할래요.
-</a>
-
-
+	
 
 										</header>
 										<p>9/28일 테마수정했습니다.</p>
@@ -202,10 +176,12 @@ Kakao.Link.createTalkLinkButton({
 						<div class="inner">
 
 							<!-- Search -->
-							
-								
-									<gcse:search></gcse:search>
 						
+
+<div style="inherited:no;">
+								
+<gcse:search></gcse:search>
+						</div>
 
 							<!-- Menu -->
 								<nav id="menu">
@@ -229,9 +205,11 @@ Kakao.Link.createTalkLinkButton({
           									<%}else{ %>
          							 <li> <a  href="mypage">마이페이지</a></li>
           									 <%} %>
-          								
+          								 <%if(session.getAttribute("session_id")==null){%>
+          								 <li><a href="videoout">운동영상</a></li>
+          								 <%}else{ %>
 										<li><a href="video">운동영상</a></li>
-									
+									<%} %>
 										<li>
 											<span class="opener">정보 공유</span>
 											<ul>
@@ -251,8 +229,7 @@ Kakao.Link.createTalkLinkButton({
 												
 											</ul>
 										</li>
-										<li><a href="find">Sapien Mauris</a></li>
-										<li><a href="serch">Amet Lacinia</a></li>
+										<li><a href="find">찾아오는 길</a></li>
 									</ul>
 								</nav>
 
@@ -281,8 +258,12 @@ Kakao.Link.createTalkLinkButton({
 
 			</div>
 <!-- Tocplus 15.1 -->
-<script type="text/javascript">
-tocplusTop=1150;
+	<%if(session.getAttribute("session_id")=="admin" || session.getAttribute("session_id")=="null"){%>
+	
+<%}else{%>
+								<script type="text/javascript">
+							
+								tocplusTop=1150;
 tocplusLeft=5;
 tocplusMinimizedImage='img/test.jpg';
 tocplusHAlign='right';
@@ -293,7 +274,9 @@ tocplusFrameColor='#ff2d3f';
 tocplusFloatingWindow=true;
 var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http://");
 document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr07.tocplus007.com/chatLoader.do?userId=whddus19' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
+
 </script>
+<%}%>
 <!-- End of Tocplus -->
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>

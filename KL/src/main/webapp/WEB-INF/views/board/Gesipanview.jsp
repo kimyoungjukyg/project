@@ -5,15 +5,44 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script>
+	//검색부분
+  (function() {
+    var cx = '005390764898483465964:ppy_c337lam';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>​
 <script>
       jQuery( document ).ready( function( $ ) {
         $( 'iframe[src^="https://www.youtube.com/"]' ).wrap( '<div class="youtubeWrap"></div>' );
       } );
     </script>
+    <script>
+	function contentCheck(){
+		if (confirm("신고를 진행하시겠습니까..?"+$('#num').val()) == true){    //확인
+			location.href="gesipanDeclaration?Rid="+$('#num').val();
+		}else{   //취소
+		    return;
+		}
+		}
+	function numCheck(i){
+		document.getElementById('num').value = i;
+	}
+
+	</script>
 <title>상세보기</title>
 <style>
 .youtubeWrap {
@@ -28,6 +57,7 @@
         height: 100%;
       }
 </style>
+ 
 <script> 
 
   
@@ -69,26 +99,30 @@ function doShow() {
 									</ul>
 								</header>
 	<form action="modify" method="post">
+		<input type="hidden" name="cwriter" required="required"  value="<%=session.getAttribute("session_id")%>" readonly>	
+	<input type="hidden" name="Rid" value="${gesipanview.rid}"> 
+	<input type="hidden" name="rid" value="${gesipanview.rid}">
 	<table border="1">
-		<input type="hidden" name="rid" value="${gesipanview.rid}">
-		<tr><td>글번호</td>
-			<td>${gesipanview.rid}</td></tr>
-		<tr><td>조회수</td>
+		
+		<tr><td style="width: 15%;">글번호</td>
+			<td style="width: 20%;">${gesipanview.rid}</td>
+			<td style="width: 15%;">글제목</td>
+			<td style="width: 50%;">${gesipanview.rtitle}</td>
+			
+			</tr>
+			<tr>
+			<td>작성자</td>
+			<td>${gesipanview.rname}</td>
+		<td>조회수</td>
 			<td>${gesipanview.rhit}</td></tr>
-		<tr><td>작성자</td>
-			<td>${gesipanview.rname}</td></tr>
-		<tr><td>글제목</td>
-			<td>${gesipanview.rtitle}</td></tr>
-		<tr><td>글내용</td>
-			<td>${gesipanview.rcontent}</td></tr>
+		<tr style="height: 500px; overflow:auto;"><td>글내용</td>
+			<td colspan='3'>${gesipanview.rcontent}</td></tr>
 		<tr>
 		
 		
-		<tr><td>썸네일</td>
-			<td><img src="uploadFile/${gesipanview.rfilename}" width="300"/></td></tr>
-		<tr>
+	
 		<tr><td>동영상!</td>
-			<td>${gesipanview.videourl}</td>
+			<td colspan='3'>${gesipanview.videourl}</td>
 			
     
 			</tr>
@@ -96,11 +130,20 @@ function doShow() {
 		<tr>
 	
 		
-			<td colspan="2">
-			<a href="gesipanmodify?Rid=${gesipanview.rid}">수정</a> &nbsp;&nbsp;
-			<a href="RgesipanList">목록보기</a> &nbsp;&nbsp;
-			<a href="gesipandelete?Rid=${gesipanview.rid}">삭제</a> &nbsp;&nbsp;
+			<td colspan="4">
+				<input type="hidden" id="num" value="${gesipanview.rid}">
+					<input type="button" onclick="location.href='gesipanmodify?Rid=${gesipanview.rid}'"value="수정">
+				<input type="button" onclick="location.href='RgesipanList'"value="목록보기">
+					<input type="button" onclick="location.href='gesipandelete?Rid=${gesipanview.rid}'"value="삭제">
+			<%if(session.getAttribute("session_id")==null){ %>
+			<%}else{ %>
 			<input type="button" value="댓글보기" onclick="javascript:doShow()" id="button1" class="byn btn-secondary">
+			<%} %>
+<input type="button" onclick="numCheck(${gesipanview.rid})"class="btn-secondary" data-toggle="modal" data-target="#myModal" value="신고하기">
+  						
+			
+	
+
 			</td>
 		</tr>
 	</table>
@@ -111,7 +154,7 @@ function doShow() {
 	<c:forEach var="reply" items="${replyView}">
 	<input type="hidden" name="Cid" value="${reply.cid}">
 	<tr>
-	<td>글작성자:${reply.cwriter}<a href="ReplyLike?Cid=${reply.cid}">좋아용!</a>:${reply.tolike}</td>
+	<td>글작성자:${reply.cwriter}<a href="ReplyLike?Cid=${reply.cid}" style="text-align:right">좋아요!</a>:${reply.tolike}</td>
 	</tr>
 	<tr>
 	<td>내용:${reply.ccontent}</td>
@@ -121,14 +164,11 @@ function doShow() {
 	<h3>댓글을 달아봅시다</h3>
 	<form action="Gesipanreply" method ="post">
 	<table border="1">
+
+
 	<tr>
-	
-	<td>글작성자</td>
-	<td><input type="text" name="cwriter" required="required"  value="<%=session.getAttribute("session_id")%>" readonly></td>	
-	</tr>
-	<tr>
-	<input type="hidden" name="Rid" value="${gesipanview.rid}"> 
-	<td><input type="text" name="ccontent" required="required" style="text-align:center; width:200px; height:50px;" placeholder="내용을입력하거라 애송이"></td>
+
+	<td><input type="text" name="ccontent" required="required" style=" height:50px;" placeholder="내용을입력하시오"></td>
 	<td><input type="submit" value="댓글달기"></td>
 	</tr>
 	</table>
@@ -141,7 +181,7 @@ function doShow() {
 	
 	 </div>
 	
-	 
+    
 	 
 	 
 	 </div></div>
@@ -201,8 +241,7 @@ function doShow() {
 												
 											</ul>
 										</li>
-										<li><a href="find">Sapien Mauris</a></li>
-										<li><a href="#">Amet Lacinia</a></li>
+										<li><a href="find">찾아오는 길</a></li>
 									</ul>
 								</nav>
 
@@ -231,6 +270,58 @@ function doShow() {
 					</div>
 								
 								</div>
+							
+					
+ 			<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">신고하기</h4>
+        <button type="button" class="close" data-dismiss="modal" style="height:50px">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        	신고이유는??
+        	<br>
+        	<br>
+        <select name= "Cdeclaration" id="Cdeclaration">
+				<option value="1">수준낮음</option>
+				<option value="2">불건전닉네임</option>
+				<option value="3">댓글도배</option>
+				<option value="4">음란물작성</option>
+				</select>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <input type="button" class="btn btn-primary" data-dismiss="modal"onClick="contentCheck();" value="신고하기">
+        
+        <input type="button" class="btn btn-danger" data-dismiss="modal" value="닫기">
+      </div>
+			</div></div></div>
+								
+									<%if(session.getAttribute("session_id")=="admin"||session.getAttribute("session_id")=="null"){%>
+<%}else{%>
+								<script type="text/javascript">
+							
+								tocplusTop=1150;
+tocplusLeft=5;
+tocplusMinimizedImage='img/test.jpg';
+tocplusHAlign='right';
+tocplusWidth=250;
+tocplusHeight=350;
+tocplusUserName='${session_id}';
+tocplusFrameColor='#ff2d3f';
+tocplusFloatingWindow=true;
+var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr07.tocplus007.com/chatLoader.do?userId=whddus19' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
+
+</script>
+<%}%>
+​
 								 <!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>

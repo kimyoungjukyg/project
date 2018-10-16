@@ -7,6 +7,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script>
+	//검색부분
+  (function() {
+    var cx = '005390764898483465964:ppy_c337lam';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
 <meta charset='utf-8' />
 <link href='css/fullcalendar.min.css' rel='stylesheet' />
 <link href='css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
@@ -37,6 +49,10 @@ var curDate = new Date();
 
   });
 
+ 
+  
+  
+  
 </script>
 <script type="text/javascript">
 

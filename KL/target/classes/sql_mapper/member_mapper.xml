@@ -17,7 +17,9 @@
 	</select>
 	
 
-
+<update id="rewriteme" parameterType="member">
+	update member set phone_number=#{phone_number},address=#{address},classify=#{classify} where ID=#{id}
+</update>
 
 
 

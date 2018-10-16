@@ -4,6 +4,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script>
+	//검색부분
+  (function() {
+    var cx = '005390764898483465964:ppy_c337lam';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
 <meta charset="UTF-8">
 <title>글 수정</title>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
@@ -48,10 +60,8 @@ td, tr {
 			<tr>
 				<td>목록분류</td>
 				<td>
-				<select name= "Rtype" id="Rtype">
-				<option value="레시피" >레시피</option>
-				<option value="운동기구">운동기구</option>
-				</select>
+				<input type="text" name="Rtype" value="${gesipanview.rtype}" readonly >
+				
 				</td>
 			</tr>
 			<tr>
@@ -152,8 +162,7 @@ td, tr {
 												
 											</ul>
 										</li>
-										<li><a href="find">Sapien Mauris</a></li>
-										<li><a href="serch">Amet Lacinia</a></li>
+										<li><a href="find">찾아오는 길</a></li>
 									</ul>
 								</nav>
 
@@ -181,8 +190,11 @@ td, tr {
 					</div>
 						</div>
 	<!-- Tocplus 15.1 -->
-<script type="text/javascript">
-tocplusTop=1150;
+	<%if(session.getAttribute("session_id")=="admin"||session.getAttribute("session_id")=="null"){%>
+<%}else{%>
+								<script type="text/javascript">
+							
+								tocplusTop=1150;
 tocplusLeft=5;
 tocplusMinimizedImage='img/test.jpg';
 tocplusHAlign='right';
@@ -193,7 +205,9 @@ tocplusFrameColor='#ff2d3f';
 tocplusFloatingWindow=true;
 var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http://");
 document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr07.tocplus007.com/chatLoader.do?userId=whddus19' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
+
 </script>
+<%}%>
 <!-- End of Tocplus -->
 		<!-- Scripts -->
 			<script src="assets/js/browser.min.js"></script>

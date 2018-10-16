@@ -145,10 +145,10 @@ public class MemberService {
 	// 로그인 메소드
 	public ModelAndView memberLogin(MemberVO memberVO, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=UTF-8");
-
+		PrintWriter out = response.getWriter();
 		mav = new ModelAndView();
 		MemberVO loginMember = memberDAO.memberLogin(memberVO);
-		PrintWriter out = response.getWriter();
+		
 
 		
 		try {
@@ -261,6 +261,58 @@ mav.setViewName("Pt/pt");
 				return mav;
 	}
 
+	public ModelAndView meinformation(String id) {
+		mav = new ModelAndView();
+		MemberVO viewMember = memberDAO.memberView(id);
+		mav.addObject("viewMember", viewMember);
+		mav.setViewName("log/meinformation");
+		return mav;
+	}
+
+	public ModelAndView merewrite(String id) {
+		mav = new ModelAndView();
+		MemberVO viewMember = memberDAO.memberView(id);
+		mav.addObject("viewMember", viewMember);
+		mav.setViewName("log/rewrite");
+		return mav;
+	}
+
+	public ModelAndView rewriteme(MemberVO memberVO, HttpServletResponse response) throws IOException {
+	
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		mav=new ModelAndView();
+		MemberVO loginMember = memberDAO.memberLogin(memberVO);
+		try {
+		if (passEncoder.matches(memberVO.getPassword(), loginMember.getPassword())) {
+		int result =memberDAO.rewriteme(memberVO);
+		if (result == 0) {
+			// 등록 실패하면 다시 joinForm으로 이동
+			mav.setViewName("log/mypage");
+		} else {
+			
+			// 등록 성공하면 loginForm으로 이동
+			mav.setViewName("log/mypage");
+		}
+		}else{
+			out.println("<script>");
+			out.println("alert('비밀번호가 틀립니다.');");
+			out.println("history.go(-1)");// 이전 페이지로 이동!
+			out.println("</script>");
+			out.close();
+		}
+		
+	
+		
+	}catch(NullPointerException ne){
+		out.println("<script>");
+		out.println("alert('회원이 아닙니다.');");
+		out.println("history.go(-1)");// 이전 페이지로 이동!
+		out.println("</script>");
+		out.close();
+	
+	}
+		return mav;}
 
 
 

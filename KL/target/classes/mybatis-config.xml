@@ -11,5 +11,6 @@
 <typeAlias alias="Com" type="com.KL.member.vo.CommentVO"/>
 <typeAlias alias="Message" type="com.KL.member.vo.MessageVO"/>
 <typeAlias alias="Re" type="com.KL.member.vo.reVO"/>
+<typeAlias alias="search" type="com.KL.member.vo.KLVO"/>
 </typeAliases>
 </configuration>

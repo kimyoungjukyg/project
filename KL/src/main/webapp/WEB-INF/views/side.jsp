@@ -15,12 +15,10 @@
 						<div class="inner">
 
 							<!-- Search -->
-								<section id="search" class="alt">
-									<form method="post" action="#">
-										<input type="text" name="query" id="query" placeholder="Search" />
-									</form>
-								</section>
-
+								<div style="inherited:no;">
+								
+<gcse:search></gcse:search>
+						</div>
 							<!-- Menu -->
 								<nav id="menu">
 									<header class="major">
@@ -65,8 +63,7 @@
 												
 											</ul>
 										</li>
-										<li><a href="#">Sapien Mauris</a></li>
-										<li><a href="#">Amet Lacinia</a></li>
+										<li><a href="#">찾아오는 길</a></li>
 									</ul>
 								</nav>
 
@@ -95,8 +92,11 @@
 
 		
 <!-- Tocplus 15.1 -->
-<script type="text/javascript">
-tocplusTop=1150;
+	<%if(session.getAttribute("session_id")=="admin"||session.getAttribute("session_id")=="null"){%>
+<%}else{%>
+								<script type="text/javascript">
+							
+								tocplusTop=1150;
 tocplusLeft=5;
 tocplusMinimizedImage='img/test.jpg';
 tocplusHAlign='right';
@@ -107,7 +107,9 @@ tocplusFrameColor='#ff2d3f';
 tocplusFloatingWindow=true;
 var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http://");
 document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr07.tocplus007.com/chatLoader.do?userId=whddus19' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
+
 </script>
+<%}%>
 <!-- End of Tocplus -->
 		<!-- Scripts -->
 			<script src="assets/js/browser.min.js"></script>

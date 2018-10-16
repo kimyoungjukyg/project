@@ -56,8 +56,13 @@
                <prop key="mail.debug">true</prop>
          </props>
       </property>
+      
  
    </bean>
+   <bean id="chatController" class="com.KL.member.controller.MemberController" />
+   
+   <bean id="echoHandler" class="com.KL.member.controller.EchoHandler" />
+   
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 		
 </beans>

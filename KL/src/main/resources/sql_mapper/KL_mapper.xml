@@ -7,7 +7,7 @@
 <!-- 글 목록 쿼리 -->
 	
 	<select id="gesipanlist" resultType="kl">
-	 SELECT * FROM RGESIPAN where RTYPE='운동기구' ORDER BY RID
+	 SELECT * FROM RGESIPAN where RTYPE='운동법' ORDER BY RID
 	</select>
 	<select id="gesipanlist2" resultType="kl">
 	 SELECT * FROM RGESIPAN where RTYPE='레시피' ORDER BY RID
@@ -29,12 +29,19 @@
 	<insert id="gesipanwrite" parameterType="kl" useGeneratedKeys="true"
 			keyProperty="Rid">
 			INSERT INTO RGESIPAN VALUES(#{rtype},RGESIPAN_SEQ.nextval, #{rname},
-			#{rtitle},#{rcontent},SYSDATE,0,#{rfilename},#{videourl})
+			#{rtitle},#{rcontent},SYSDATE,0,#{rfilename},#{videourl},0)
 			<selectKey keyProperty="Rid" resultType="int" order="AFTER">
 				SELECT RGESIPAN_SEQ.CURRVAL FROM DUAL
 			</selectKey>
 	</insert>
+		<!-- 글 수정업데이트 쿼리 -->
+	<update id="gesipanmodifyer2" parameterType="kl" keyProperty="Rid" >
 	
+		UPDATE RGESIPAN SET RTYPE=#{rtype},RNAME=#{rname},
+		RTITLE=#{rtitle},RCONTENT=#{rcontent},VIDEOURL=#{videourl}
+		WHERE RID=#{rid}
+	
+	</update>
 	<!-- 글 수정업데이트 쿼리 -->
 	<update id="gesipanmodifyer" parameterType="kl" >
 	

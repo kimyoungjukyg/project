@@ -23,14 +23,28 @@
 				SELECT TOCOMMENT_SEQ.CURRVAL FROM DUAL
 			</selectKey>
 	</insert>
-	
-	
+	<!-- 비디오 댓글 보기-->
+	<select id="videoReplyView" parameterType="int" resultType="Com">
+		SELECT * FROM VIDEO_COMMENT WHERE RID=#{rid}
+		</select>
+	<!-- 비디오 댓글 작성 -->
+	<insert id="videoReply" parameterType="Com" useGeneratedKeys="true"
+			keyProperty="Cid">
+			INSERT INTO video_comment VALUES(VIDEO_COMMENT_SEQ.nextval,#{Rid},#{Ccontent},
+			#{Cwriter},SYSDATE)
+			<selectKey keyProperty="Cid" resultType="int" order="AFTER">
+				SELECT VIDEO_COMMENT_SEQ.CURRVAL FROM DUAL
+			</selectKey>
+	</insert>
 	<!-- 게시판에 단 댓글 작성 보여주는 쿼리 -->
 	<select id="replyView" parameterType="int" resultType="Com">
 		SELECT * FROM TOCOMMENT WHERE RID=#{rid}
 		</select>
 	
-	
+	<!-- 게시글에 달린 답글을 신고해보자 -->
+	<update id="gesipanDeclaration" parameterType="int">
+		UPDATE RGESIPAN SET RDECLARATION=RDECLARATION+1 WHERE RID=#{rid}
+	</update>
 	<!--  좋아요를 누르면 +1 좆까 누르면 -1 될끄야ㅏㅏ -->
 	<update id="ReplyLike" parameterType="int">
 		UPDATE TOCOMMENT SET TOLIKE=TOLIKE+1 WHERE CID=#{cid}

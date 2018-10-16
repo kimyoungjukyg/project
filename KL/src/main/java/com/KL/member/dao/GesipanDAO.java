@@ -81,8 +81,8 @@ public class GesipanDAO {
 		 return sqlSession.selectOne("kl.getListCount", count);
 	}
 
-	public int ReplyLike(int cid) {
-		return sqlSession.update("Com.ReplyLike", cid);
+	public int ReplyLike(CommentVO Comvo) {
+		return sqlSession.update("Com.ReplyLike", Comvo);
 	}
 
 	
@@ -95,6 +95,22 @@ public class GesipanDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Re.relist", tranl);
 	}
+
+	//검색
+		public List<KLVO> searchList(String keyword) {
+			return sqlSession.selectList("Search.searchList",keyword);
+		}
+
+		public int gesipanmodifyer2(KLVO klvo) {
+			// TODO Auto-generated method stub
+			return sqlSession.update("kl.gesipanmodifyer2", klvo);
+		}
+
+		public int gesipanDeclaration(int Rid) {
+			// TODO Auto-generated method stub
+			return sqlSession.update("Com.gesipanDeclaration", Rid);
+		}
+
 
 	
 	

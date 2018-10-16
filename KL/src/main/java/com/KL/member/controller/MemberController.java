@@ -84,10 +84,6 @@ public class MemberController {
 	public String home() {
 		return "testtama";
 		}
-	@RequestMapping(value = "/serch", method = RequestMethod.GET)
-	public String serch() {
-		return "serch";
-		}
 	//홈화면으로이동
 	@RequestMapping(value = "/testtama", method = RequestMethod.GET)
 	public String testtama() {
@@ -98,6 +94,13 @@ public class MemberController {
 	public String login_join() {
 		return "log/login_join";
 		}
+	
+	//운동법 공유 게시판 오픈 채팅
+	   @RequestMapping(value = "/chat", method = RequestMethod.GET)
+	   public String openchat(@RequestParam("id") String id ) {
+	      session.setAttribute("session_id", id);
+	      return "board/chat";
+	      }
 	
 	//관리자페이지
 		@RequestMapping(value = "/adminpage", method = RequestMethod.GET)
@@ -193,10 +196,10 @@ public class MemberController {
 		
 				//좋아요?싫어요!
 				@RequestMapping(value= "/ReplyLike" , method= RequestMethod.GET)
-				public ModelAndView ReplyLike(@RequestParam("Cid") int Cid)throws IOException{
-					
+				public ModelAndView ReplyLike(@ModelAttribute CommentVO comvo,@RequestParam("Rid") int Rid,@RequestParam("Cid") int Cid)throws IOException{
+					gs.ReplyLike(comvo);
 					mav = new ModelAndView();
-					mav = gs.ReplyLike(Cid);
+					mav = gs.gesipanview(Rid);
 					return mav;
 				}
 	
@@ -274,6 +277,28 @@ public class MemberController {
 		}
 		return mav;
 	}
+	//개인이 자기정보보기
+	@RequestMapping(value = "/meinformation", method = RequestMethod.GET)
+	public ModelAndView meinformation(@RequestParam("id") String id) {
+		mav = new ModelAndView();
+		mav = ms.meinformation(id);
+		return mav;
+	}
+	//회원수정페이지로
+	@RequestMapping(value = "/merewrite", method = RequestMethod.GET)
+	public ModelAndView merewrite(@RequestParam("id") String id) {
+		mav = new ModelAndView();
+		mav = ms.merewrite(id);
+		return mav;
+	}	
+	//회원수정
+	@RequestMapping(value = "/rewriteme", method = RequestMethod.POST)
+	public ModelAndView rewriteme(@ModelAttribute MemberVO memberVO, HttpServletResponse response) throws IOException {
+		mav = new ModelAndView();
+		mav = ms.rewriteme(memberVO,response);
+		return mav;
+	}
+
 
 	// 회원 상세정보
 	@RequestMapping(value = "/memberView", method = RequestMethod.GET)
@@ -294,7 +319,20 @@ public class MemberController {
 	@RequestMapping(value = "/find", method = RequestMethod.GET)
 	public String find() {
 		return "Pt/way";
-		}
+		}   
+	@RequestMapping(value = "/videoout", method = RequestMethod.GET)
+		public void videoout(HttpServletResponse response) throws IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert(' 로그인후 사용 하세요.');");
+		out.println("location.href='login_join'");
+		out.println("</script>");
+		out.close();
+			
+			}   
+	
+	
 	//트레이너만가능 pt생성단계로
 	@RequestMapping(value="/ptView",method=RequestMethod.GET)
 	public ModelAndView ptView(@RequestParam("id") String id) {
@@ -476,13 +514,26 @@ public class MemberController {
 					return "redirect:/board";
 				
 				}
+				//응~ 게시글 신고할꺼야~
 				
+				@RequestMapping(value="/gesipanDeclaration", method= RequestMethod.GET)
+				public ModelAndView gesipanDeclaration(@RequestParam ("Rid") int Rid)
+				throws IOException{
+					
+					gs.gesipanDeclaration(Rid);
+				
+					
+					mav = new ModelAndView();
+					mav = gs.gesipanview(Rid);	
+					
+					return mav;
+				}
 				
 				//게시글 삭제
 				@RequestMapping(value ="/gesipandelete", method = RequestMethod.GET)
 				public String gesipandelete(@RequestParam("Rid") int Rid) {
 					gs.gesipandelete(Rid);
-					return "redirect:/Rgesipanwriteform";
+					return "redirect:/board";
 					
 				}
 				
@@ -580,13 +631,15 @@ public class MemberController {
 
 					// 글 상세보기
 					@RequestMapping(value = "/videoView", method = RequestMethod.GET)
-					public ModelAndView vidoView(@RequestParam("exe_Num") int exe_Num) {
+					public ModelAndView vidoeView(@RequestParam("exe_Num") int exe_Num) {
 						System.out.println("글 상세보기 EXE_NUM?" + exe_Num);
-						// vs.increaseHit(EXE_NUM); 조회 수 증가
+						// 조회수 증가
+						vs.increaseHit(exe_Num);
 						mav = new ModelAndView();
 						mav = vs.videoView(exe_Num);
 						return mav;
 					}
+
 
 					// 게시글 삭제
 					@RequestMapping(value = "/videoDelete", method = RequestMethod.GET)
@@ -598,6 +651,32 @@ public class MemberController {
 					@RequestMapping(value= "/videoLike" , method= RequestMethod.GET)
 					public void videoLike(@RequestParam("exe_Num") int exe_Num, HttpServletResponse response)throws IOException{
 						vs.videoLike(exe_Num, response);
+					}
+					//비디오 댓글 달기
+					@RequestMapping(value = "/videoReply", method = RequestMethod.POST)
+					public ModelAndView videoReply(@ModelAttribute CommentVO comvo, @RequestParam("Rid") int Rid) throws IOException {
+						mav = new ModelAndView();
+						comvo.setRid(Rid);
+						vs.videoReply(comvo);
+						mav = vs.videoView(Rid);
+
+						return mav;
+
+					}
+					//비디오 등록페이지로 이동
+					@RequestMapping(value = "/videoRegiste", method = RequestMethod.GET)
+					public String videoRegiste() {
+						return "video/videoRegiste";
+					}
+					
+					//검색
+					@RequestMapping(value = "/Search", method = RequestMethod.POST)
+					public ModelAndView search(@RequestParam("keyword") String keyword) {
+						//로그인 없어서 일단 코드만 써봄
+						//String loginid = (String) session.getAttribute("id");
+						mav = new ModelAndView();
+						mav = gs.searchList(keyword);
+						return mav;
 					}
 
 }
