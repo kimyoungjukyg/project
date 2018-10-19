@@ -33,9 +33,9 @@ public class GesipanService {
 	//댓글 리스트 불러오기
 	public ModelAndView gesipanview(int Rid) {
 		mav = new ModelAndView();
-		
 		KLVO gesipanview = gdao.gesipanView(Rid);
 		mav.addObject("gesipanview", gesipanview);
+		session.setAttribute("name", gesipanview.getRname());
 		List<CommentVO> replyView = gdao.replyView(Rid);
 		mav.addObject("replyView",replyView);
 		mav.setViewName("board/Gesipanview");
@@ -229,6 +229,9 @@ public class GesipanService {
 			return mav;	
 			
 		}
+
+
+			
 
 
 			

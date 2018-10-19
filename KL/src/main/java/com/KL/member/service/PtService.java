@@ -54,7 +54,7 @@ mav.setViewName("Pt/ptView");
 		response.setContentType("text/html;charset=utf-8");
 		mav=new ModelAndView();
 		int result = ptDAO.ptmake(ptVo);
-session.setAttribute("ptid", ptVo);
+		session.setAttribute("ptid", ptVo);
 		if (result == 0) {
 			// 등록 실패하면 다시 joinForm으로 이동
 			mav.setViewName("ptView");
@@ -75,7 +75,7 @@ session.setAttribute("ptid", ptVo);
 
  
 	
-	public ModelAndView ptr(PtVO ptVO,String id) {
+	public ModelAndView ptr(PtVO ptVO) {
 		mav=new ModelAndView();
 		PtVO ptr=ptDAO.ptr(ptVO);
 		session.setAttribute("log", ptr.getLog());
@@ -164,6 +164,17 @@ session.setAttribute("ptid", ptVo);
 		mav.addObject("relistview",relistview);
 
 		mav.setViewName("board/write_review");
+				
+		return mav;
+	}
+
+
+	public ModelAndView gesipanview2(int id) {
+		mav=new ModelAndView(); 
+		PtVO gesipanview2=ptDAO.gesipanview2(id);
+		mav.addObject("gesipanview",gesipanview2);
+
+		mav.setViewName("Pt/ptreview");
 				
 		return mav;
 	}

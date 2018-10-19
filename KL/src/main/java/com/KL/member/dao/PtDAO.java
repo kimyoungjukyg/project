@@ -91,6 +91,11 @@ public class PtDAO {
 		return sqlSession.selectList("Pt.relistview",id);
 	}
 
+	public PtVO gesipanview2(int rid) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Pt.gesipanview2",rid);
+	}
+
 	
 
 	

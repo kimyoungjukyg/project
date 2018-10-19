@@ -6,9 +6,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+$('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('whatever') // Extract info from data-* attributes
+  var modal = $(this)
+  modal.find('.modal-body input')
+});
+</script>
 	<script>
 	//검색부분
-  (function() {
+  (function() {   
     var cx = '005390764898483465964:ppy_c337lam';
     var gcse = document.createElement('script');
     gcse.type = 'text/javascript';
@@ -16,15 +24,15 @@
     gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(gcse, s);
-  })();
+  })();  
 </script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="//rawgithub.com/ashleydw/lightbox/master/dist/ekko-lightbox.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="assets/css/main.css" />
 <title>게시판</title>
 </head>
 <body>
@@ -68,18 +76,38 @@
            <th>작성시간</th>
          
            <th>별점</th>
+           <th>상세보기</th>
            </tr>
            <thead>			
 		<c:forEach var="re" items="${relist}">									
 			 <tr>
    
-   <th><a href="gesipanview?Rid=${re.id}">${re.title}</a></th>
+   <th>${re.title}</th>
    <th>${re.id}</th>
    <th>${re.tranl }</th>
    <th><fmt:formatDate value="${re.redate }" pattern="yyyy'년'-MM'월'-dd'일 'HH:mm:ss "/></th>
    <th>${re.star} 점</th>
-  
-         
+  <th><button type="button" class="button big" data-toggle="modal" data-target="#content${re.id}"
+		>상세보기</button></th>
+         <div class="modal fade" id="content${re.id}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">상세 내용</h4>
+          <button type="button" class="button big" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+        <label for="recipient-name"><font color="black">  ${re.content}</font></label>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="button big" data-dismiss="modal" onClick="fuckyou();">닫기</button>
+        </div>
+      </div>
+    </div>
+  </div>
   
         </c:forEach> 
         
@@ -120,17 +148,21 @@
 										<h2>Menu</h2>
 									</header>
 									<ul>
-								<%if(session.getAttribute("session_id")==null){%>
+									<%if(session.getAttribute("session_id")==null){%>
   
    <%}else{ %>
+  	   <li>
   <c:choose>
-      <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
+  
+     <c:when test="${nuMessage == 0}"><%=session.getAttribute("session_id") %> &nbsp; 새쪽지:${nuMessage}  
       </c:when>
       <c:when test="${nuMessage != 0}">
-      새쪽지:${nuMessage}
+    <%=session.getAttribute("session_id") %>  &nbsp;   새쪽지:${nuMessage} 
      <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
+      </li>
     <%} %>
+				
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
 										<li><a href="login_join">로그인/회원가입</a></li>
@@ -140,9 +172,14 @@
           									<%}else{ %>
          							 <li> <a  href="mypage">마이페이지</a></li>
           									 <%} %>
-          								
+          								<%if(session.getAttribute("session_id")==null){%>
+          								 <li><a href="videoout">운동영상</a></li>
+          								 <%}else{ %>
 										<li><a href="video">운동영상</a></li>
-									
+									<%} %>
+									 <%if(session.getAttribute("session_id")==null){%>
+									 <li><a href="videoout">정보 공유</a></li>
+          								 <%}else{ %>
 										<li>
 											<span class="opener">정보 공유</span>
 											<ul>
@@ -151,6 +188,8 @@
 												
 											</ul>
 										</li>
+											<%} %>
+								
 										<li>
 											<span class="opener">PT</span>
 											<ul>
@@ -208,13 +247,13 @@ var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http
 document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr07.tocplus007.com/chatLoader.do?userId=whddus19' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
 
 </script>
-<%}%>
-								 <!-- Scripts -->
+<%}%>					 <!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
      
 </body>
 </html>

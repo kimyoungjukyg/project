@@ -16,6 +16,12 @@
 		select count(*) from member where id = #{id} order by id asc
 	</select>
 	
+	<select id="messageList" parameterType="member" resultType="member">
+		select distinct id from member 
+	</select>	
+	<select id="emaillist" parameterType="member" resultType="member">
+		select distinct email from member 
+	</select>	
 
 <update id="rewriteme" parameterType="member">
 	update member set phone_number=#{phone_number},address=#{address},classify=#{classify} where ID=#{id}

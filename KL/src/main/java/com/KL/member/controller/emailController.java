@@ -9,17 +9,28 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.KL.member.service.MemberService;
 
 @Controller
 @RequestMapping("/email")
 public class emailController {
+	private ModelAndView mav;
 	@Autowired
 	private JavaMailSender mailSender;
+	@Autowired
+	private MemberService ms;
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String email() {
-		return "message/mail";
+	public ModelAndView email() {
+		mav=new ModelAndView();
+		mav=ms.emaillist();
+		return mav;
 	}
-	  // mailSending 코드
+
+	
+	// mailSending 코드
 	  @RequestMapping(value = "/mailSending")
 	  public String mailSending(HttpServletRequest request) {
 	   

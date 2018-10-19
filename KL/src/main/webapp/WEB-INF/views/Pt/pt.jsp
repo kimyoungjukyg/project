@@ -59,14 +59,14 @@
           <%}else{%>
           
           <%} %>
-           </div>
-
+           </div>  
+   
     <div class="resume-date text-md-right">
             <%if(null==session.getAttribute("session_id")){ %>
                
      <button type="button" class="byn btn-secondary" onclick="location.href='login_join'">로그인이 필요합니다</button>
             <%}else{ %>
-           
+           <input type="button" value="채팅" onclick="window.open('PTchat?id=${session_id}', '트레이너 채팅', 'width=400, height=400')">
    <c:forEach var="member" items="${textList}">
    
           <div class="resume-item d-flex flex-column flex-md-row mb-5">
@@ -87,7 +87,9 @@
       <%} %>
     
       
-         <button type="button" class="byn btn-secondary" onclick="location.href='ptReview?id=${member.id}'">리뷰 보기</button>      
+         <button type="button" class="byn btn-secondary" onclick="location.href='ptReview?id=${member.id}'">리뷰 보기</button>
+          	
+		
             </div>
           
      
@@ -123,17 +125,22 @@
 										<h2>Menu</h2>
 									</header>
 									<ul>
-											<%if(session.getAttribute("session_id")==null){%>
+								<%if(session.getAttribute("session_id")==null){%>
   
    <%}else{ %>
+  	   <li>
   <c:choose>
-      <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
+  
+     <c:when test="${nuMessage == 0}"><%=session.getAttribute("session_id") %> &nbsp; 새쪽지:${nuMessage}  
       </c:when>
       <c:when test="${nuMessage != 0}">
-      새쪽지:${nuMessage}
+    <%=session.getAttribute("session_id") %>  &nbsp;   새쪽지:${nuMessage} 
      <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
+      </li>
     <%} %>
+				
+				
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
 										<li><a href="login_join">로그인/회원가입</a></li>
@@ -144,8 +151,14 @@
          							 <li> <a  href="mypage">마이페이지</a></li>
           									 <%} %>
           								
+									<%if(session.getAttribute("session_id")==null){%>
+          								 <li><a href="videoout">운동영상</a></li>
+          								 <%}else{ %>
 										<li><a href="video">운동영상</a></li>
-									
+									<%} %>
+									 <%if(session.getAttribute("session_id")==null){%>
+									 <li><a href="videoout">정보 공유</a></li>
+          								 <%}else{ %>
 										<li>
 											<span class="opener">정보 공유</span>
 											<ul>
@@ -154,6 +167,8 @@
 												
 											</ul>
 										</li>
+											<%} %>
+								
 										<li>
 											<span class="opener">PT</span>
 											<ul>

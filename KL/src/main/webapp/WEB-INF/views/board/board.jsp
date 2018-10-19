@@ -21,12 +21,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="//rawgithub.com/ashleydw/lightbox/master/dist/ekko-lightbox.js"></script>
 
+<style>
+#boarder{
+boader-style:solid;
+width:306px;
 
+}
+#bod{padding-top: 10px;}
+</style>
   
   
 
@@ -81,24 +87,29 @@
     <div class="container mt40">
     <section class="row">
 <c:forEach var="Rgsp" items="${gesipanlist}">
-      <div class="panel-body">
-            <div class="panel panel-default">
+      <div class="panel-body" id="bod" >
+            <div class="panel panel-default" id="boarder" style="border: solid;">
                 <div class="panel-body">
                     <a href="gesipanview?Rid=${Rgsp.rid}" title="Nature Portfolio" class="zoom" data-title="Amazing Nature" data-footer="The beauty of nature" data-type="image" data-toggle="lightbox">
                 <c:if test="${Rgsp.rfilename == null}">
               <img src="img/lo.png" alt="" width="300" height="250"/>
                </c:if>
+                <c:if test="${Rgsp.rfilename != null}">
              <img src="uploadFile/${Rgsp.rfilename}"alt="${Rgsp.rfilename}" width="300"height="250"/>
                         <span class="overlay"><i class="glyphicon glyphicon-fullscreen"></i></span>
-                    </a>
+                   
+                         </c:if>
+                          </a>
                 </div>
                 <div class="panel-footer">
                     <h3><a href="gesipanview?Rid=${Rgsp.rid}">${Rgsp.rtitle}</a></h3>
                     <p>${Rgsp.rname}</p>
-                    <p><fmt:formatDate value="${Rgsp.rdate}" pattern="yyyy'년'-MM'월'-dd'일 'HH:mm:ss "/></p>
-    <a href="#" class="btn"><i class="icon-thumbs-up"></i></a>
-    <span class="rating pull-right"><i class="icon-heart"></i>조회수: ${Rgsp.rhit}</span>
+                        <p class="rating pull-right">조회수: ${Rgsp.rhit}</p>
    
+                    <p><fmt:formatDate value="${Rgsp.rdate}" pattern="yyyy'년'-MM'월'-dd'일 'HH:mm:ss "/></p>
+                
+        
+       
                 </div>
             </div>
              
@@ -151,13 +162,16 @@
 									<%if(session.getAttribute("session_id")==null){%>
   
    <%}else{ %>
+  	   <li>
   <c:choose>
-      <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
+  
+     <c:when test="${nuMessage == 0}"><%=session.getAttribute("session_id") %> &nbsp; 새쪽지:${nuMessage}  
       </c:when>
       <c:when test="${nuMessage != 0}">
-      새쪽지:${nuMessage}
+    <%=session.getAttribute("session_id") %>  &nbsp;   새쪽지:${nuMessage} 
      <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
+      </li>
     <%} %>
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
@@ -168,9 +182,14 @@
           									<%}else{ %>
          							 <li> <a  href="mypage">마이페이지</a></li>
           									 <%} %>
-          								
+          							<%if(session.getAttribute("session_id")==null){%>
+          								 <li><a href="videoout">운동영상</a></li>
+          								 <%}else{ %>
 										<li><a href="video">운동영상</a></li>
-									
+									<%} %>
+									 <%if(session.getAttribute("session_id")==null){%>
+									 <li><a href="videoout">정보 공유</a></li>
+          								 <%}else{ %>
 										<li>
 											<span class="opener">정보 공유</span>
 											<ul>
@@ -179,6 +198,7 @@
 												
 											</ul>
 										</li>
+											<%} %>
 										<li>
 											<span class="opener">PT</span>
 											<ul>

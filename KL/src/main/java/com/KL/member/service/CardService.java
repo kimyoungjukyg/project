@@ -41,7 +41,7 @@ public class CardService {
 
 
 
-	public ModelAndView ptpay(PtVO ptVO,HttpServletResponse response,String id) throws IOException {
+	public ModelAndView ptpay(PtVO ptVO,HttpServletResponse response,String id,String tranl,String title,String start,String end,int price) throws IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		mav = new ModelAndView();

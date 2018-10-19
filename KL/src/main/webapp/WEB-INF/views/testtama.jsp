@@ -24,10 +24,9 @@ height: 100px;
 }
 
 </style>	
-	<script>
-	//검색부분
+<script>
   (function() {
-    var cx = '005390764898483465964:ppy_c337lam';
+    var cx = '005390764898483465964:xm23c3v-oak';
     var gcse = document.createElement('script');
     gcse.type = 'text/javascript';
     gcse.async = true;
@@ -178,10 +177,7 @@ height: 100px;
 							<!-- Search -->
 						
 
-<div style="inherited:no;">
-								
 <gcse:search></gcse:search>
-						</div>
 
 							<!-- Menu -->
 								<nav id="menu">
@@ -189,13 +185,21 @@ height: 100px;
 										<h2>Menu</h2>
 									</header>
 									<ul>
-									<c:choose>
-      <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
+							<%if(session.getAttribute("session_id")==null){%>
+  
+   <%}else{ %>
+  	   <li>
+  <c:choose>
+  
+     <c:when test="${nuMessage == 0}"><%=session.getAttribute("session_id") %> &nbsp; 새쪽지:${nuMessage}  
       </c:when>
       <c:when test="${nuMessage != 0}">
-      새쪽지:${nuMessage}
+    <%=session.getAttribute("session_id") %>  &nbsp;   새쪽지:${nuMessage} 
      <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
+      </li>
+    <%} %>
+				
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
 										<li><a href="login_join">로그인/회원가입</a></li>
@@ -210,6 +214,9 @@ height: 100px;
           								 <%}else{ %>
 										<li><a href="video">운동영상</a></li>
 									<%} %>
+									 <%if(session.getAttribute("session_id")==null){%>
+									 <li><a href="videoout">정보 공유</a></li>
+          								 <%}else{ %>
 										<li>
 											<span class="opener">정보 공유</span>
 											<ul>
@@ -218,6 +225,7 @@ height: 100px;
 												
 											</ul>
 										</li>
+											<%} %>
 										<li>
 											<span class="opener">PT</span>
 											<ul>

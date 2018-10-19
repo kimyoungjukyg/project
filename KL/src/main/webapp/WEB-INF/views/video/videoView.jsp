@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+		 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,13 +17,13 @@
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(gcse, s);
   })();
-</script>
+</script>  
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <div id="wrapper">
-		<div id="main">
+		<div id="main"> 
 			<div class="inner">
 
 				<!-- Header -->
@@ -72,7 +74,10 @@
 								href="videoLike?exe_Num=${videoView.exe_Num}">좋아요</a>
 								&nbsp;&nbsp; <a href="#"
 								onClick="history.back(); return false ; ">목록보기</a> &nbsp;&nbsp;
+								<%if(session.getAttribute("session_id").equals(session.getAttribute("vie"))){ %>
 								<a href="videoDelete?exe_Num=${videoView.exe_Num}">삭제</a>
+							<%}else{ %>
+							<%} %>
 								&nbsp;&nbsp;</td>
 						</tr>
 					</table>
@@ -91,9 +96,9 @@
 						<tr>
 							<td><input type="hidden" name="Rid"
 								value="${videoView.exe_Num}"></td>
-							<td><input type="text" name="ccontent" required="required"
-								style="text-align: center; width: auto; height: auto;"
-								"placeholder="댓글을 입력해주세요"></td>
+							<td><textarea rows="4" cols="50" name="ccontent" required="required"
+								
+								"placeholder="댓글을 입력해주세요"></textarea></td>
 							<td><input type="submit" value="댓글달기"></td>
 						</tr>
 					</table>
@@ -102,13 +107,20 @@
 
 
 				<h3>댓글창</h3>
+				<%=session.getAttribute("vie") %>
 				<table>
 					<c:forEach var="reply" items="${replyView}">
+<c:set var="today" value="<%=new java.util.Date()%>"/>
+<c:set var="day" value="${reply.cdate}"/>
+<fmt:formatDate var="now" type="date" value="${today}" pattern=" hh:ss"/>
+<fmt:formatDate var="ter" type="date" value="${day}" pattern="yyyy-MM-dd hh:mm"/>
+
 						<tr>
 							<td>글작성자 : ${reply.cwriter}</td>
+							<td>작성시간 : ${ter}</td>
 						</tr>
 						<tr style="margin-bottom: 10px;">
-							<td>내용 : ${reply.ccontent}</td>
+							<td colspan="2">내용 : ${reply.ccontent}</td>
 						</tr>
 						<!-- <tr bgcolor="#ffffff"><td bgcolor="#ffffff"></td></tr> --> 
 					</c:forEach>
@@ -135,14 +147,20 @@
 						<h2>Menu</h2>
 					</header>
 					<ul>
-						<c:choose>
-							<c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
+										<%if(session.getAttribute("session_id")==null){%>
+  
+   <%}else{ %>
+  	   <li>
+  <c:choose>
+  
+      <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
       </c:when>
-							<c:when test="${nuMessage != 0}">
+      <c:when test="${nuMessage != 0}">
       새쪽지:${nuMessage}
-     <img src="img/q.png" width="13" height="13">
-							</c:when>
-						</c:choose>
+     <img src="img/q.png" width="13"height="13"></c:when>
+      </c:choose>
+      </li>
+    <%} %>
 						<li><a href="testtama">홈</a></li>
 						<%
 							if (session.getAttribute("session_id") == null) {
@@ -177,13 +195,13 @@
 								%>
 								<%
 									} else {
-								%>
-								<li><a href="ptoff">등록강의</a></li>
-								<%
-									}
-								%>
+										%>
+										<li><a href="ptoff">등록강의</a></li>
+										<%
+											}
+										%>
 
-							</ul></li>
+									</ul></li>
 						<li><a href="find">찾아오는 길</a></li>
 					</ul>
 				</nav>

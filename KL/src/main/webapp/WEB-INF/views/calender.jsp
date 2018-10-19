@@ -59,13 +59,24 @@ var curDate = new Date();
 var dataset = [
 	
 	 <c:forEach var="pt" items="${callender}" varStatus="status">
+	 <c:set var="today" value="<%=new java.util.Date()%>"/>
+		 <c:set var="day" value="${pt.starttime}"/>
+ <fmt:formatDate var="now" type="date" value="${today}" pattern="MM/dd/yyyy"/>
 	 <c:if test="${pt.starttime != ''}">
 	  {"id":"<c:out value='${pt.id}' />"
 	  ,"title":"<c:out value="${pt.title}" />"
-	  ,"start":"<c:out value="${pt.starttime}" />"
+	  ,"start":"<c:out value="${pt.starttime}" />"   
 	  <c:if test="${pt.endtime != ''}">
   ,"end":"<c:out value="${pt.endtime}" />"
-</c:if> 
+  ,"color":"#257e4a"
+  ,
+  <c:if test="${now>day}">
+  "color":"#dd971c" 
+  </c:if>
+  <c:if test="${now<=day}">
+  "url":"ptr?log=<c:out value="${pt.log}"/>&id=<c:out value="${pt.id}"/>"
+</c:if>
+		  </c:if> 
 } <c:if test="${!status.last}">,</c:if>
 </c:if>
 </c:forEach>
@@ -143,7 +154,7 @@ var dataset = [
  <th><button type="checkbox" class="byn btn-secondary" disabled >신청 불가 </button> </th></c:if>
  
 <c:if test="${now<=day}">
-   <th><button type="submit" class="byn btn-secondary" onclick="location.href='ptr?log=${pt.log}&id=<%=session.getAttribute("session_id") %>&starttime=<%=session.getAttribute("start") %>'" >신청 하기</button><br></th>
+   <th><button type="submit" class="byn btn-secondary" onclick="location.href='ptr?log=${pt.log}&id=${pt.id}'" >신청 하기</button><br></th>
 </c:if>
    </tr>   
             </c:forEach>

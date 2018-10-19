@@ -5,7 +5,7 @@
 <!-- 켈린더값입력 -->
 <insert parameterType="pt" id="ptmake"> 
 INSERT INTO FULLCALENDAR VALUES(#{id}, #{title}, #{starttime},#{endtime},#{price},#{count},#{log}) 
-</insert>
+</insert> 
 <!-- 달력 -->
 <select id="callender" parameterType="pt" resultType="pt">
 SELECT * FROM FULLCALENDAR where id=#{id} order by title asc
@@ -13,9 +13,12 @@ SELECT * FROM FULLCALENDAR where id=#{id} order by title asc
 
 <!--강의목록  -->
 <select id="ptList" parameterType="pt" resultType="pt">
-SELECT * FROM FULLCALENDAR where id=#{id} order by title asc
+SELECT * FROM FULLCALENDAR where id=#{id} order by starttime asc
 </select>
 <select id="relistview" parameterType="pt" resultType="pt">
+SELECT distinct tranl FROM pt where id=#{id}
+</select>
+<select id="gesipanview2" parameterType="pt" resultType="pt">
 SELECT * FROM pt where id=#{id} order by title asc
 </select>
 
@@ -43,7 +46,7 @@ UPDATE FULLCALENDAR SET title= #{title},starttime= #{starttime} , endtime= #{end
  
 
 <select parameterType="pt" id="ptr" resultType="pt">
-SELECT * FROM FULLCALENDAR where LOG=#{log} order by title asc</select>
+SELECT * FROM FULLCALENDAR where LOG=#{log} and id=#{id} order by title asc</select>
 
 <insert parameterType="pt" id="addpt"> 
 INSERT INTO PT VALUES(#{id},#{tranl},#{title},#{starttime},#{endtime},#{price}) 

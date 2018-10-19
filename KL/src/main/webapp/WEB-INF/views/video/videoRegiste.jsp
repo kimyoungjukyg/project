@@ -202,14 +202,20 @@
 							<h2>Menu</h2>
 						</header>
 						<ul>
-							<c:choose>
-								<c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
+													<%if(session.getAttribute("session_id")==null){%>
+  
+   <%}else{ %>
+  	   <li>
+  <c:choose>
+  
+      <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
       </c:when>
-								<c:when test="${nuMessage != 0}">
+      <c:when test="${nuMessage != 0}">
       새쪽지:${nuMessage}
-      <img src="img/q.png" width="20" height="20">
-								</c:when>
-							</c:choose>
+     <img src="img/q.png" width="13"height="13"></c:when>
+      </c:choose>
+      </li>
+    <%} %>
 							<li><a href="testtama">홈</a></li>
 							<%
 								if (session.getAttribute("session_id") == null) {

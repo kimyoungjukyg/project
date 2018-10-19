@@ -103,13 +103,16 @@
 								<%if(session.getAttribute("session_id")==null){%>
   
    <%}else{ %>
+  	   <li>
   <c:choose>
-      <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
+  
+     <c:when test="${nuMessage == 0}"><%=session.getAttribute("session_id") %> &nbsp; 새쪽지:${nuMessage}  
       </c:when>
       <c:when test="${nuMessage != 0}">
-      새쪽지:${nuMessage}
+    <%=session.getAttribute("session_id") %>  &nbsp;   새쪽지:${nuMessage} 
      <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
+      </li>
     <%} %>
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
@@ -120,9 +123,14 @@
           									<%}else{ %>
          							 <li> <a  href="mypage">마이페이지</a></li>
           									 <%} %>
-          								
+          								<%if(session.getAttribute("session_id")==null){%>
+          								 <li><a href="videoout">운동영상</a></li>
+          								 <%}else{ %>
 										<li><a href="video">운동영상</a></li>
-									
+									<%} %>
+									 <%if(session.getAttribute("session_id")==null){%>
+									 <li><a href="videoout">정보 공유</a></li>
+          								 <%}else{ %>
 										<li>
 											<span class="opener">정보 공유</span>
 											<ul>
@@ -131,6 +139,8 @@
 												
 											</ul>
 										</li>
+											<%} %>
+										<li>
 										<li>
 											<span class="opener">PT</span>
 											<ul>

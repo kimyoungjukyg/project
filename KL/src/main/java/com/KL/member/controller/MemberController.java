@@ -395,13 +395,13 @@ public class MemberController {
 	}
 	//PT신청 페이지로
 	@RequestMapping(value="/ptr",method=RequestMethod.GET)
-	public ModelAndView ptr(@ModelAttribute PtVO ptVO,@RequestParam("id") String id) {
+	public ModelAndView ptr(@ModelAttribute PtVO ptVO) {
 	/*pt.increasHit(id);*/
 	
 	
 	mav=new ModelAndView();
 		
-	mav=pt.ptr(ptVO,id);
+	mav=pt.ptr(ptVO);
 	return mav;
 		
 	}
@@ -423,6 +423,13 @@ public class MemberController {
 					pt.increase(title);
 						return "redirect:/pton";	 
 				}
+				
+	//pt 트레이너 채팅
+	@RequestMapping(value="/PTchat",method=RequestMethod.GET)
+	public String PTchat() {
+	String id=(String) session.getAttribute("session_id");
+	return "Pt/PTchat";
+			}
 	
 //일반회원이 개설강의 리스트보기
 	@RequestMapping(value = "/callender", method = RequestMethod.GET)
@@ -434,14 +441,12 @@ public class MemberController {
 	}
 
 	//카드결제진행
-	@RequestMapping(value = "/ptpay", method = RequestMethod.POST)
-	public ModelAndView ptpay(@ModelAttribute PtVO ptVO, HttpServletResponse response)
-			throws IOException {
+	@RequestMapping(value = "/ptpay", method = RequestMethod.GET)
+	public ModelAndView ptpay(@ModelAttribute PtVO ptVO,HttpServletResponse response,@RequestParam("id") String id,@RequestParam("tranl") String tranl,@RequestParam("starttime") String start,@RequestParam("endtime") String end,@RequestParam("title") String title,@RequestParam("price") int price)
+			throws IOException {  
 		mav = new ModelAndView();
-		String title=(String) session.getAttribute("title");
-		String starttime=(String)session.getAttribute("start");
-		String id=(String)session.getAttribute("session_id");
-		mav = ca.ptpay(ptVO, response,id);
+		
+		mav = ca.ptpay(ptVO,response,id,tranl,start,end,title,price);
 		pt.increase(title);
 		return mav;
 	}
@@ -464,6 +469,18 @@ public class MemberController {
 				
 				mav = new ModelAndView();
 				mav = gs.gesipanview(Rid);	
+				
+				return mav;  
+				
+				
+			}
+			//리뷰상세보기
+			@RequestMapping(value="/gesipanview2" , method=RequestMethod.GET)
+			public ModelAndView gesipanview2(@RequestParam("id") int id) {
+				
+				
+				mav = new ModelAndView();
+				mav = pt.gesipanview2(id);	
 				
 				return mav;
 				
@@ -563,9 +580,11 @@ public class MemberController {
 				 
 				 //쪽지 작성 화면 호출
 				 @RequestMapping(value = "/messageWriteForm", method = RequestMethod.GET)
-					public String messageWriteForm(@RequestParam("id") String id) {
+					public ModelAndView messageWriteForm(@RequestParam("id") String id) {
 					 session.setAttribute("session_id", id);
-						return "message/messageWriteForm";
+					 mav = new ModelAndView();
+					mav=ms.messageList();
+						return mav;
 					}
 				 
 				 //쪽지 작성

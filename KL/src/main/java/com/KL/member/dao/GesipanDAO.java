@@ -111,6 +111,10 @@ public class GesipanDAO {
 			return sqlSession.update("Com.gesipanDeclaration", Rid);
 		}
 
+		
+		
+		
+		
 
 	
 	

@@ -79,6 +79,7 @@ public class VideoService {
 		mav.addObject("videoView", videoView);
 		 List<CommentVO> videoReplyView = videoDAO.videoReplyView(exe_Num);
 		 mav.addObject("replyView", videoReplyView);
+		 session.setAttribute("vie", videoView.getId());
 		mav.setViewName("video/videoView");
 		return mav;
 	}
@@ -90,7 +91,7 @@ public class VideoService {
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
 		out.println("alert('삭제되었습니다.');");
-		out.println("history.go(-1)");// 이전 페이지로 이동!
+		out.println("history.go(-2)");// 이전 페이지로 이동!
 		out.println("</script>");
 	}
 

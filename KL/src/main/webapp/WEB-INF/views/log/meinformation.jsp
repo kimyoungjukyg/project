@@ -54,8 +54,7 @@
 					</tr>
 					<td colspan=5><input type="button"
 						onclick="location.href='merewrite?id=${viewMember.id}'"
-						value="정보수정"> <input type="button"
-						onclick="location.href='memberList'" value="돌아가기"></td>
+						value="정보수정"> </td>
 				</table>
 			</div>
 		</div>
@@ -75,24 +74,21 @@
 						<h2>Menu</h2>
 					</header>
 					<ul>
-						<%
-							if (session.getAttribute("session_id") == null) {
-						%>
-
-						<%
-							} else {
-						%>
-						<c:choose>
-							<c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
+												<%if(session.getAttribute("session_id")==null){%>
+  
+   <%}else{ %>
+  	   <li>
+  <c:choose>
+  
+     <c:when test="${nuMessage == 0}"><%=session.getAttribute("session_id") %> &nbsp; 새쪽지:${nuMessage}  
       </c:when>
-							<c:when test="${nuMessage != 0}">
-      새쪽지:${nuMessage}
-     <img src="img/q.png" width="13" height="13">
-							</c:when>
-						</c:choose>
-						<%
-							}
-						%>
+      <c:when test="${nuMessage != 0}">
+    <%=session.getAttribute("session_id") %>  &nbsp;   새쪽지:${nuMessage} 
+     <img src="img/q.png" width="13"height="13"></c:when>
+      </c:choose>
+      </li>
+    <%} %>
+				
 						<li><a href="testtama">홈</a></li>
 						<%
 							if (session.getAttribute("session_id") == null) {

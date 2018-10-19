@@ -25,13 +25,20 @@
 										<h2>Menu</h2>
 									</header>
 									<ul>
-									<c:choose>
+							<%if(session.getAttribute("session_id")==null){%>
+  
+   <%}else{ %>
+  	   <li>
+  <c:choose>
+  
       <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
       </c:when>
       <c:when test="${nuMessage != 0}">
       새쪽지:${nuMessage}
      <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
+      </li>
+    <%} %>
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
 										<li><a href="login_join">로그인/회원가입</a></li>
@@ -41,18 +48,25 @@
           									<%}else{ %>
          							 <li> <a  href="mypage">마이페이지</a></li>
           									 <%} %>
-          								
+          								<%if(session.getAttribute("session_id")==null){%>
+          								 <li><a href="videoout">운동영상</a></li>
+          								 <%}else{ %>
 										<li><a href="video">운동영상</a></li>
-									
+									<%} %>
+									 <%if(session.getAttribute("session_id")==null){%>
+									 <li><a href="videoout">정보 공유</a></li>
+          								 <%}else{ %>
 										<li>
 											<span class="opener">정보 공유</span>
 											<ul>
 												<li><a href="board">운동법</a></li>
-												<li><a href="#">레시피</a></li>
+												<li><a href="foodlist">레시피</a></li>
 												
 											</ul>
 										</li>
+											<%} %>
 										<li>
+									
 											<span class="opener">PT</span>
 											<ul>
 												<li><a href="pton">개설 강의</a></li>

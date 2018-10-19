@@ -17,7 +17,7 @@
   })();
 </script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">        
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -25,7 +25,7 @@
 <title>KL</title>
 <link rel="stylesheet" href="assets/css/main.css" />
 </head>
-<body>
+<body>   
 
 <div id="wrapper">
 
@@ -164,13 +164,22 @@ function fuckyou(){
 										<h2>Menu</h2>
 									</header>
 									<ul>
-									<c:choose>
-      <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
+								<%if(session.getAttribute("session_id")==null){%>
+  
+   <%}else{ %>
+  	   <li>
+  <c:choose>
+  
+     <c:when test="${nuMessage == 0}"><%=session.getAttribute("session_id") %> &nbsp; 새쪽지:${nuMessage}  
       </c:when>
       <c:when test="${nuMessage != 0}">
-      새쪽지:${nuMessage}
-      <img src="img/q.png" width="20"height="20"></c:when>
+    <%=session.getAttribute("session_id") %>  &nbsp;   새쪽지:${nuMessage} 
+     <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
+      </li>
+    <%} %>
+				
+				
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
 										<li><a href="login_join">로그인/회원가입</a></li>
@@ -181,7 +190,14 @@ function fuckyou(){
          							 <li> <a  href="mypage">마이페이지</a></li>
           									 <%} %>
           								
+									<%if(session.getAttribute("session_id")==null){%>
+          								 <li><a href="videoout">운동영상</a></li>
+          								 <%}else{ %>
 										<li><a href="video">운동영상</a></li>
+									<%} %>
+									 <%if(session.getAttribute("session_id")==null){%>
+									 <li><a href="videoout">정보 공유</a></li>
+          								 <%}else{ %>
 										<li>
 											<span class="opener">정보 공유</span>
 											<ul>
@@ -190,6 +206,8 @@ function fuckyou(){
 												
 											</ul>
 										</li>
+											<%} %>
+										<li>
 										<li>
 											<span class="opener">PT</span>
 											<ul>

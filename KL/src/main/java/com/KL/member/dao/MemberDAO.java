@@ -56,5 +56,13 @@ public class MemberDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.update("Member.rewriteme", memberVO);
 	}
+	public List<MemberVO> messageList() {
+		
+		return sqlSession.selectList("Member.messageList");
+	}
+	public List<MemberVO> emaillist() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("Member.emaillist");
+	}
 
 }

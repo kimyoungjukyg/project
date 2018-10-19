@@ -115,7 +115,7 @@ function doShow() {
 			<td>${gesipanview.rname}</td>
 		<td>조회수</td>
 			<td>${gesipanview.rhit}</td></tr>
-		<tr style="height: 500px; overflow:auto;"><td>글내용</td>
+		<tr style="height: auto; overflow:auto;"><td>글내용</td>
 			<td colspan='3'>${gesipanview.rcontent}</td></tr>
 		<tr>
 		
@@ -132,16 +132,22 @@ function doShow() {
 		
 			<td colspan="4">
 				<input type="hidden" id="num" value="${gesipanview.rid}">
-					<input type="button" onclick="location.href='gesipanmodify?Rid=${gesipanview.rid}'"value="수정">
-				<input type="button" onclick="location.href='RgesipanList'"value="목록보기">
-					<input type="button" onclick="location.href='gesipandelete?Rid=${gesipanview.rid}'"value="삭제">
-			<%if(session.getAttribute("session_id")==null){ %>
+				<%if(session.getAttribute("session_id")==null){ %>
+			
 			<%}else{ %>
 			<input type="button" value="댓글보기" onclick="javascript:doShow()" id="button1" class="byn btn-secondary">
+			<input type="button" onclick="numCheck(${gesipanview.rid})"class="btn-secondary" data-toggle="modal" data-target="#myModal" value="신고하기">
 			<%} %>
-<input type="button" onclick="numCheck(${gesipanview.rid})"class="btn-secondary" data-toggle="modal" data-target="#myModal" value="신고하기">
-  						
 			
+	<%if(session.getAttribute("session_id").equals(session.getAttribute("name"))){%>
+					<input type="button" onclick="location.href='gesipanmodify?Rid=${gesipanview.rid}'"value="수정">
+						<input type="button" onclick="location.href='gesipandelete?Rid=${gesipanview.rid}'"value="삭제">
+			<%}%>
+				<input type="button" onclick="location.href='board'"value="목록보기">
+				
+			
+
+  						  
 	
 
 			</td>
@@ -154,7 +160,7 @@ function doShow() {
 	<c:forEach var="reply" items="${replyView}">
 	<input type="hidden" name="Cid" value="${reply.cid}">
 	<tr>
-	<td>글작성자:${reply.cwriter}<a href="ReplyLike?Cid=${reply.cid}" style="text-align:right">좋아요!</a>:${reply.tolike}</td>
+	<td>글작성자:${reply.cwriter}<a href="ReplyLike?Cid=${reply.cid}&Rid=${reply.rid}" style="text-align:right">좋아요!</a>:${reply.tolike}</td>
 	</tr>
 	<tr>
 	<td>내용:${reply.ccontent}</td>
@@ -164,8 +170,8 @@ function doShow() {
 	<h3>댓글을 달아봅시다</h3>
 	<form action="Gesipanreply" method ="post">
 	<table border="1">
-
-
+<input type="hidden" name="Cwriter" value="<%=session.getAttribute("session_id") %>">
+<input type="hidden" name="Rid"value="${gesipanview.rid }">
 	<tr>
 
 	<td><input type="text" name="ccontent" required="required" style=" height:50px;" placeholder="내용을입력하시오"></td>
@@ -203,17 +209,21 @@ function doShow() {
 										<h2>Menu</h2>
 									</header>
 									<ul>
-										<%if(session.getAttribute("session_id")==null){%>
+							<%if(session.getAttribute("session_id")==null){%>
   
    <%}else{ %>
+  	   <li>
   <c:choose>
-      <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
+  
+     <c:when test="${nuMessage == 0}"><%=session.getAttribute("session_id") %> &nbsp; 새쪽지:${nuMessage}  
       </c:when>
       <c:when test="${nuMessage != 0}">
-      새쪽지:${nuMessage}
+    <%=session.getAttribute("session_id") %>  &nbsp;   새쪽지:${nuMessage} 
      <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
+      </li>
     <%} %>
+				
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
 										<li><a href="login_join">로그인/회원가입</a></li>
@@ -223,8 +233,14 @@ function doShow() {
           									<%}else{ %>
          							 <li> <a  href="mypage">마이페이지</a></li>
           									 <%} %>
-          								
+          							<%if(session.getAttribute("session_id")==null){%>
+          								 <li><a href="videoout">운동영상</a></li>
+          								 <%}else{ %>
 										<li><a href="video">운동영상</a></li>
+									<%} %>
+									 <%if(session.getAttribute("session_id")==null){%>
+									 <li><a href="videoout">정보 공유</a></li>
+          								 <%}else{ %>
 										<li>
 											<span class="opener">정보 공유</span>
 											<ul>
@@ -233,11 +249,16 @@ function doShow() {
 												
 											</ul>
 										</li>
+											<%} %>
+									
 										<li>
 											<span class="opener">PT</span>
 											<ul>
 												<li><a href="pton">개설 강의</a></li>
+												  <%if(null==session.getAttribute("session_id")){ %>
+               <%}else{ %>
 												<li><a href="ptoff">등록강의</a></li>
+												<%} %>
 												
 											</ul>
 										</li>

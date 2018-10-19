@@ -9,25 +9,80 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<script>
+<link rel="stylesheet" href="assets/css/main.css" />
+<script>
 	//검색부분
-  (function() {
-    var cx = '005390764898483465964:ppy_c337lam';
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-  })();
+	(function() {
+		var cx = '005390764898483465964:ppy_c337lam';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
 </script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <head>
-	
+
 
 <style>
-.checks {position: relative;} .checks input[type="checkbox"] { /* 실제 체크박스는 화면에서 숨김 */ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0 } .checks input[type="checkbox"] + label { display: inline-block; position: relative; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; } .checks input[type="checkbox"] + label:before { /* 가짜 체크박스 */ content: ' '; display: inline-block; width: 21px; /* 체크박스의 너비를 지정 */ height: 21px; /* 체크박스의 높이를 지정 */ line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */ margin: -2px 8px 0 0; text-align: center; vertical-align: middle; background: #fafafa; border: 1px solid #cacece; border-radius : 3px; box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05); } .checks input[type="checkbox"] + label:active:before, .checks input[type="checkbox"]:checked + label:active:before { box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1); } .checks input[type="checkbox"]:checked + label:before { /* 체크박스를 체크했을때 */ content: '\2714'; /* 체크표시 유니코드 사용 */ color: #99a1a7; text-shadow: 1px 1px #fff; background: #e9ecee; border-color: #adb8c0; box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1); }
+.checks {
+	position: relative;
+}
+
+.checks input[type="checkbox"] { /* 실제 체크박스는 화면에서 숨김 */
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0
+}
+
+.checks input[type="checkbox"]+label {
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+.checks input[type="checkbox"]+label:before { /* 가짜 체크박스 */
+	content: ' ';
+	display: inline-block;
+	width: 21px; /* 체크박스의 너비를 지정 */
+	height: 21px; /* 체크박스의 높이를 지정 */
+	line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */
+	margin: -2px 8px 0 0;
+	text-align: center;
+	vertical-align: middle;
+	background: #fafafa;
+	border: 1px solid #cacece;
+	border-radius: 3px;
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px
+		rgba(0, 0, 0, 0.05);
+}
+
+.checks input[type="checkbox"]+label:active:before, .checks input[type="checkbox"]:checked+label:active:before
+	{
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px
+		rgba(0, 0, 0, 0.1);
+}
+
+.checks input[type="checkbox"]:checked+label:before { /* 체크박스를 체크했을때 */
+	content: '\2714'; /* 체크표시 유니코드 사용 */
+	color: #99a1a7;
+	text-shadow: 1px 1px #fff;
+	background: #e9ecee;
+	border-color: #adb8c0;
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px
+		rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+}
 
 div {
 	border-style: solid; 0.1 px;
@@ -72,8 +127,7 @@ table {
 	width: 700px;
 	height: 1000px;
 	float: left;
- 	overflow: auto;
-	
+	overflow: auto;
 }
 </style>
 
@@ -166,35 +220,34 @@ table {
 		}
 
 	}
-
 </script>
 
 </head>
 
 <body>
-		<div id="wrapper">
+	<div id="wrapper">
 
-				<!-- Main -->
-					<div id="main">
-				
-						<div class="inner">
+		<!-- Main -->
+		<div id="main">
 
-							<!-- Header -->
-								<header id="header">
-									<a href="testtama" class="logo"><strong>KL</strong> project</a>
-									<ul class="icons">
-										
-									
-										<li><a  class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a  class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-										<li><a  class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a  class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a  class="icon fa-medium"><span class="label">Medium</span></a></li>
-									</ul>
-								
-								</header>
-								
-		<div class="wrap">
+			<div class="inner">
+
+				<!-- Header -->
+				<header id="header">
+					<a href="testtama" class="logo"><strong>KL</strong> project</a>
+					<ul class="icons">
+
+
+						<li><a class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+						<li><a class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a class="icon fa-medium"><span class="label">Medium</span></a></li>
+					</ul>
+
+				</header>
+
+				<div class="wrap">
 
 					<div class="checks" id="muscleImage">
 						<form action="orderVideo" method="get"
@@ -264,20 +317,16 @@ table {
 
 					<div id="div1">
 						<div>
-							<%-- <c:when test="!session.getAttribute('classify').equals('0')">
-								<button type="button" class="btn btn-outline-info"
-									onclick="location.href='videoRegiste'" style="width: 95%;">게시글
-									등록</button>
-							</c:when> --%>
-							<%-- <%
-									if (session.getAttribute("classify").equals("1") && session.getAttribute("classify").equals("2")) {
-							%> --%>
+
+							<%
+								if (!session.getAttribute("classify").equals("0")) {
+							%>
 							<button type="button" class="btn btn-outline-info"
 								onclick="location.href='videoRegiste'" style="width: 95%;">게시글
 								등록</button>
-							<%-- <%
+							<%
 								}
-							%> --%>
+							%>
 							<%--
 							<!-- 게시글 등록 -->
 							<button type="button" class="btn btn-outline-info"
@@ -387,116 +436,147 @@ table {
 
 
 
-	
-	
-	
-	</div>
-								</div>
-									<!-- Sidebar -->
-					<div id="sidebar">
-						<div class="inner">
 
-							<!-- Search -->
-							<div style="inherited:no;">
-								
-<gcse:search></gcse:search>
-						</div>
-							<!-- Menu -->
-								<nav id="menu">
-									<header class="major">
-										<h2>Menu</h2>
-									</header>
-									<ul>
-									<c:choose>
+
+
+			</div>
+		</div>
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div class="inner">
+
+				<!-- Search -->
+				<div style="inherited: no;">
+
+					<gcse:search></gcse:search>
+				</div>
+				<!-- Menu -->
+				<nav id="menu">
+					<header class="major">
+						<h2>Menu</h2>
+					</header>
+					<ul>
+										<%if(session.getAttribute("session_id")==null){%>
+  
+   <%}else{ %>
+  	   <li>
+  <c:choose>
+  <c:when test="${nuMessage == null}">
+      </c:when>
       <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
       </c:when>
       <c:when test="${nuMessage != 0}">
       새쪽지:${nuMessage}
-      <img src="img/q.png" width="20"height="20"></c:when>
+     <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
-										<li><a href="testtama">홈</a></li>
-									 <%if(session.getAttribute("session_id")==null){%>
-										<li><a href="login_join">로그인/회원가입</a></li>
-										  <%}else if(session.getAttribute("session_id").equals("admin")){ %>
-           									<li><a href="adminpage">관리자</a></li>
-          
-          									<%}else{ %>
-         							 <li> <a  href="mypage">마이페이지</a></li>
-          									 <%} %>
-          								
-										<li><a href="video">운동영상</a></li>
-										<li>
-											<span class="opener">정보 공유</span>
-											<ul>
-												<li><a href="board">운동법</a></li>
-												<li><a href="foodlist">레시피</a></li>
-												
-											</ul>
-										</li>
-										<li>
-											<span class="opener">PT</span>
-											<ul>
-												<li><a href="pton">개설 강의</a></li>
-											  <%if(null==session.getAttribute("session_id")){ %>
-               <%}else{ %>
-												<li><a href="ptoff">등록강의</a></li>
-												<%} %>
-												
-												
-											</ul>
-										</li>
-										<li><a href="find">찾아오는 길</a></li>
-									</ul>
-								</nav>
+      </li>
+    <%} %>
+						<li><a href="testtama">홈</a></li>
+						<%
+							if (session.getAttribute("session_id") == null) {
+						%>
+						<li><a href="login_join">로그인/회원가입</a></li>
+						<%
+							} else if (session.getAttribute("session_id").equals("admin")) {
+						%>
+						<li><a href="adminpage">관리자</a></li>
 
-							
+						<%
+							} else {
+						%>
+						<li><a href="mypage">마이페이지</a></li>
+						<%
+							}
+						%>
 
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>관리자정보</h2>
-									</header>
-									<p>홈페이지 관리자 정보 입니다. 문의할 내용은 해당 정보로 해주시기 바랍니다.</p>
-									<ul class="contact">
-										<li class="fa-envelope-o">kyg7414@gmail.com</li>
-										<li class="fa-phone">(010) 0000-0000</li>
-										<li class="fa-home">찾아서 머하실라고요<br />
-										경기도, TN 00000-0000</li>
-									</ul>
-								</section>
+						<li><a href="video">운동영상</a></li>
+						<li><span class="opener">정보 공유</span>
+							<ul>
+								<li><a href="board">운동법</a></li>
+								<li><a href="foodlist">레시피</a></li>
 
-							<!-- Footer -->
-								<footer id="footer">
-									<p class="copyright">&copy; KL create here <a href="https://unsplash.com">Thank you</a> come <a href="https://html5up.net">here</a>.</p>
-								</footer>
+							</ul></li>
+						<li><span class="opener">PT</span>
+							<ul>
+								<li><a href="pton">개설 강의</a></li>
+								<%
+									if (null == session.getAttribute("session_id")) {
+								%>
+								<%
+									} else {
+								%>
+								<li><a href="ptoff">등록강의</a></li>
+								<%
+									}
+								%>
 
-						</div>
-					</div>
-								
-								</div>
-									<%if(session.getAttribute("session_id")=="admin"||session.getAttribute("session_id")=="null"){%>
-<%}else{%>
-								<script type="text/javascript">
-							
-								tocplusTop=1150;
-tocplusLeft=5;
-tocplusMinimizedImage='img/test.jpg';
-tocplusHAlign='right';
-tocplusWidth=250;
-tocplusHeight=350;
-tocplusUserName='${session_id}';
-tocplusFrameColor='#ff2d3f';
-tocplusFloatingWindow=true;
-var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http://");
-document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr07.tocplus007.com/chatLoader.do?userId=whddus19' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
 
-</script>
-<%}%>
-								 <!-- Scripts -->
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+							</ul></li>
+						<li><a href="find">찾아오는 길</a></li>
+					</ul>
+				</nav>
+
+
+
+				<!-- Section -->
+				<section>
+					<header class="major">
+						<h2>관리자정보</h2>
+					</header>
+					<p>홈페이지 관리자 정보 입니다. 문의할 내용은 해당 정보로 해주시기 바랍니다.</p>
+					<ul class="contact">
+						<li class="fa-envelope-o">kyg7414@gmail.com</li>
+						<li class="fa-phone">(010) 0000-0000</li>
+						<li class="fa-home">찾아서 머하실라고요<br /> 경기도, TN 00000-0000
+						</li>
+					</ul>
+				</section>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<p class="copyright">
+						&copy; KL create here <a href="https://unsplash.com">Thank you</a>
+						come <a href="https://html5up.net">here</a>.
+					</p>
+				</footer>
+
+			</div>
+		</div>
+
+	</div>
+	<%
+		if (session.getAttribute("session_id") == "admin" || session.getAttribute("session_id") == "null") {
+	%>
+	<%
+		} else {
+	%>
+	<script type="text/javascript">
+		tocplusTop = 1150;
+		tocplusLeft = 5;
+		tocplusMinimizedImage = 'img/test.jpg';
+		tocplusHAlign = 'right';
+		tocplusWidth = 250;
+		tocplusHeight = 350;
+		tocplusUserName = '${session_id}';
+		tocplusFrameColor = '#ff2d3f';
+		tocplusFloatingWindow = true;
+		var tocplusHost = (("https:" == document.location.protocol) ? "https://"
+				: "http://");
+		document
+				.write(unescape("%"
+						+ "3Cscript src='"
+						+ tocplusHost
+						+ "kr07.tocplus007.com/chatLoader.do?userId=whddus19' type='text/javascript'"
+						+ "%" + "3E" + "%" + "3C/script" + "%" + "3E"));
+	</script>
+	<%
+		}
+	%>
+	<!-- Scripts -->
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
 </body>
 
 </html>

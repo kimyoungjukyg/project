@@ -25,6 +25,9 @@
 	<select id="gesipanview" parameterType="int" resultType="kl">
 		SELECT * FROM RGESIPAN WHERE RID=#{rid}
 	</select>
+	<select id="gesipanview2" parameterType="int" resultType="kl">
+		SELECT * FROM RGESIPAN WHERE RID=#{rid}
+	</select>
 	<!-- 글쓰기 쿼리 -->
 	<insert id="gesipanwrite" parameterType="kl" useGeneratedKeys="true"
 			keyProperty="Rid">

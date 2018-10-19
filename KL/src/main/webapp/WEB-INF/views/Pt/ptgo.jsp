@@ -128,14 +128,22 @@
 									<header class="major">
 										<h2>Menu</h2>
 									</header>
-									<ul>
-									<c:choose>
-      <c:when test="${nuMessage == 0}">새쪽지:${nuMessage}
+									<ul>							<%if(session.getAttribute("session_id")==null){%>
+							<%if(session.getAttribute("session_id")==null){%>
+  
+   <%}else{ %>
+  	   <li>
+  <c:choose>
+  
+     <c:when test="${nuMessage == 0}"><%=session.getAttribute("session_id") %> &nbsp; 새쪽지:${nuMessage}  
       </c:when>
       <c:when test="${nuMessage != 0}">
-      새쪽지:${nuMessage}
+    <%=session.getAttribute("session_id") %>  &nbsp;   새쪽지:${nuMessage} 
      <img src="img/q.png" width="13"height="13"></c:when>
       </c:choose>
+      </li>
+    <%} %>
+				
 										<li><a href="testtama">홈</a></li>
 									 <%if(session.getAttribute("session_id")==null){%>
 										<li><a href="login_join">로그인/회원가입</a></li>
@@ -195,8 +203,7 @@
 					</div>
 								
 								</div>
-		<%if(session.getAttribute("session_id")=="admin"||session.getAttribute("session_id")=="null"){%>
-<%}else{%>
+	
 								<script type="text/javascript">
 							
 								tocplusTop=1150;
@@ -212,7 +219,7 @@ var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http
 document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr07.tocplus007.com/chatLoader.do?userId=whddus19' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
 
 </script>
-<%}%>
+
 								 <!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>

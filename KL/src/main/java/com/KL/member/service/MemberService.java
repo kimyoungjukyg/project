@@ -314,6 +314,28 @@ mav.setViewName("Pt/pt");
 	}
 		return mav;}
 
+	public ModelAndView messageList() {
+		mav=new ModelAndView();
+		List<MemberVO> messageList = memberDAO.messageList();
+		mav.addObject("messageList", messageList);
+		
+		mav.setViewName("message/messageWriteForm");
+				
+				
+				return mav;
+	}
+
+	public ModelAndView emaillist() {
+		mav=new ModelAndView();
+		List<MemberVO> emaillist = memberDAO.emaillist();
+		mav.addObject("emaillist", emaillist);
+		
+		mav.setViewName("message/mail");
+				
+				
+				return mav;
+	}
+
 
 
 	
